@@ -9,10 +9,12 @@ The `master` branch is protected. This means that you cannot directly push to th
 - Ubuntu 18.04 Bionic (64-bit)
 - OpenJDK Java 1.8.0 build 251
 - Maven 3
+- Redis 5.0.8
 
 ## Environment Variables
 *Project may crash without these defined*
 - `JDBC_DATABASE_URL` Defines the PostgreSQL username, password, URI, and database to use.
+- `REDIS_URL` Defines the Redis username, password, URI, and database to use.
 
 ## Default Accounts
 By default, the following users are created for testing purposes.
