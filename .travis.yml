@@ -14,6 +14,7 @@ env:
   global:
     - JDBC_DATABASE_URL=jdbc:postgresql:travis_ci_test?user=postgres
     - PGPORT=5432
+    - REDIS_URL=redis://localhost:6379
 # For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
 before_install:
   - mvn -N io.takari:maven:wrapper
