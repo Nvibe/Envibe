@@ -17,7 +17,8 @@ import java.net.URISyntaxException;
 public class RedisConfig {
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() throws URISyntaxException {
-        URI redisURI = new URI(System.getenv("REDIS_URL"));
+        String rawURI = System.getenv("REDIS_URL") == null ? "redis://localhost:6379" : System.getenv("REDIS_URL");
+        URI redisURI = new URI(rawURI);
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisURI.getHost(), redisURI.getPort());
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(10);
@@ -30,7 +31,9 @@ public class RedisConfig {
         jedisConnectionFactory.setHostName(redisURI.getHost());
         jedisConnectionFactory.setPort(redisURI.getPort());
         jedisConnectionFactory.setTimeout(Protocol.DEFAULT_TIMEOUT);
-        jedisConnectionFactory.setPassword(redisURI.getUserInfo().split(":", 2)[1]);
+        if(redisURI.getUserInfo() != null) {
+            jedisConnectionFactory.setPassword(redisURI.getUserInfo().split(":", 2)[1]);
+        }
         return jedisConnectionFactory;
     }
 
