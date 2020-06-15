@@ -13,13 +13,13 @@ public class CachedItemDao {
     public static String PURPOSE_NEWS_FEED_CACHE = "NEWS";
 
     @Autowired
-    private RedisTemplate<String, CachedItem> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     public void create(@NotNull CachedItem cachedItem) {
         redisTemplate.opsForValue().set(generateTag(cachedItem), cachedItem);
     }
     public CachedItem read(@NotNull String tag) {
-        return redisTemplate.opsForValue().get(tag);
+        return (CachedItem)redisTemplate.opsForValue().get(tag);
     }
     public void update(@NotNull CachedItem cachedItem) {
         delete(generateTag(cachedItem));
