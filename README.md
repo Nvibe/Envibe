@@ -14,6 +14,15 @@ The `master` branch is protected. This means that you cannot directly push to th
 *Project may crash without these defined*
 - `JDBC_DATABASE_URL` Defines the PostgreSQL username, password, URI, and database to use.
 
+## Default Accounts
+By default, the following users are created for testing purposes.
+
+| Username | Email                | Password | Internal Role |
+|----------|----------------------|----------|---------------|
+| admin    | admin@example.com    | envibe   | ROLE_ADMIN    |
+| listener | listener@example.com | envibe   | ROLE_USER     |
+| artist   | artist@example.com   | envibe   | ROLE_USER     |
+
 ## Basic Commands
 - `mvnw spring-boot:run` Runs server locally.
 - `mvnw clean package` Builds JAR file, rarely needed.
