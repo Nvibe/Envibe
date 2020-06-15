@@ -23,7 +23,6 @@ public class UserDao {
 
     // CRUD definitions for User model.
     public void create(User user) {
-        System.out.println("||||||||||||" + user.getPassword() + "||||||||||");
         jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole());
     }
 
