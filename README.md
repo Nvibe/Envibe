@@ -1,10 +1,12 @@
 # Envibe
 [![Build Status](https://travis-ci.org/Nvibe/Envibe.svg?branch=master)](https://travis-ci.org/Nvibe/Envibe)
 
+## How To Contribute
+The `master` branch is protected. This means that you cannot directly push to the `master` branch. Instead, use the box above to create a new branch (for example: `fix-registration-form`). Once you have submitted your code to the branch, and your feature/fix is complete, sumbit a PR. GitHub will show you if you need to change anything before you merge.
+
 ## Environment Info
 *For minimal issues, try to get your dev environment as close as possible to this list*
 - Ubuntu 18.04 Bionic (64-bit)
-- PostgreSQL 12.2
 - OpenJDK Java 1.8.0 build 251
 - Maven 3
 
@@ -12,11 +14,25 @@
 *Project may crash without these defined*
 - `JDBC_DATABASE_URL` Defines the PostgreSQL username, password, URI, and database to use.
 
+## Default Accounts
+By default, the following users are created for testing purposes.
+
+| Username | Email                | Password | Internal Role |
+|----------|----------------------|----------|---------------|
+| admin    | admin@example.com    | envibe   | ROLE_ADMIN    |
+| listener | listener@example.com | envibe   | ROLE_USER     |
+| artist   | artist@example.com   | envibe   | ROLE_USER     |
+
 ## Basic Commands
 - `mvnw spring-boot:run` Runs server locally.
 - `mvnw clean package` Builds JAR file, rarely needed.
-- `mvnw flyway:migrate` Updates the schema of your local PostgreSQL database.
+- `mvnw flyway:migrate` Updates the schema of your local PostgreSQL database (done automatically on bootup).
 - `mvnw test` Runs unit test suite (Requires JUnit).
+
+## How To Use H2
+Instead of messing around with PostgreSQL, you can run an in-memory database for testing purposes.
+1. Within your IDE, set the environment variable `JDBC_DATABASE_URL` to `jdbc:h2:mem:test_db`.
+2. Every time you start the webapp, it will create a temporary database in memory that your application will use. The database will be deleted every time you close the webapp.
 
 ## How To Update Database
 This project uses Flyway to manage database schemas. To change how the database is set up, create a migration.

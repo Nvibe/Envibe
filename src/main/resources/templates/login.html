@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+<div id="login-box">
+    <h2>Login Here</h2>
+    <div th:if="${error}">
+        <div class="msg">[[${error}]]</div>
+    </div>
+    <div th:if="${msg}">
+        <div class="msg">[[${msg}]]</div>
+    </div>
+    <form name='loginForm' th:action="@{/authenticate}" method='POST'>
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+                <td colspan='2'><input name="submit" type="submit"
+                                       value="Submit" /></td>
+            </tr>
+        </table>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
+    </form>
+</div>
+</body>
+</html>
