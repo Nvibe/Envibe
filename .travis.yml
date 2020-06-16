@@ -8,31 +8,44 @@ dist: bionic
 # Trying to use version 12.2 causes issues and is not worth pursuing.
 services:
   - postgresql
-  - redis-server
+  - redis
 # Specify environment variables for database integration.
 env:
   global:
     - JDBC_DATABASE_URL=jdbc:postgresql:travis_ci_test?user=postgres
     - PGPORT=5432
     - REDIS_URL=redis://localhost:6379
-# For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
+    - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 before_install:
-  - mvn -N io.takari:maven:wrapper
+  # For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
+  - mvn -N io.takari:maven:wrapper -B
   - chmod +x ./mvnw
 # Initialize the database and perform all necessary migrations.
 before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
-  - mvn flyway:migrate -e
-# Build project into JAR file for deployment onto Heroku.
+  - mvn flyway:migrate -e -B
+script:
+  - mvn test -B
 before_deploy:
-  - mvn clean package
+  # Build project to JAR file for deployment onto Heroku.
+  - mvn clean package -B
+  # Generate internal code documentation site for GitHub Pages.
+  - mvn javadoc:javadoc -B
 deploy:
-  provider: heroku
-  # Use API method to avoid git collision issues.
-  strategy: api
-  app: envibe
-  # Only deploy on master branch builds.
-  on:
-    branch: master
-  # Use deploy API v2 as v1 is deprecated
-  edge: true
+  - provider: heroku
+    # Use API method to avoid git collision issues.
+    strategy: api
+    app: envibe
+    # Only deploy on master branch builds.
+    on:
+      branch: master
+    # Use deploy API v2 as v1 is deprecated
+    edge: true
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: false
+    local_dir: ./target/site/apidocs
+    target_branch: gh-pages
+    on:
+      branch: master

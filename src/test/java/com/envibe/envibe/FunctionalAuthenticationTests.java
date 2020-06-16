@@ -6,15 +6,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AuthenticationTests extends EnvibeApplicationTests {
+/**
+ * Performs functional tests for the authentication controller, and all related Spring Security framework implementations.
+ * @see com.envibe.envibe.controller.AuthenticationController
+ * @see com.envibe.envibe.service.UserAuthService
+ * @see com.envibe.envibe.service.UserRegistrationService
+ * @see com.envibe.envibe.rowmapper.UserRowMapper
+ * @see User
+ * @see com.envibe.envibe.model.validation.validator.RoleValidator
+ * @see com.envibe.envibe.model.validation.constraints.ValidRole
+ * @see com.envibe.envibe.exception.UserAlreadyExistsException
+ * @see com.envibe.envibe.dao.UserDao
+ * @see com.envibe.envibe.config.SecurityConfig
+ *
+ * @author ARMmaster17
+ */
+public class FunctionalAuthenticationTests extends EnvibeApplicationTests {
+
+    /**
+     * Tests that the login page is rendered correctly.
+     * @throws Exception Validation assertion failed.
+     */
     @Test
     public void testLoginPage() throws Exception {
         // Send HTTP request GET:/login
@@ -22,6 +40,10 @@ public class AuthenticationTests extends EnvibeApplicationTests {
         assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
     }
 
+    /**
+     * Tests that registration flow functions correctly.
+     * @throws Exception Internal error occured (201 HTTP status code not returned) or not redirected to /login on successful validation.
+     */
     @Test
     public void testDirectRegistration() throws Exception {
         // Create a User object to submit.
@@ -31,6 +53,10 @@ public class AuthenticationTests extends EnvibeApplicationTests {
         assertThat(response.getHeaders().get("Location").get(0)).contains("/login");
     }
 
+    /**
+     * Tests that the entire registration, login, and authentication stages work correctly. Not fully implemented yet.
+     * @throws Exception Internal error occured (201 HTTP status code not returned) or not redirected as expected.
+     */
     @Test
     public void testCompleteSignUpProcess() throws Exception {
         // Create a User object to submit.
