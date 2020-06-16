@@ -3,7 +3,6 @@ package com.envibe.envibe.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,20 +11,38 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.envibe.envibe.service.UserAuthService;
 
+/**
+ * Manages the application-specific security settings for the Spring Security framework. Handles password hashing, defining authenticated endpoints, and how to handle POST login requests.
+ *
+ * @author ARMmaster17
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // Plug in our own user authentication service using JDBC.
+    /**
+     * Injected dependency on our own authentication service that handles searching for users. See {@link UserAuthService}.
+     */
     @Autowired
     private UserAuthService userAuthService;
 
-    // Specify that we are creating a user service with default password hashing methods.
+    /**
+     * Connects our own authentication service with the password hashing method of our choice.
+     * @param auth Injected builder service given by the Spring Security framework.
+     * @throws Exception Usually thrown by underlying Spring Security framework or a missing system package for the selected password hashing service.
+     * @see SecurityConfig#passwordEncoder()
+     * @see UserAuthService
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * Configures the authentication-related settings of the web service. Defines endpoints that do not require a valid session cookie.
+     * @param http Injected object representing configuration options of the Spring Security framework.
+     * @throws Exception Usually thrown by underlying Spring Security framework. Possibly bad Regex expression for endpoint definitions.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Configure global security parameters of the http object.
@@ -54,6 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password");
     }
 
+    /**
+     * Defines the password hashing service that will be used internally by the Spring Security framework.
+     * @return Encoding service of our choice (in this case, BCrypt).
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         // Use BCrypt since it's widely available on Linux, secure, and "it just works".

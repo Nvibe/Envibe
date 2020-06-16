@@ -123,6 +123,8 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+					<show>private</show>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
