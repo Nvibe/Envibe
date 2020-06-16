@@ -25,7 +25,7 @@ before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
   - mvn flyway:migrate -e -B
 script:
-  - mvn test --no-tranfer-progress
+  - mvn test -B
 before_deploy:
   # Build project to JAR file for deployment onto Heroku.
   - mvn clean package -B
