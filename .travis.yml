@@ -8,7 +8,7 @@ dist: bionic
 # Trying to use version 12.2 causes issues and is not worth pursuing.
 services:
   - postgresql
-  - redis-server
+  - redis
 # Specify environment variables for database integration.
 env:
   global:
@@ -26,13 +26,22 @@ before_script:
 # Build project into JAR file for deployment onto Heroku.
 before_deploy:
   - mvn clean package
+  - mvn javadoc:javadoc
 deploy:
-  provider: heroku
-  # Use API method to avoid git collision issues.
-  strategy: api
-  app: envibe
-  # Only deploy on master branch builds.
-  on:
-    branch: master
-  # Use deploy API v2 as v1 is deprecated
-  edge: true
+  - provider: heroku
+    # Use API method to avoid git collision issues.
+    strategy: api
+    app: envibe
+    # Only deploy on master branch builds.
+    on:
+      branch: master
+    # Use deploy API v2 as v1 is deprecated
+    edge: true
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: false
+    local_dir: ./target/site/apidocs
+    target_branch: gh-pages
+    on:
+      branch: master
