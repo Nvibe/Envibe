@@ -3,6 +3,8 @@ package com.envibe.envibe.model;
 import com.envibe.envibe.model.validation.constraints.ValidPassword;
 import com.envibe.envibe.model.validation.constraints.ValidRole;
 import com.envibe.envibe.model.validation.constraints.ValidUsername;
+
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -101,7 +103,7 @@ public class User implements Serializable {
      * Sets the globally-unique user alias associated with the account. Cannot be changed after record is committed to permanent datastore.
      * @param username User-supplied alias.
      */
-    public void setUsername(@ValidUsername String username) {
+    public void setUsername(@Valid @ValidUsername String username) {
         this.username = username;
     }
 
