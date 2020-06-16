@@ -28,17 +28,17 @@ public class UserDao {
     /**
      * Prepared query to insert user records into database.
      */
-    final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role) VALUES (?, ?, ?, ?)";
+    final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role, country, birthday, last_name, first_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * Prepared query to search for user records in database.
      */
-    final String queryRead = "SELECT user_name, user_password, user_email, user_role FROM user_account WHERE user_name = ?";
+    final String queryRead = "SELECT user_name, user_password, user_email, user_role, country, birthday, last_name, first_name FROM user_account WHERE user_name = ?";
 
     /**
      * Prepared query to update user records in database.
      */
-    final String queryUpdate = "UPDATE user_account SET user_password = ?, user_email = ?, user_role = ? WHERE user_name = ?";
+    final String queryUpdate = "UPDATE user_account SET user_password = ?, user_email = ?, user_role = ?, country = ?, birthday = ?, last_name = ?, first_name = ? WHERE user_name = ?";
 
     /**
      * Prepared query to delete user records in database.
@@ -53,7 +53,7 @@ public class UserDao {
      */
     public void create(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
-        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole());
+        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name());
     }
 
     /**
@@ -77,7 +77,7 @@ public class UserDao {
     public void update(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
         // TODO: Catch EmptyResultDataAccessExceptions.
-        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getUsername());
+        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getUsername());
     }
 
     /**

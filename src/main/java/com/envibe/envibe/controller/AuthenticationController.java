@@ -5,13 +5,12 @@ import com.envibe.envibe.exception.UserAlreadyExistsException;
 import com.envibe.envibe.model.User;
 import com.envibe.envibe.service.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Handles all endpoints related to authentication and session modification.
@@ -26,6 +25,15 @@ public class AuthenticationController {
      */
     @Autowired
     UserRegistrationService userRegistrationService;
+
+    /**
+     * Injected binding pattern to allow us to use HTML5 date formats.
+     * @param binder Configuration object that holds all supported model bindings.
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addCustomFormatter(new DateFormatter("YYYY-MM-DD"));
+    }
 
     /**
      * Render endpoint for the login page.
