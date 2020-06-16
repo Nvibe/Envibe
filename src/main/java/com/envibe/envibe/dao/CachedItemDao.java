@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Data access object for CachedItems that are stored in a Redis-compatible datastore. Utilizes CRUD model.
@@ -36,6 +37,9 @@ public class CachedItemDao {
      * @param cachedItem Item to store in the application-wide cache.
      */
     public void create(@NotNull CachedItem cachedItem) {
+        // Argument validation.
+        Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
+        // Commit record to cache.
         redisTemplate.opsForValue().set(generateTag(cachedItem), cachedItem);
     }
 
@@ -45,6 +49,10 @@ public class CachedItemDao {
      * @return Selected cache item (if it exists).
      */
     public CachedItem read(@NotNull String tag) {
+        // Argument validation.
+        Objects.requireNonNull(tag, "Method argument tag cannot be null");
+        // Return record from memory.
+        // TODO: Throw custom exception if item does not exist.
         return (CachedItem)redisTemplate.opsForValue().get(tag);
     }
 
@@ -53,7 +61,11 @@ public class CachedItemDao {
      * @param cachedItem Valid CachedItem with updated payload. The purpose and user_tag fields must be the original values for the update to work.
      */
     public void update(@NotNull CachedItem cachedItem) {
+        // Argument validation.
+        Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
+        // Delete old record from cache.
         delete(generateTag(cachedItem));
+        // Commit new record to cache.
         create(cachedItem);
     }
 
@@ -62,6 +74,10 @@ public class CachedItemDao {
      * @param cachedItem Item to delete.
      */
     public void delete(@NotNull CachedItem cachedItem) {
+        // Argument validation.
+        Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
+        // Delete record from cache.
+        // TODO: Throw a custom exception if the record does not exist.
         delete(generateTag(cachedItem));
     }
 
@@ -70,6 +86,8 @@ public class CachedItemDao {
      * @param tag Access key for item. Usually follows the PURPOSE|USER schema. See {@link CachedItemDao#generateTag(String, String)}.
      */
     public void delete(@NotNull String tag) {
+        // Argument validation.
+        Objects.requireNonNull(tag, "Method argument tag cannot be null");
         redisTemplate.delete(tag);
     }
 
@@ -79,7 +97,10 @@ public class CachedItemDao {
      * @param user_tag User that this item should be attached to.
      * @return Generated search tag that can be used for CRUD operations. Schema follows the PURPOSE|USER format.
      */
-    private String generateTag(@NotNull String purpose, String user_tag) {
+    private String generateTag(@NotNull String purpose, @NotNull String user_tag) {
+        // Argument validation.
+        Objects.requireNonNull(purpose, "Method argument purpose cannot be null");
+        Objects.requireNonNull(user_tag, "Method argument user_tag cannot be null");
         return purpose + "|" + user_tag;
     }
 
@@ -89,6 +110,8 @@ public class CachedItemDao {
      * @return Generated search tag that can be used for CRUD operations. Schema follows the PURPOSE|USER format.
      */
     private String generateTag(@NotNull CachedItem cachedItem) {
+        // Argument validation.
+        Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
         return generateTag(cachedItem.getPurpose(), cachedItem.getUserTag());
     }
 }

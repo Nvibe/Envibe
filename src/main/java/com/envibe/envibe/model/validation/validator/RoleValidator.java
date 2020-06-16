@@ -4,6 +4,9 @@ import com.envibe.envibe.model.validation.constraints.ValidRole;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Validator for fields marked with the @ValidRole annotation.
@@ -11,6 +14,11 @@ import javax.validation.ConstraintValidatorContext;
  * @author ARMmaster17
  */
 public class RoleValidator implements ConstraintValidator<ValidRole, String> {
+
+    /**
+     * Master list of accepted values for the user_role field.
+     */
+    private static final String[] VALID_ROLES = {"ROLE_USER", "ROLE_ADMIN"};
 
     /**
      * Initializer for RoleValidator object. Contains no logic, but is required by base ConstraintValidator interface.
@@ -28,10 +36,8 @@ public class RoleValidator implements ConstraintValidator<ValidRole, String> {
      * @return If the supplied value matches the function-specific constraints.
      */
     @Override
-    public boolean isValid(String role, ConstraintValidatorContext context) {
-        if (role.equals("ROLE_USER")) {
-            return true;
-        }
-        else return role.equals("ROLE_ADMIN");
+    public boolean isValid(@NotNull String role, ConstraintValidatorContext context) {
+        Objects.requireNonNull(role, "Method argument role cannot be null");
+        return (Arrays.asList(VALID_ROLES).contains(role));
     }
 }

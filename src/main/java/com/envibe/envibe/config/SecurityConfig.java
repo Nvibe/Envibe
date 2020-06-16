@@ -11,6 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.envibe.envibe.service.UserAuthService;
 
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
 /**
  * Manages the application-specific security settings for the Spring Security framework. Handles password hashing, defining authenticated endpoints, and how to handle POST login requests.
  *
@@ -34,7 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @see UserAuthService
      */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(@NotNull AuthenticationManagerBuilder auth) throws Exception {
+        // Argument validation.
+        Objects.requireNonNull(auth, "Method argument auth cannot be null");
+        // Bind our custom authentication service to the globally-selected password encoder class.
         auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder());
     }
 
@@ -44,7 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception Usually thrown by underlying Spring Security framework. Possibly bad Regex expression for endpoint definitions.
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(@NotNull HttpSecurity http) throws Exception {
+        // Argument validation.
+        Objects.requireNonNull(http, "Method argument http cannot be null");
         // Configure global security parameters of the http object.
         http
                 // Must have valid session cookie to access site.

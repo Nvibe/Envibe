@@ -2,11 +2,14 @@ package com.envibe.envibe.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.envibe.envibe.model.User;
 import com.envibe.envibe.rowmapper.UserRowMapper;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Data access object for Users that are stored in a permanent JDBC-compatible datastore. Utilizes CRUD model.
@@ -48,7 +51,8 @@ public class UserDao {
      * Creates a pre-validated user in the permanent datastore.
      * @param user Pre-validated user model object to insert.
      */
-    public void create(User user) {
+    public void create(@Valid User user) {
+        Objects.requireNonNull(user, "Method argument user cannot be null");
         jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole());
     }
 
@@ -57,7 +61,8 @@ public class UserDao {
      * @param username Username to search for.
      * @return User model object if the specified username exists. Otherwise returns null.
      */
-    public User read(String username) {
+    public User read(@NotNull String username) {
+        Objects.requireNonNull(username, "Method argument username cannot be null");
         try {
             return jdbcTemplate.queryForObject(queryRead, new String[]{username}, new UserRowMapper());
         } catch (EmptyResultDataAccessException e) {
@@ -69,7 +74,8 @@ public class UserDao {
      * Updates the core account information for the specified user. Note that the username must be the same as the original record.
      * @param user Pre-validated user model object to replace existing record in permanent datastore.
      */
-    public void update(User user) {
+    public void update(@Valid User user) {
+        Objects.requireNonNull(user, "Method argument user cannot be null");
         // TODO: Catch EmptyResultDataAccessExceptions.
         jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getUsername());
     }
@@ -78,7 +84,8 @@ public class UserDao {
      * Permanently deletes the specified user record from the permanent datastore.
      * @param user User model object that represents the record to be deleted.
      */
-    public void delete(User user) {
+    public void delete(@Valid User user) {
+        Objects.requireNonNull(user, "Method argument user cannot be null");
         jdbcTemplate.update(queryDelete, user.getUsername());
     }
 }
