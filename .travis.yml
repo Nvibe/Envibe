@@ -15,21 +15,21 @@ env:
     - JDBC_DATABASE_URL=jdbc:postgresql:travis_ci_test?user=postgres
     - PGPORT=5432
     - REDIS_URL=redis://localhost:6379
-# For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
 before_install:
-  - mvn -N io.takari:maven:wrapper
+  # For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
+  - mvn -N io.takari:maven:wrapper --no-transfer-progress
   - chmod +x ./mvnw
 # Initialize the database and perform all necessary migrations.
 before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
-  - mvn flyway:migrate -e
-# Temporary to test that all file paths are correct
-after_script:
-  - mvn javadoc:javadoc
-# Build project into JAR file for deployment onto Heroku.
+  - mvn flyway:migrate -e --no-transfer-progress
+script:
+  - mvn test --no-tranfer-progress
 before_deploy:
-  - mvn clean package
-#  - mvn javadoc:javadoc
+  # Build project to JAR file for deployment onto Heroku.
+  - mvn clean package --no-transfer-progress
+  # Generate internal code documentation site for GitHub Pages.
+  - mvn javadoc:javadoc --no-transfer-progress
 deploy:
   - provider: heroku
     # Use API method to avoid git collision issues.
