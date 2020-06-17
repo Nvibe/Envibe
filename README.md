@@ -4,15 +4,19 @@
 ## How To Contribute
 The `master` branch is protected. This means that you cannot directly push to the `master` branch. Instead, use the box above to create a new branch (for example: `fix-registration-form`). Once you have submitted your code to the branch, and your feature/fix is complete, sumbit a PR. GitHub will show you if you need to change anything before you merge.
 
+Code documentation is available at https://nvibe.github.io/Envibe.
+
 ## Environment Info
 *For minimal issues, try to get your dev environment as close as possible to this list*
 - Ubuntu 18.04 Bionic (64-bit)
 - OpenJDK Java 1.8.0 build 251
 - Maven 3
+- Redis 5.0.8
 
 ## Environment Variables
 *Project may crash without these defined*
 - `JDBC_DATABASE_URL` Defines the PostgreSQL username, password, URI, and database to use.
+- `REDIS_URL` Defines the Redis username, password, URI, and database to use.
 
 ## Default Accounts
 By default, the following users are created for testing purposes.
@@ -28,6 +32,7 @@ By default, the following users are created for testing purposes.
 - `mvnw clean package` Builds JAR file, rarely needed.
 - `mvnw flyway:migrate` Updates the schema of your local PostgreSQL database (done automatically on bootup).
 - `mvnw test` Runs unit test suite (Requires JUnit).
+- `mvn javadoc:javadoc` Compiles HTML documentation site under `./target/site/apidocs`.
 
 ## How To Use H2
 Instead of messing around with PostgreSQL, you can run an in-memory database for testing purposes.
