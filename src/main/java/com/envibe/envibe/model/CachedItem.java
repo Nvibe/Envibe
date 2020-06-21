@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class CachedItem implements Serializable {
 
-    // TODO: Craete validator for this field since there are a limited number of valid values.
+    // TODO: Creaete validator for this field since there are a limited number of valid values.
     /**
      * Describes the service that this item should be associated with. See the static fields of {@link com.envibe.envibe.dao.CachedItemDao} for valid values.
      */
@@ -28,6 +28,25 @@ public class CachedItem implements Serializable {
     private String payload;
 
     /**
+     * Default constructor.
+     */
+    public CachedItem() {
+
+    }
+
+    /**
+     * Overloaded constructor. Allows setting all parameters.
+     * @param purpose Service tag associated with this item. See the static final members of this class.
+     * @param user_tag Username to tag this item with.
+     * @param payload Raw String payload to hold for external processing.
+     */
+    public CachedItem(String purpose, String user_tag, String payload) {
+        this.purpose = purpose;
+        this.user_tag = user_tag;
+        this.payload = payload;
+    }
+
+    /**
      * Returns the service that this item is associated with. See the static fields of {@link com.envibe.envibe.dao.CachedItemDao} for valid values.
      * @return Internal purpose tag.
      */
@@ -41,5 +60,21 @@ public class CachedItem implements Serializable {
      */
     public String getUserTag() {
         return user_tag;
+    }
+
+    /**
+     * Returns the raw String payload.
+     * @return
+     */
+    public String getPayload() {
+        return payload;
+    }
+
+    /**
+     * Sets the payload to a raw String value for external parsing.
+     * @param payload String-formatted payload.
+     */
+    public void setPayload(String payload) {
+        this.payload = payload;
     }
 }

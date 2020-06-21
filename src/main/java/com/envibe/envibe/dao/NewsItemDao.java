@@ -3,6 +3,7 @@ package com.envibe.envibe.dao;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.model.validation.constraints.ValidUsername;
 import com.envibe.envibe.rowmapper.NewsItemRowMapper;
+import com.envibe.envibe.service.NewsFeedUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,6 +29,9 @@ public class NewsItemDao {
      */
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private NewsFeedUpdateService newsFeedUpdateService;
 
     /**
      * Prepared query to create a single post.
@@ -55,12 +59,15 @@ public class NewsItemDao {
     final String queryDelete = "DELETE FROM newspost WHERE post_id = ?";
 
     /**
-     * Creates a pre-validated post in the permanent datastore.
+     * Creates a pre-validated post in the permanent datastore. Also triggers the newsfeed update service.
+     * @see NewsFeedUpdateService#triggerWorker(int)
      * @param newsItem Pre-validated post model object to insert.
      */
     public void create(@Valid NewsItem newsItem) {
         Objects.requireNonNull(newsItem, "Method argument newsItem cannot be null");
         jdbcTemplate.update(queryCreate, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
+        // Fire off the NewsFeedUpdaterService to add the post to the user's friend's newsfeeds.
+        newsFeedUpdateService.triggerWorker(newsItem.getPost_id());
     }
 
     /**
