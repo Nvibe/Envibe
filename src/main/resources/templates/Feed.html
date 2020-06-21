@@ -31,22 +31,6 @@
       transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
       transform-style: preserve-3d;
     }
-    .ContentArea {
-      position: absolute;
-      width: 600px;
-      height: 724px;
-      transform-origin: 300px 362px 0px;
-      left: 302px;
-      top: 0px;
-      background: transparent;
-      border-image-source: none;
-      border-image-width: 1;
-      border-image-outset: 0;
-      border-image-repeat: stretch;
-      border-color: rgb(239, 102, 3);
-      border-style: solid;
-      border-width: 0px 1px;
-    }
     .UserConArea {
       position: absolute;
       background-image: none;
@@ -57,53 +41,23 @@
       width: 587px;
       transform-origin: 293.5px 85.5px 0px;
       left: 6px;
+      visibility: hidden;
     }
-    .gwd-div-pwe2 {
-      height: 164px;
-      left: 0px;
-      position: absolute;
-      width: 600px;
-      top: 44px;
-    }
-    .gwd-div-52i3 {
-      height: 44px;
-      left: 0px;
-      position: absolute;
-      width: 600px;
-      top: 0px;
-    }
-    .gwd-div-mx4j {
-      height: 40px;
-      position: absolute;
-      width: 40px;
-      left: 37px;
-      top: 2px;
-    }
-    .gwd-oval-vfzj {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      left: 37px;
-      top: 2px;
-      stroke: rgb(0, 0, 0);
-      stroke-width: 1px;
-      fill: rgba(255, 255, 255, 0);
-    }
-    .gwd-div-ox36 {
-      position: absolute;
+    .LeftColumn {
       width: 302px;
       height: 724px;
-      left: 0px;
+      position: fixed;
       top: 0px;
+      left: 0px;
     }
-    .gwd-div-ncvi {
-      position: absolute;
-      width: 298px;
+    .RightColumn {
       height: 724px;
+      position: fixed;
+      width: 298px;
       left: 904px;
       top: 0px;
     }
-    .gwd-div-luae {
+    .ItemRow {
       height: 33px;
       left: 127px;
       position: absolute;
@@ -112,7 +66,7 @@
       border-width: 0px 0px 1px;
       border-style: solid;
     }
-    .gwd-p-1c74 {
+    .MyAccount {
       position: absolute;
       text-align: center;
       left: 0px;
@@ -121,7 +75,7 @@
       transform-origin: 78px 11px 0px;
       top: 6px;
     }
-    .gwd-span-1ys7 {
+    .MyAccountText {
       color: rgb(255, 255, 255);
       font-family: Tahoma;
       text-align: center;
@@ -132,30 +86,145 @@
     .gwd-br-10eb {
       text-align: center;
     }
+    .ContentArea {
+      height: 721px;
+      overflow: hidden;
+      position: relative;
+      width: 602px;
+      transform-origin: 301px 360.5px 0px;
+      left: 302px;
+      top: 20px;
+    }
+    .InnerContentArea {
+      position: absolute;
+      left: 1px;
+      top: 5px;
+      bottom: 0px;
+      right: -20px;
+      overflow-y: scroll;
+      width: 623px;
+      height: 740px;
+      transform-origin: 311.663px 369.634px 0px;
+    }
+    .Bubble {
+      height: 207px;
+      position: relative;
+      width: 599px;
+      left: 1px;
+      top: 15px;
+    }
+    .UserContent {
+      height: 164px;
+      position: absolute;
+      width: 600px;
+      left: -1px;
+      top: 44px;
+    }
+    .UserInfo {
+      height: 44px;
+      left: -1px;
+      position: absolute;
+      top: 0px;
+      width: 600px;
+    }
+    .ProfilePicture {
+      height: 40px;
+      left: 37px;
+      position: absolute;
+      top: 2px;
+      width: 40px;
+    }
+    .ProfileOutline {
+      width: 40px;
+      height: 40px;
+      display: block;
+      fill: none;
+      stroke: rgb(0, 0, 0);
+      top: -17px;
+      left: 36px;
+      position: absolute;
+    }
+    .UserNameStyle {
+      position: absolute;
+      top: 2px;
+      height: 40px;
+      left: 94px;
+      width: 226px;
+      transform-origin: 121.136px 20px 0px;
+      text-align: center;
+    }
+    .ContentText {
+      height: 131px;
+      position: absolute;
+      width: 572px;
+      transform-origin: 286px 65.5px 0px;
+      top: 17px;
+      left: 14px;
+    }
   </style>
 </head>
 
 <body class="htmlNoPages">
-  <div class="ContentArea" id="ContentArea">
-    <div class="UserConArea" id="UserContentArea">
-      <div class="gwd-div-pwe2" id="UserContent"></div>
-      <div class="gwd-div-52i3" id="UserInfo">
-        <div class="gwd-div-mx4j" id="ProfilePicture"></div>
-        <svg data-gwd-shape="oval" preserveAspectRatio="none" viewBox="0 0 40 40" class="gwd-oval-vfzj">
-          <ellipse cx="50%" cy="50%" rx="19.5" ry="19.5"></ellipse>
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="gwd-div-ox36" id="LeftColumn">
-    <div class="gwd-div-luae" id="Row1">
-      <p class="gwd-p-1c74"><span class="gwd-span-1ys7">My Account</span><br>
+  <div class="LeftColumn" id="LeftColumn">
+    <div class="ItemRow" id="Row1">
+      <p class="MyAccount"><span class="MyAccountText">My Account</span><br>
         <br>
         
       </p>
     </div>
   </div>
-  <div class="gwd-div-ncvi" id="RightColumn"></div>
+  <div class="ContentArea" id="ContentArea">
+    <div class="InnerContentArea" id="InnerContentArea">
+      <template id="UserContentTemplate">
+        <div class="Bubble" id="ContentBubble">
+          <div class="UserContent" id="UserContent">
+            <p class="text-tool-feedback ContentText" id="ContentText"><br>
+              
+            </p>
+          </div>
+          <div class="UserInfo" id="UserInfo">
+            <p class="UserNameStyle" id="UserNameText"><br>
+              
+            </p>
+            <div class="ProfilePicture" id="ProfilePicture"></div>
+            <svg data-gwd-shape="oval" preserveAspectRatio="none" viewBox="0 0 40 40" class="ProfileOutline">
+              <ellipse cx="50%" cy="50%" rx="19.5" ry="19.5"></ellipse>
+            </svg>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <div class="RightColumn" id="RightColumn"></div>
+  <script>
+    class User {
+      constructor(name, content) {
+        this.name = name;
+        this.content = content;
+      }
+    }
+
+    function newElement(name, content) {
+      let element = document.createElement('div');
+      element.append(UserContentTemplate.content.cloneNode(true));
+      element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name;
+      element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content;
+      let target = document.getElementById('InnerContentArea');
+      target.append(element);
+    }
+
+    user1 = new User("John Smith", "Generic content");
+    user2 = new User("Kyle Hill", "What would it feel like to get pulled into a black hole?");
+    user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
+    user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
+    user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
+    var testinfo = [user1, user2, user3, user4, user5];
+    newElement(user1.name, user1.content);
+    newElement(user2.name, user2.content);
+    newElement(user3.name, user3.content);
+    newElement(user4.name, user4.content);
+    newElement(user5.name, user5.content);
+  </script>
 </body>
 
 </html>
