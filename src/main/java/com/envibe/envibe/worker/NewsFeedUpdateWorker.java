@@ -45,17 +45,20 @@ public class NewsFeedUpdateWorker implements Runnable {
     CachedItemDao cachedItemDao;
 
     /**
-     * Override for constructor that accepts a post_id parameter to limit the update scope.
-     * @param post_id ID of new NewsItem.
+     * Constructor that retrieves the newest post ID from memcache.
      */
-    public NewsFeedUpdateWorker(int post_id) {
-        this.post_id = post_id;
+    public NewsFeedUpdateWorker() {
+
     }
 
     /**
      * Triggered by super Thread class. Runs the background task until completion, then the Thread super class performs automated garbage collection.
      */
     public void run() {
+        // Generate the tag to search for in the temporary keystore.
+        String serviceTag = cachedItemDao.generateTag(CachedItemDao.PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH, "INTERNAL");
+        // Find the post ID that needs to be updated.
+        this.post_id = Integer.parseInt(cachedItemDao.readAndDelete(serviceTag).getPayload());
         // Pull the full post details from the database.
         NewsItem originalPost = newsItemDao.read(post_id);
         // Pull the entire profile of the user who created the post.

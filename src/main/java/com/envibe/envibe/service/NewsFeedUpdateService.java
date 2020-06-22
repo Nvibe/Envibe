@@ -1,6 +1,9 @@
 package com.envibe.envibe.service;
 
+import com.envibe.envibe.dao.CachedItemDao;
+import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.worker.NewsFeedUpdateWorker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +20,12 @@ import java.util.ArrayList;
  */
 @Service
 public class NewsFeedUpdateService {
+
+    /**
+     * Injected data access object for CachedItems in the temporary datastore.
+     */
+    @Autowired
+    CachedItemDao cachedItemDao;
 
     /**
      * Local pool of workers so that we can invoke their control functions if needed.
@@ -36,8 +45,12 @@ public class NewsFeedUpdateService {
      * @param post_id
      */
     public void triggerWorker(int post_id) {
-        // Fire off a worker with the post_id and assign it to the worker pool so we can monitor it.
-        workers.add(new Thread(new NewsFeedUpdateWorker(post_id)));
+        // Send a payload through the temporary datastore with the new post ID to add to the newsfeed.
+        CachedItem newPostMessage = new CachedItem(CachedItemDao.PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH, "INTERNAL", Integer.toString(post_id));
+        // Save the payload so that it can be accessed by the worker thread.
+        cachedItemDao.create(newPostMessage);
+        // Fire off a worker and assign it to the worker pool so we can monitor it.
+        workers.add(new Thread(new NewsFeedUpdateWorker()));
     }
 
     /**

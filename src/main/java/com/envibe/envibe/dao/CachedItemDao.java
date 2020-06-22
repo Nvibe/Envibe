@@ -27,6 +27,11 @@ public class CachedItemDao {
     public static final String PURPOSE_NEWS_FEED_CACHE = "NEWSFEEDCACHE";
 
     /**
+     * Global tag for cached items that need to be passed from frontend to threaded workers.
+     */
+    public static final String PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH = "NEWSFEEDWORKERPASSTHROUGH";
+
+    /**
      * Injected Redis connection object to run queries against. See {@link RedisTemplate}.
      */
     @Autowired
@@ -54,6 +59,20 @@ public class CachedItemDao {
         // Return record from memory.
         // TODO: Throw custom exception if item does not exist.
         return (CachedItem)redisTemplate.opsForValue().get(tag);
+    }
+
+    /**
+     * Finds a cache item with a given key and deletes the entry immediately before returning the found value. Reduces risk of duplicate threads
+     * or race conditions or deadlock.
+     * @param tag Access key for item. Usually follows the PURPOSE|USER schema. See {@link CachedItemDao#generateTag(String, String)}.
+     * @return Selected cache item (if it exists). Is deleted before it is returned.
+     */
+    public CachedItem readAndDelete(@NotNull String tag) {
+        // No argument validation. Handled by the inner classes.
+        CachedItem item = this.read(tag);
+        // Immediately delete the tag so no objects are retrieved.
+        this.delete(tag);
+        return item;
     }
 
     /**
