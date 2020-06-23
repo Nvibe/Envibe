@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * User model that represents all core properties associated with each user account.
@@ -50,6 +51,33 @@ public class User implements Serializable {
     private String email;
 
     /**
+     * Country that user currently resides in.
+     */
+    @NotNull
+    @NotEmpty
+    private String country;
+
+    /**
+     * User's date of birth. Follows the SQL 'YYYY-MM-DD' format.
+     */
+    @NotNull
+    private Date birthday;
+
+    /**
+     * User's last name.
+     */
+    @NotNull
+    @NotEmpty
+    private String last_name;
+
+    /**
+     * User's first name.
+     */
+    @NotNull
+    @NotEmpty
+    private String first_name;
+
+    /**
      * Empty constructor for user model. Consumed by several Thymeleaf templates controlled by {@link com.envibe.envibe.controller.AuthenticationController}.
      */
     public User() {
@@ -63,13 +91,21 @@ public class User implements Serializable {
      * @param password Pre-hashed user password.
      * @param role Internal role of user that is consumed internally by the Spring Security framework.
      * @param email Email address of user.
+     * @param country String-serialized country code of country that user currently resides in.
+     * @param birthday The user's date of birth in SQL DATE (YYYY-MM-DD)-compatible format.
+     * @param last_name The user's last name.
+     * @param first_name The user's first name.
      * @deprecated This isn't 2008 anymore. Will be replaced with Builder pattern to be compliant with 2020 coding standards.
      */
-    public User(@ValidUsername String username, @ValidPassword String password, @ValidRole String role, @Email String email) {
+    public User(@ValidUsername String username, @ValidPassword String password, @ValidRole String role, @Email String email, @NotEmpty String country, @NotNull Date birthday, @ValidUsername String last_name, @ValidUsername String first_name) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.email = email;
+        this.country = country;
+        this.birthday = birthday;
+        this.last_name = last_name;
+        this.first_name = first_name;
     }
 
     /**
@@ -140,5 +176,69 @@ public class User implements Serializable {
      */
     public void setEmail(@Email String email) {
         this.email = email;
+    }
+
+    /**
+     * Gets the country that the user currently resides in.
+     * @return String-serialized country code as defined by Javascript API on frontend.
+     */
+    public String getCountry() {
+        return this.country;
+    }
+
+    /**
+     * Sets the country that the user currently resides in.
+     * @param country String-serialized country code as defined by Javascript API on frontend.
+     */
+    public void setCountry(@NotEmpty String country) {
+        this.country = country;
+    }
+
+    /**
+     * Returns the user's date of birth in SQL DATE 'YYYY-MM-DD' format.
+     * @return User's date of birth.
+     */
+    public Date getBirthday() {
+        return this.birthday;
+    }
+
+    /**
+     * Sets the user's date of birth.
+     * @param birthday User's date of birth that is in a serialized SQL DATE (YYYY-MM-DD)-compatible format.
+     */
+    public void setBirthday(@NotNull Date birthday) {
+        this.birthday = birthday;
+    }
+
+    /**
+     * Returns the user's last name.
+     * @return The user's last name.
+     */
+    public String getLast_name() {
+        return this.last_name;
+    }
+
+    /**
+     * Sets the user's last name.
+     * @param last_name User's last name.
+     */
+    public void setLast_name(@NotEmpty String last_name) {
+        this.last_name = last_name;
+    }
+
+    /**
+     * Returns the user's first name.
+     * @return The user's first name.
+     */
+    public String getFirst_name() {
+        return this.first_name;
+    }
+
+    /**
+     * Sets the user's first name.
+     * @param first_name The user's first name.
+     */
+    public void setFirst_name(@NotEmpty String first_name) {
+        this.first_name = first_name;
     }
 }
