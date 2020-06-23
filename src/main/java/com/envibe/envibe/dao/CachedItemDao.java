@@ -19,12 +19,17 @@ public class CachedItemDao {
     /**
      * Global tag for cached items that are not connected to a specific service.
      */
-    public static String PURPOSE_GENERAL_CACHE = "GENERAL";
+    public static final String PURPOSE_GENERAL_CACHE = "GENERAL";
 
     /**
      * Global tag for cached items that are produced and consumed by the news feed service.
      */
-    public static String PURPOSE_NEWS_FEED_CACHE = "NEWS";
+    public static final String PURPOSE_NEWS_FEED_CACHE = "NEWSFEEDCACHE";
+
+    /**
+     * Global tag for cached items that need to be passed from frontend to threaded workers.
+     */
+    public static final String PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH = "NEWSFEEDWORKERPASSTHROUGH";
 
     /**
      * Injected Redis connection object to run queries against. See {@link RedisTemplate}.
@@ -54,6 +59,20 @@ public class CachedItemDao {
         // Return record from memory.
         // TODO: Throw custom exception if item does not exist.
         return (CachedItem)redisTemplate.opsForValue().get(tag);
+    }
+
+    /**
+     * Finds a cache item with a given key and deletes the entry immediately before returning the found value. Reduces risk of duplicate threads
+     * or race conditions or deadlock.
+     * @param tag Access key for item. Usually follows the PURPOSE|USER schema. See {@link CachedItemDao#generateTag(String, String)}.
+     * @return Selected cache item (if it exists). Is deleted before it is returned.
+     */
+    public CachedItem readAndDelete(@NotNull String tag) {
+        // No argument validation. Handled by the inner classes.
+        CachedItem item = this.read(tag);
+        // Immediately delete the tag so no objects are retrieved.
+        this.delete(tag);
+        return item;
     }
 
     /**
@@ -97,7 +116,7 @@ public class CachedItemDao {
      * @param user_tag User that this item should be attached to.
      * @return Generated search tag that can be used for CRUD operations. Schema follows the PURPOSE|USER format.
      */
-    private String generateTag(@NotNull String purpose, @NotNull String user_tag) {
+    public String generateTag(@NotNull String purpose, @NotNull String user_tag) {
         // Argument validation.
         Objects.requireNonNull(purpose, "Method argument purpose cannot be null");
         Objects.requireNonNull(user_tag, "Method argument user_tag cannot be null");
