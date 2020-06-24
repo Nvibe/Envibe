@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -70,9 +71,9 @@ public class FeedController {
      * @param model Container that we can use to inject data into the view.
      * @return Redirect to the news feed view.
      */
-    @GetMapping("/api/v1/feed/create")
-    public String apiTestAddPost(Model model) {
-        NewsItem ni = new NewsItem("artist", new Date(), "Awesome stuff!!!!!!!!!!!!");
+    @PostMapping("/api/v1/feed/create")
+    public String apiTestAddPost(Model model, HttpServletRequest request, @RequestBody String content) {
+        NewsItem ni = new NewsItem(request.getRemoteUser(), new Date(), content);
         newsItemDao.create(ni);
         return "Feed";
     }
