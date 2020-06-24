@@ -22,15 +22,4 @@ public class HomeController {
         // Return index.html template.
         return "index";
     }
-
-    /**
-     * Render endpoint for a sample authenticated endpoint.
-     * @param model Object used to pass parameters to Thymeleaf template.
-     * @return Reference to the restricted.html template.
-     * @deprecated For testing purposes only. Will be removed in the future when more authenticated pages are available.
-     */
-    @GetMapping("/restricted")
-    public String restricted(Model model) {
-        return "restricted";
-    }
 }
