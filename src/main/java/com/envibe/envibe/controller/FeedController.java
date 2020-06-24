@@ -54,14 +54,14 @@ public class FeedController {
      */
     @GetMapping(value = "/api/v1/feed/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String apiUserFeed(Model model, @PathVariable String username, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
+    public String apiUserFeed(Model model, HttpServletRequest request, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
         List<NewsItem> newsFeed;
         if (count == 0) {
-            newsFeed = newsFeedRetrievalService.getNewsFeed(username);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser());
         } else if (after == 0) {
-            newsFeed = newsFeedRetrievalService.getNewsFeed(username, count);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser(), count);
         } else {
-            newsFeed = newsFeedRetrievalService.getNewsFeed(username, count, after);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser(), count, after);
         }
         return new Gson().toJson(newsFeed);
     }
