@@ -47,12 +47,12 @@ public class FeedController {
     /**
      * Handles API requests for a user's cached newsfeed. URI follows the format /api/v1/feed?username=user1&count=10&after=4012.
      * @param model Container we can use to inject data into the view.
-     * @param username Username to search for in cache tags.
+     * @param request Access class that allows us to read session data from the user's browser.
      * @param count Number of posts to return.
      * @param after Last post_id received by the client.
      * @return List of news items with specified parameters.
      */
-    @GetMapping(value = "/api/v1/feed/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/v1/feed/user", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String apiUserFeed(Model model, HttpServletRequest request, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
         List<NewsItem> newsFeed;

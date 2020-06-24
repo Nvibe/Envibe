@@ -20,6 +20,6 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         // Return index.html template.
-        return "index";
+        return "redirect:/login";
     }
 }

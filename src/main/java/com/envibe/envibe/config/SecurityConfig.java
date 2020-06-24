@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Send users to this endpoint for processing after providing login credentials.
                 .loginProcessingUrl("/authenticate")
                 // After successful login, redirect users here.
-                .defaultSuccessUrl("/feed")
+                .defaultSuccessUrl("/feed", true)
                 // On authentication error, redirect them here.
                 .failureUrl("/login?error")
                 // Manually specify parameters to look for at POST:/authenticate.
