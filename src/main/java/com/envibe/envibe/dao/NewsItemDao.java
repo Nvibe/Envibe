@@ -30,6 +30,9 @@ public class NewsItemDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    /**
+     * Injected service that handles background workers that update the news feed caches when a new post is created. See {@link NewsFeedUpdateService}.
+     */
     @Autowired
     private NewsFeedUpdateService newsFeedUpdateService;
 
@@ -37,6 +40,11 @@ public class NewsItemDao {
      * Prepared query to create a single post.
      */
     final String queryCreate = "INSERT INTO newspost (user_name, post_date, post_content) VALUES (?, ?, ?)";
+
+    /**
+     * Prepared query to create a single post when the underlying database does not support auto-incrementing primary keys.
+     */
+    final String queryCreateNonAutoKey = "INSERT INTO newspost (post_id, user_name, post_date, post_content) VALUES (?, ?, ?, ?)";
 
     /**
      * Prepared query to find a single post by ID.
@@ -59,13 +67,25 @@ public class NewsItemDao {
     final String queryDelete = "DELETE FROM newspost WHERE post_id = ?";
 
     /**
+     * Prepared query to return the number of posts in the permanent datastore.
+     */
+    final String queryCountRows = "SELECT COUNT(*) FROM newspost";
+
+    /**
      * Creates a pre-validated post in the permanent datastore. Also triggers the newsfeed update service.
      * @see NewsFeedUpdateService#triggerWorker(int)
      * @param newsItem Pre-validated post model object to insert.
      */
     public void create(@Valid NewsItem newsItem) {
         Objects.requireNonNull(newsItem, "Method argument newsItem cannot be null");
-        jdbcTemplate.update(queryCreate, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
+        int newId;
+        if(System.getenv("JDBC_DATABASE_URL").contains("h2")) {
+            newId = getNextId();
+            jdbcTemplate.update(queryCreateNonAutoKey, newId, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
+        } else {
+            newId = jdbcTemplate.update(queryCreate, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
+        }
+        newsItem.setPost_id(newId);
         // Fire off the NewsFeedUpdaterService to add the post to the user's friend's newsfeeds.
         newsFeedUpdateService.triggerWorker(newsItem.getPost_id());
     }
@@ -139,5 +159,13 @@ public class NewsItemDao {
         Objects.requireNonNull(newsItem, "Method argument newsItem cannot be null");
         Objects.requireNonNull(newsItem.getPost_id(), "Object attribute newsItem.post_id cannot be null");
         jdbcTemplate.update(queryDelete, newsItem.getPost_id());
+    }
+
+    /**
+     * Gets the next ID to use for a post. Used only with databases that don't support the SERIAL datatype.
+     * @return Next available value to use for post_id.
+     */
+    private int getNextId() {
+        return jdbcTemplate.queryForObject(queryCountRows, Integer.class);
     }
 }

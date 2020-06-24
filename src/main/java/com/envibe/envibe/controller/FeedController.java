@@ -1,15 +1,16 @@
 package com.envibe.envibe.controller;
 
+import com.envibe.envibe.dao.NewsItemDao;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.service.NewsFeedRetrievalService;
-import com.envibe.envibe.service.NewsFeedUpdateService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +21,17 @@ import java.util.List;
 @Controller
 public class FeedController {
 
+    /**
+     * Injected service that handles retrieving news feed caches.
+     */
     @Autowired
     NewsFeedRetrievalService newsFeedRetrievalService;
+
+    /**
+     * Injected data access object for accessing user posts in the permanent datastore.
+     */
+    @Autowired
+    NewsItemDao newsItemDao;
 
     /**
      * Returns a view that can display news feed posts.
@@ -41,14 +51,29 @@ public class FeedController {
      * @param after Last post_id received by the client.
      * @return List of news items with specified parameters.
      */
-    @GetMapping("/api/v1/feed")
-    public List<NewsItem> apiUserFeed(Model model, @RequestParam String username, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
+    @GetMapping(value = "/api/v1/feed/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String apiUserFeed(Model model, @PathVariable String username, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
+        List<NewsItem> newsFeed;
         if (count == 0) {
-            return newsFeedRetrievalService.getNewsFeed(username);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(username);
         } else if (after == 0) {
-            return newsFeedRetrievalService.getNewsFeed(username, count);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(username, count);
         } else {
-            return newsFeedRetrievalService.getNewsFeed(username, count, after);
+            newsFeed = newsFeedRetrievalService.getNewsFeed(username, count, after);
         }
+        return new Gson().toJson(newsFeed);
+    }
+
+    /**
+     * Creates a post and fires off a background worker that rebuilds the news feeds of all the user's friends.
+     * @param model Container that we can use to inject data into the view.
+     * @return Redirect to the news feed view.
+     */
+    @GetMapping("/api/v1/feed/create")
+    public String apiTestAddPost(Model model) {
+        NewsItem ni = new NewsItem("artist", new Date(), "Awesome stuff!!!!!!!!!!!!");
+        newsItemDao.create(ni);
+        return "Feed";
     }
 }

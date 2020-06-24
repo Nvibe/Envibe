@@ -66,14 +66,15 @@ public class NewsFeedUpdateWorker implements Runnable {
         // Get a list of all the friends of the original user. Use Strings since we don't need any friend User attributes.
         ArrayList<String> friends = new ArrayList<String>();
         // TODO: Generate a list of friends of the OP.
+        friends.add("listener");
         // Get the news feed caches for each friend.
-        ArrayList<CachedItem> caches = new ArrayList<CachedItem>();
+        ArrayList<CachedItem> caches = new ArrayList<>(friends.size());
         // Use an index to keep both friends and caches in the same order.
         for (int i = 0; i < friends.size(); i++) {
             // Generate a tag from our service name and the friend's username.
             String tag = cachedItemDao.generateTag(CachedItemDao.PURPOSE_NEWS_FEED_CACHE, friends.get(i));
             // Load the cache (if it exists) into the same index in caches.
-            caches.set(i, cachedItemDao.read(tag));
+            caches.add(cachedItemDao.read(tag));
         }
         // Insert the post into the newsfeeds.
         // TODO: Insert fancy algorithm here. For now just put it at the top of the feed and trim it if it's too big.

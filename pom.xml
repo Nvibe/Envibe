@@ -102,6 +102,10 @@
 			<version>3.3.0</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
