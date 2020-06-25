@@ -232,8 +232,8 @@
       </template>
     </div>
     <div class="NewComment" id="NewComment">
-      <form action="#" th:action="@{/api/v1/feed/create}" th:object="${NewsItem}" method="post" >
-        <input type="text" id="CommentField" class="TextField" placeholder="What are you vibing to?" value="">
+      <form action="#" th:action="@{/api/v1/feed/create}" method="post" >
+        <input type="text" id="CommentField" class="TextField" name="content" placeholder="What are you vibing to?" value="">
         <button id="CreateButton" class="CreateButton" type="submit" >Create Post</button>
       </form>
     </div>

@@ -72,7 +72,7 @@ public class FeedController {
      * @return Redirect to the news feed view.
      */
     @PostMapping("/api/v1/feed/create")
-    public String apiTestAddPost(Model model, HttpServletRequest request, @RequestBody String content) {
+    public String apiTestAddPost(Model model, HttpServletRequest request, @RequestParam(value="content", required=true) String content) {
         NewsItem ni = new NewsItem(request.getRemoteUser(), new Date(), content);
         newsItemDao.create(ni);
         return "Feed";
