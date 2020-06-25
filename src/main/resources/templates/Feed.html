@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th ="https://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <title>undefined</title>
+  <meta charset="UTF-8">
+  <title>Envibe</title>
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
   <style type="text/css" id="gwd-text-style">
@@ -173,6 +173,31 @@
       height: 47px;
       transform-origin: 278px 26.5px 0px;
     }
+    .NewComment {
+      position: absolute;
+      width: 599px;
+      height: 79px;
+      left: 1px;
+      top: 13px;
+    }
+    .CreateButton {
+      position: absolute;
+      left: 498px;
+      top: 13px;
+      width: 83px;
+      height: 53px;
+      transform-origin: 41.5px 26.5px 0px;
+      background-image: none;
+      background-color: rgb(183, 181, 176);
+    }
+    createbutton {
+      position: absolute;
+      left: 475px;
+      top: 13px;
+      width: 106px;
+      height: 53px;
+      transform-origin: 53px 26.5px 0px;
+    }
   </style>
 </head>
 
@@ -206,7 +231,12 @@
         </div>
       </template>
     </div>
-    <input type="text" id="CommentField" class="TextField" placeholder="What are you vibing to?">
+    <div class="NewComment" id="NewComment">
+      <form action="#" th:action="@{/api/v1/feed/create}" th:object="${NewsItem}" method="post" >
+        <input type="text" id="CommentField" class="TextField" placeholder="What are you vibing to?" value="">
+        <button id="CreateButton" class="CreateButton" type="submit" >Create Post</button>
+      </form>
+    </div>
   </div>
   <div class="RightColumn" id="RightColumn"></div>
   <script>
@@ -215,6 +245,7 @@
         this.name = name;
         this.content = content;
       }
+
     }
 
     function newElement(name, content) {
@@ -231,12 +262,6 @@
     user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
     user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
     user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
-    var testinfo = [user1, user2, user3, user4, user5];
-    newElement(user1.name, user1.content);
-    newElement(user2.name, user2.content);
-    newElement(user3.name, user3.content);
-    newElement(user4.name, user4.content);
-    newElement(user5.name, user5.content);
   </script>
 </body>
 
