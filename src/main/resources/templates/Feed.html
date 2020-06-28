@@ -271,8 +271,13 @@
 	error:function(xhr,statTxt,thrownTXT){
 	alert(xhr.status + statTxt)},
 	success: function(data,txtStatus,xhr){
-	alert( "status: " + txtStatus);
-	alert(JSON.stringify(data));
+	var i;
+	for(i = 0; i < data.length-1;i++){
+	newElement(data[i].username,data[i].content);
+	}
+	//alert( "status: " + txtStatus);
+	alert(data.length);
+	//alert(JSON.stringify(data));
 	}
 	});
   </script>
