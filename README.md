@@ -27,6 +27,8 @@ By default, the following users are created for testing purposes.
 | listener | listener@example.com | envibe   | ROLE_USER     |
 | artist   | artist@example.com   | envibe   | ROLE_USER     |
 
+As of right now, the friends functionality is missing from the codebase. Anytime you create a post, only the `listener` account will be able to see it. (Essentially, `listener` is a permanent follower of the other two accounts).
+
 ## Basic Commands
 - `mvnw spring-boot:run` Runs server locally.
 - `mvnw clean package` Builds JAR file, rarely needed.
