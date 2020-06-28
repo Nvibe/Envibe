@@ -6,6 +6,7 @@
   <title>Envibe</title>
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
@@ -262,6 +263,17 @@
     user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
     user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
     user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
+	
+	$.ajax({
+	url:'/api/v1/feed/user?count=10&after=0',
+	type:'GET',
+	error:function(xhr,statTxt,thrownTXT){
+	alert(xhr.status + statTxt)},
+	success: function(data,txtStatus,xhr){
+	alert( "status: " + txtStatus);
+	alert(data);
+	}
+	});
   </script>
 </body>
 
