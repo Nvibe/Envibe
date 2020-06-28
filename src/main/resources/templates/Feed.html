@@ -267,11 +267,12 @@
 	$.ajax({
 	url:'/api/v1/feed/user?count=10&after=0',
 	type:'GET',
+	dataType: 'json',
 	error:function(xhr,statTxt,thrownTXT){
 	alert(xhr.status + statTxt)},
 	success: function(data,txtStatus,xhr){
 	alert( "status: " + txtStatus);
-	alert(data);
+	alert(JSON.stringify(data));
 	}
 	});
   </script>

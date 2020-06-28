@@ -63,7 +63,8 @@ public class FeedController {
         } else {
             newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser(), count, after);
         }
-        return new Gson().toJson(newsFeed);
+        String results = new Gson().toJson(newsFeed);
+        return results;
     }
 
     /**
