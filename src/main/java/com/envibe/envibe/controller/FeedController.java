@@ -76,6 +76,6 @@ public class FeedController {
     public String apiTestAddPost(Model model, HttpServletRequest request, @RequestParam(value="content", required=true) String content) {
         NewsItem ni = new NewsItem(request.getRemoteUser(), new Date(), content);
         newsItemDao.create(ni);
-        return "Feed";
+        return "redirect:/feed";
     }
 }
