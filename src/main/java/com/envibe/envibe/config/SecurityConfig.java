@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Must have valid session cookie to access site.
                 .authorizeRequests()
                 // The following endpoints do not require authorization.
-                .antMatchers("/", "/login", "/register")
+                .antMatchers("/", "/login", "/register", "/assets/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
