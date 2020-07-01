@@ -41,37 +41,56 @@ public class NewsItemDao {
     /**
      * Prepared query to create a single post.
      */
-    final String queryCreate = "INSERT INTO newspost (user_name, post_date, post_content) VALUES (?, ?, ?)";
+    private static final String queryCreate = "INSERT INTO newspost (user_name, post_date, post_content) " +
+                                                "VALUES (?, ?, ?)";
 
     /**
      * Prepared query to create a single post when the underlying database does not support auto-incrementing primary keys.
      */
-    final String queryCreateNonAutoKey = "INSERT INTO newspost (post_id, user_name, post_date, post_content) VALUES (?, ?, ?, ?)";
+    final String queryCreateNonAutoKey = "INSERT INTO newspost (post_id, user_name, post_date, post_content) " +
+                                            "VALUES (?, ?, ?, ?)";
 
     /**
      * Prepared query to find a single post by ID.
      */
-    final String queryRead = "SELECT post_id, user_name, post_date, post_content FROM newspost WHERE post_id = ?";
+    private static final String queryRead = "SELECT post_id, user_name, post_date, post_content " +
+                                            "FROM newspost " +
+                                            "WHERE post_id = ? " +
+                                            "LIMIT 1";
 
     /**
      * Prepared query to find all posts created by a specified username.
      */
-    final String queryReadByUsername = "SELECT post_id, user_name, post_date, post_content FROM newspost WHERE user_name = ?";
+    private static final String queryReadByUsername = "SELECT post_id, user_name, post_date, post_content " +
+                                                        "FROM newspost " +
+                                                        "WHERE user_name = ? " +
+                                                        "LIMIT ?";
 
     /**
      * Prepared query to update a single post by ID.
      */
-    final String queryUpdate = "UPDATE newspost SET user_name = ?, post_date = ?, post_content = ? WHERE post_id = ?";
+    private static final String queryUpdate = "UPDATE newspost " +
+                                                "SET " +
+                                                    "user_name = ?, " +
+                                                    "post_date = ?, " +
+                                                    "post_content = ? " +
+                                                "WHERE post_id = ?";
 
     /**
      * Prepared query to delete a single post by ID.
      */
-    final String queryDelete = "DELETE FROM newspost WHERE post_id = ?";
+    private static final String queryDelete = "DELETE FROM newspost " +
+                                                "WHERE post_id = ?";
 
     /**
      * Prepared query to return the number of posts in the permanent datastore.
      */
     final String queryCountRows = "SELECT COUNT(*) FROM newspost";
+
+    /**
+     * Default number of posts to return in a query that returns more than one record.
+     */
+    private static final int DEFAULT_POST_COUNT = 10;
 
     /**
      * Creates a pre-validated post in the permanent datastore. Also triggers the newsfeed update service.
@@ -81,11 +100,11 @@ public class NewsItemDao {
     public void create(@Valid NewsItem newsItem) {
         Objects.requireNonNull(newsItem, "Method argument newsItem cannot be null");
         int newId;
-        if(System.getenv("JDBC_DATABASE_URL").contains("h2")) {
+        if(supportsSerialPrimaryKeys()) {
+            newId = jdbcTemplate.update(queryCreate, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
+        } else {
             newId = getNextId();
             jdbcTemplate.update(queryCreateNonAutoKey, newId, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
-        } else {
-            newId = jdbcTemplate.update(queryCreate, newsItem.getUsername(), newsItem.getPost_date(), newsItem.getContent());
         }
         newsItem.setPost_id(newId);
         // Fire off the NewsFeedUpdaterService to add the post to the user's friend's newsfeeds.
@@ -100,10 +119,24 @@ public class NewsItemDao {
     public NewsItem read(@NotNull int post_id) {
         Objects.requireNonNull(post_id, "Method argument post_id cannot be null");
         try {
-            return jdbcTemplate.queryForObject(queryRead, new String[]{Integer.toString(post_id)}, new NewsItemRowMapper());
+            return jdbcTemplate.queryForObject(queryRead, new NewsItemRowMapper(), Integer.toString(post_id));
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    /**
+     * Batch call that searches for and returns posts with matching IDs.
+     * @param post_ids List of IDs to look for.
+     * @return NewsItem model objects if their corresponding IDs exist. Otherwise returns null.
+     */
+    public List<NewsItem> read(int... post_ids) {
+        // Apparently batch SELECT calls are not allowed. This will just be a wrapper method.
+        ArrayList<NewsItem> results = new ArrayList<>();
+        for (int post_id : post_ids) {
+            results.add(read(post_id));
+        }
+        return results;
     }
 
     /**
@@ -112,36 +145,22 @@ public class NewsItemDao {
      * @return List of unsorted posts with specified username as the original author.
      */
     public List<NewsItem> read(@ValidUsername String user_name) {
+        return read(user_name, DEFAULT_POST_COUNT);
+    }
+
+    /**
+     * Searches for and returns a list of posts created by the specified user.
+     * @param user_name Username to search for in list of post creators.
+     * @param count Number of posts to return.
+     * @return List of unsorted posts with specified username as the original author.
+     */
+    public List<NewsItem> read(@ValidUsername String user_name, int count) {
         Objects.requireNonNull(user_name, "Method argument user_name cannot be null");
-        // Create container to hold un-processed result set.
-        List<Map<String, Object>> result;
         try {
-            result = jdbcTemplate.queryForList(queryReadByUsername, new String[]{user_name});
+            return jdbcTemplate.query(queryReadByUsername, new NewsItemRowMapper(), user_name, String.valueOf(count));
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<NewsItem>();
         }
-        // Create an instance of the DateFormat class for parsing dates from raw string input.
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        // Return a collected List<NewsItem> with a lambda function to individually process each row.
-        return result.stream().map(m -> {
-            // Create storage for post-processed post_date outside of try/catch scope.
-            Date post_date;
-            try {
-                // Attempt to parse the value of column post_date for this row as a Date object.
-                post_date = dateFormat.parse(String.valueOf(m.get("POST_DATE")));
-            } catch (ParseException e) {
-                // Should probably actually handle this exception.
-                return null;
-            }
-            // Create a NewsItem object and return it so it can be included in the collected List<NewsItem>.
-            NewsItem n = new NewsItem(
-                    Integer.parseInt(String.valueOf(m.get("POST_ID"))),
-                    String.valueOf(m.get("USER_NAME")),
-                    post_date,
-                    String.valueOf(m.get("POST_CONTENT"))
-            );
-            return n;
-        }).collect(Collectors.toList());
     }
 
     /**
@@ -169,5 +188,13 @@ public class NewsItemDao {
      */
     private int getNextId() {
         return jdbcTemplate.queryForObject(queryCountRows, Integer.class);
+    }
+
+    /**
+     * Checks if a JDBC permanent datastore is being used that supports auto-incrementing keys.
+     * @return If the current JDBC connection supports the SERIAL keyword.
+     */
+    private boolean supportsSerialPrimaryKeys() {
+        return !System.getenv("JDBC_DATABASE_URL").contains("h2");
     }
 }

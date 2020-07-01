@@ -80,7 +80,7 @@ public class NewsFeedRetrievalService {
         // Calculate the index of idReferenceArray to end at (or the end of the array, whichever is shorter.
         int endIndex = Math.min(startIndex + count, idReferenceArray.length - 1);
         // Return the loaded NewsItems for the portion of post_ids in idReferenceArray that we need.
-        return getItemsBetweenIndexes(idReferenceArray, startIndex, endIndex);
+        return getNewsItemsBetweenIndexes(idReferenceArray, startIndex, endIndex);
     }
 
     /**
@@ -101,7 +101,7 @@ public class NewsFeedRetrievalService {
         // Return an empty array if the feed is empty.
         if (idFeed.isEmpty()) return new int[0];
         // Split the feed into an array so we can address each post_id.
-        String[] idArray = idFeed.split(",");
+        String[] idArray = idFeed.split(CachedItemDao.PAYLOAD_LIST_DELIMITER);
         // Convert the String[] array to an int[] array.
         int[] idReferenceArray = new int[idArray.length];
         for (int i = 0; i < idArray.length; i++) {
@@ -141,20 +141,26 @@ public class NewsFeedRetrievalService {
      * @param endIndex Index to end sublist at.
      * @return Sublist of idReferenceArray with loaded NewsItems.
      */
-    private List<NewsItem> getItemsBetweenIndexes(int[] idReferenceArray, int startIndex, int endIndex) {
+    private List<NewsItem> getNewsItemsBetweenIndexes(int[] idReferenceArray, int startIndex, int endIndex) {
         // Create list to hold all of the loaded posts.
         ArrayList<NewsItem> returnPostings = new ArrayList<NewsItem>();
-        // Iterate from the starting index to the ending index.
-        for (int i = startIndex; i < endIndex; i++) {
-            // For each post_id in idReferenceArray, load the actual post from the database.
-            // TODO: Probably shouldn't be performing 10 different calls to the database. Convert to a bulk call.
-            NewsItem newsItem = newsItemDao.read(idReferenceArray[i]);
-            // If the post exists, add it to the list.
-            if (newsItem != null) {
-                returnPostings.add(newsItem);
-            }
-        }
         // Return the result.
         return returnPostings;
+    }
+
+    /**
+     * Creates a sub-array from specified endpoints (inclusive).
+     * @param sourceArray Original array.
+     * @param startIndex Index to start the slice.
+     * @param endIndex Index to end the slice.
+     * @return Sub-array within given indexes (inclusive).
+     */
+    private static int[] sliceArray(int[] sourceArray, int startIndex, int endIndex) {
+        int count = endIndex - startIndex + 1;
+        int[] result = new int[count];
+        for (int i = startIndex; i <= endIndex; i++) {
+            result[i - startIndex] = sourceArray[i];
+        }
+        return result;
     }
 }
