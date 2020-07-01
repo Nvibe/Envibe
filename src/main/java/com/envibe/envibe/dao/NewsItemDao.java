@@ -11,8 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -119,24 +121,24 @@ public class NewsItemDao {
             return new ArrayList<NewsItem>();
         }
         // Create an instance of the DateFormat class for parsing dates from raw string input.
-        DateFormat dateFormat = DateFormat.getDateTimeInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         // Return a collected List<NewsItem> with a lambda function to individually process each row.
         return result.stream().map(m -> {
             // Create storage for post-processed post_date outside of try/catch scope.
             Date post_date;
             try {
                 // Attempt to parse the value of column post_date for this row as a Date object.
-                post_date = dateFormat.parse(String.valueOf(m.get("post_date")));
+                post_date = dateFormat.parse(String.valueOf(m.get("POST_DATE")));
             } catch (ParseException e) {
                 // Should probably actually handle this exception.
                 return null;
             }
             // Create a NewsItem object and return it so it can be included in the collected List<NewsItem>.
             NewsItem n = new NewsItem(
-                    Integer.parseInt(String.valueOf(m.get("post_id"))),
-                    String.valueOf(m.get("user_name")),
+                    Integer.parseInt(String.valueOf(m.get("POST_ID"))),
+                    String.valueOf(m.get("USER_NAME")),
                     post_date,
-                    String.valueOf(m.get("content"))
+                    String.valueOf(m.get("POST_CONTENT"))
             );
             return n;
         }).collect(Collectors.toList());
