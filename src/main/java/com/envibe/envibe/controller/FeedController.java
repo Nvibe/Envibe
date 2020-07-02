@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +76,21 @@ public class FeedController {
     @PostMapping("/api/v1/feed/create")
     public String apiTestAddPost(Model model, HttpServletRequest request, @RequestParam(value="content", required=true) String content) {
         NewsItem ni = new NewsItem(request.getRemoteUser(), new Date(), content);
-        newsItemDao.create(ni);
+        // Verify that this is not a duplicate submission.
+        List<NewsItem> latest = newsItemDao.read(request.getRemoteUser());
+        try {
+            if (latest.get(latest.size() - 1).getContent().equals(ni.getContent())) {
+                // TODO: Pass a message to the front-end that this post already exists.
+            } else {
+                newsItemDao.create(ni);
+            }
+        } catch (NullPointerException e) {
+            // This is the user's first post. Skip duplicate post validation.
+            newsItemDao.create(ni);
+        } catch (IndexOutOfBoundsException e) {
+            // This is the user's first post. Skip duplicate post validation.
+            newsItemDao.create(ni);
+        }
         return "redirect:/feed";
     }
 }
