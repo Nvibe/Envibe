@@ -133,6 +133,15 @@
 						<artifactId>umldoclet</artifactId>
 						<version>1.1.4</version>
 					</docletArtifact>
+					<additionalOptions>
+						<umlIncludePrivateFields>true</umlIncludePrivateFields>
+						<umlIncludeDeprecatedFields>true</umlIncludeDeprecatedFields>
+						<umlIncludeMethodParamNames>true</umlIncludeMethodParamNames>
+						<umlIncludeDefaultConstructors>true</umlIncludeDefaultConstructors>
+						<umlIncludePrivateMethods>true</umlIncludePrivateMethods>
+						<umlIncludeDeprecatedMethods>true</umlIncludeDeprecatedMethods>
+						<umlIncludePrivateClasses>true</umlIncludePrivateClasses>
+					</additionalOptions>
 				</configuration>
 			</plugin>
 		</plugins>
