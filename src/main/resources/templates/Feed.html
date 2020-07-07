@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th ="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -7,6 +7,7 @@
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/assets/StyleSheet.css">
   <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
@@ -19,185 +20,6 @@
     }
     h3 {
       margin: 0px;
-    }
-  </style>
-  <style type="text/css">
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0px;
-    }
-    body {
-      background-color: rgb(50, 50, 50);
-      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-      transform-style: preserve-3d;
-    }
-    .UserConArea {
-      position: absolute;
-      background-image: none;
-      background-color: rgb(80, 80, 80);
-      border-radius: 30px;
-      top: 41px;
-      height: 171px;
-      width: 587px;
-      transform-origin: 293.5px 85.5px 0px;
-      left: 6px;
-      visibility: hidden;
-    }
-    .LeftColumn {
-      width: 302px;
-      height: 724px;
-      position: fixed;
-      top: 0px;
-      left: 0px;
-    }
-    .RightColumn {
-      height: 724px;
-      position: fixed;
-      width: 298px;
-      left: 904px;
-      top: 0px;
-    }
-    .ItemRow {
-      height: 33px;
-      left: 127px;
-      position: absolute;
-      top: 46px;
-      width: 156px;
-      border-width: 0px 0px 1px;
-      border-style: solid;
-    }
-    .MyAccount {
-      position: absolute;
-      text-align: center;
-      left: 0px;
-      width: 156px;
-      height: 22px;
-      transform-origin: 78px 11px 0px;
-      top: 6px;
-    }
-    .MyAccountText {
-      color: rgb(255, 255, 255);
-      font-family: Tahoma;
-      text-align: center;
-    }
-    .gwd-br-kkz3 {
-      text-align: center;
-    }
-    .gwd-br-10eb {
-      text-align: center;
-    }
-    .ContentArea {
-      height: 721px;
-      overflow: hidden;
-      position: relative;
-      width: 602px;
-      transform-origin: 301px 360.5px 0px;
-      left: 302px;
-      top: 3px;
-    }
-    .InnerContentArea {
-      position: absolute;
-      left: 1px;
-      bottom: 0px;
-      right: -20px;
-      overflow-y: scroll;
-      width: 623px;
-      top: 92px;
-      height: 648px;
-      transform-origin: 311.663px 323.846px 0px;
-    }
-    .Bubble {
-      height: 207px;
-      position: relative;
-      width: 570px;
-      left: 1px;
-      top: 15px;
-      background-color: rgb(90, 90, 90);
-      border-radius: 30px;
-      margin: 25px 10px;
-    }
-    .UserContent {
-      height: 164px;
-      position: absolute;
-      width: 600px;
-      left: -1px;
-      top: 44px;
-    }
-    .UserInfo {
-      height: 44px;
-      left: -1px;
-      position: absolute;
-      top: 4px;
-      width: 600px;
-    }
-    .ProfilePicture {
-      height: 40px;
-      position: absolute;
-      top: 2px;
-      width: 40px;
-      left: 36px;
-    }
-    .ProfileOutline {
-      width: 40px;
-      height: 40px;
-      display: block;
-      fill: none;
-      stroke: rgb(0, 0, 0);
-      left: 36px;
-      position: absolute;
-      top: 2px;
-    }
-    .UserNameStyle {
-      position: absolute;
-      top: 15px;
-      height: 40px;
-      left: 94px;
-      width: 226px;
-      transform-origin: 121.136px 20px 0px;
-      color: white;
-    }
-    .ContentText {
-      height: 131px;
-      position: absolute;
-      width: 572px;
-      transform-origin: 286px 65.5px 0px;
-      top: 17px;
-      left: 14px;
-      color: white;
-    }
-    .TextField {
-      position: absolute;
-      left: 25px;
-      width: 552px;
-      top: 13px;
-      height: 47px;
-      transform-origin: 278px 26.5px 0px;
-    }
-    .NewComment {
-      position: absolute;
-      width: 599px;
-      height: 79px;
-      left: 1px;
-      top: 13px;
-    }
-    .CreateButton {
-      position: absolute;
-      left: 498px;
-      top: 13px;
-      width: 83px;
-      height: 53px;
-      transform-origin: 41.5px 26.5px 0px;
-      background-image: none;
-      background-color: rgb(183, 181, 176);
-    }
-    createbutton {
-      position: absolute;
-      left: 475px;
-      top: 13px;
-      width: 106px;
-      height: 53px;
-      transform-origin: 53px 26.5px 0px;
     }
   </style>
 </head>
@@ -233,13 +55,20 @@
       </template>
     </div>
     <div class="NewComment" id="NewComment">
-      <form action="#" th:action="@{/api/v1/feed/create}" method="post" >
+      <form action="#" th:action="@{/api/v1/feed/create}" method="post">
         <input type="text" id="CommentField" class="TextField" name="content" placeholder="What are you vibing to?" value="">
-        <button id="CreateButton" class="CreateButton" type="submit" >Create Post</button>
+        <button id="CreateButton" class="CreateButton" type="submit">Create Post</button>
       </form>
     </div>
   </div>
-  <div class="RightColumn" id="RightColumn"></div>
+  <div class="RightColumn" id="RightColumn">
+   <div class="Logout" id="Row1_1">
+      <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
+      <br>
+      
+      <p class=""></p>
+    </div>
+  </div>
   <script>
     class User {
       constructor(name, content) {
@@ -263,18 +92,24 @@
     user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
     user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
     user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
-	
-	$.ajax({
-	url:'/api/v1/feed/user?count=10&after=0',
-	type:'GET',
-	dataType: 'json',
-	error:function(xhr,statTxt,thrownTXT){
-	alert(xhr.status + statTxt)},
-	success: function(data,txtStatus,xhr){
-	alert( "status: " + txtStatus);
-	alert(JSON.stringify(data));
-	}
-	});
+
+    $.ajax({
+      url: '/api/v1/feed/user?count=10&after=0',
+      type: 'GET',
+      dataType: 'json',
+      error: function(xhr, statTxt, thrownTXT) {
+        alert(xhr.status + statTxt)
+      },
+      success: function(data, txtStatus, xhr) {
+        var i;
+        for (i = 0; i < data.length - 1; i++) {
+          newElement(data[i].username, data[i].content);
+        }
+        //alert( "status: " + txtStatus);
+        alert(data.length);
+        //alert(JSON.stringify(data));
+      }
+    });
   </script>
 </body>
 
