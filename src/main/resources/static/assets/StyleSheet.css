@@ -1,0 +1,552 @@
+<style type="text/css">
+html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+    body {
+      background-color: rgb(50, 50, 50);
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+    }
+    .ContentArea {
+      position: absolute;
+      width: 600px;
+      height: 724px;
+      transform-origin: 300px 362px 0px;
+      background: rgb(90, 90, 90);
+      left: 302px;
+      top: 0px;
+    }
+    .gwd-div-ojh2 {
+      position: absolute;
+      width: 571px;
+      height: 322px;
+      transform-origin: 285.488px 160.849px 0px;
+      left: 10px;
+      top: 85px;
+    }
+    .TextField {
+      display: block;
+      height: 19.9968px;
+      left: 180.86px;
+      position: absolute;
+      top: 119.241px;
+      width: 100px;
+    }
+    .LastName {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 54px;
+    }
+    .FirstNameLabel {
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      left: 96px;
+      top: 63px;
+    }
+    .Birthday {
+      width: 200px;
+      height: 20px;
+      left: 197px;
+      top: 134px;
+    }
+    .CountryField {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 174px;
+    }
+    email {
+      height: 20px;
+      left: 179px;
+      top: 106px;
+      transform-style: preserve-3d;
+      width: 194.537px;
+      transform-origin: 99.2508px 12.9735px 0px;
+      transform: translate3d(-1px, 23px, 0px) rotateZ(-0.602012deg);
+    }
+    .FirstName {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 14px;
+    }
+    .gwd-input-1wzc {
+      top: 220px;
+      height: 20px;
+      width: 200px;
+      left: 196px;
+    }
+    .Label {
+      left: 90px;
+      top: 17px;
+    }
+    .gwd-label-1hof {
+      left: 90px;
+      top: 57px;
+    }
+    .gwd-label-b57a {
+      left: 90px;
+      top: 138px;
+    }
+    .gwd-label-evt3 {
+      left: 90px;
+      top: 177px;
+    }
+    .gwd-label-p0ca {
+      top: 223px;
+      left: 90px;
+    }
+    .FieldsBorder {
+      border-style: solid;
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      height: 324px;
+      width: 573px;
+      transform-origin: 286.634px 161.859px 0px;
+      background-image: none;
+      background-color: transparent;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(206, 110, 12);
+      border-width: 2px;
+      border-radius: 30px;
+      left: 0px;
+      top: 0px;
+    }
+    .gwd-input-18zp {
+      top: 253px;
+    }
+    .gwd-label-pv1t {
+      top: 256px;
+    }
+    .gwd-div-1hhx {
+      position: absolute;
+      width: 333.333px;
+      height: 60.6061px;
+      left: 119px;
+      top: 327px;
+      overflow: visible;
+    }
+    .gwd-button-16n5 {
+      display: block;
+      height: 29.9874px;
+      position: absolute;
+      width: 332.986px;
+      transform-origin: 166.556px 15.263px 0px;
+      border-style: none;
+      left: 0px;
+      top: 15px;
+    }
+    .gwd-label-1o24 {
+      top: 217px;
+    }
+    .gwd-input-1e3f {
+      top: 214px;
+    }
+    .UsernameField {
+      top: 93px;
+    }
+    .UsernameLabel {
+      top: 96px;
+    }
+    
+    .gwd-div-q8c2 {
+      position: absolute;
+      width: 240.5px;
+      height: 104px;
+      top: 310px;
+      left: 481px;
+    }
+    .gwd-input-s0m9 {
+      display: block;
+      height: 20px;
+      position: absolute;
+      width: 100px;
+      left: 8px;
+      top: 5px;
+    }
+    .gwd-label-1akj {
+      display: block;
+      height: 20px;
+      position: absolute;
+      width: 100px;
+      top: -20px;
+      left: 9px;
+    }
+    .gwd-input-1nw7 {
+      left: 8px;
+      top: 5px;
+      width: 228px;
+      transform-origin: 116px 13px 0px;
+    }
+    .gwd-label-18p6 {
+      left: 9px;
+      top: -20px;
+      font-family: Tahoma;
+    }
+    .gwd-input-19ax {
+      width: 227px;
+      transform-origin: 115.5px 13px 0px;
+      left: 9px;
+      top: 67px;
+    }
+    .gwd-label-9ml0 {
+      top: 42px;
+      font-family: Tahoma;
+    }
+    .gwd-div-166q {
+      position: absolute;
+      width: 512px;
+      height: 128px;
+      transform-origin: 256.004px 64.1667px 0px;
+      top: 108px;
+      left: 350px;
+    }
+    .gwd-rect-wd79 {
+      background-color: rgb(255, 255, 255);
+      border-color: rgba(255, 108, 2, 0.66);
+      border-radius: 20px;
+      border-image-outset: 0;
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 450px;
+      left: -103px;
+      top: -310px;
+      height: 724px;
+      transform-origin: 225px 362px 0px;
+    }
+    .gwd-button-a3gx {
+      display: block;
+      height: 27px;
+      position: absolute;
+      width: 241px;
+      transform-origin: 125px 14px 0px;
+      left: 1px;
+      top: 120px;
+    }
+    .gwd-p-1qxg {
+      font-family: Tahoma;
+      font-size: 24px;
+      height: 33px;
+      position: absolute;
+      width: 66px;
+      transform-origin: 937.251px 111.487px 0px;
+      top: 150px;
+      left: 92px;
+    }
+    .gwd-span-1uia {
+      font-family: Tahoma;
+      font-size: 12px;
+      left: -2px;
+      top: 19px;
+    }
+    .gwd-br-vcoj {
+      font-family: Tahoma;
+      font-size: 24px;
+    }
+    .gwd-img-1t33 {
+      display: block;
+      position: absolute;
+      height: 88px;
+      background-image: none;
+      width: 349px;
+      transform-origin: 174.5px 43.625px 0px;
+      background-color: transparent;
+      left: 142px;
+      top: 27px;
+    }
+    .gwd-img-8xbc {
+      position: absolute;
+      width: 107px;
+      height: 107px;
+      transform-origin: 53.6667px 53.6667px 0px;
+      left: 36px;
+      top: 13px;
+    }
+    .ContentArea {
+      position: absolute;
+      width: 600px;
+      transform-origin: 300px 362px 0px;
+      left: 302px;
+      top: 0px;
+      background: transparent;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(239, 102, 3);
+      border-style: solid;
+      border-width: 0px 1px;
+      height: 100vh;
+    }
+    .UserConArea {
+      position: absolute;
+      background-image: none;
+      background-color: rgb(80, 80, 80);
+      border-radius: 30px;
+      top: 41px;
+      height: 171px;
+      width: 587px;
+      transform-origin: 293.5px 85.5px 0px;
+      left: 6px;
+      visibility: hidden;
+    }
+    .gwd-div-ox36 {
+      position: absolute;
+      width: 302px;
+      height: 724px;
+      left: 0px;
+      top: 0px;
+    }
+    .gwd-div-ncvi {
+      position: absolute;
+      width: 298px;
+      height: 724px;
+      left: 904px;
+      top: 0px;
+    }
+    .gwd-br-kkz3 {
+      text-align: center;
+    }
+    .gwd-br-10eb {
+      text-align: center;
+    }
+    .gwd-div-1bvk {
+      height: 24px;
+      left: 27px;
+      position: absolute;
+      top: 15px;
+      width: 267px;
+    }
+    .Feedlink {
+      position: absolute;
+      width: 114px;
+      transform-origin: 28px 0px 0px;
+      top: 1px;
+      left: 77px;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(255, 255, 255);
+      border-style: none;
+      color: white;
+      text-align: center;
+      height: 23px;
+    }
+    .FormLines {
+      height: 30px;
+      position: absolute;
+      transform-origin: 301px 15px 0px;
+      top: 8px;
+      left: 0px;
+      width: 600px;
+    }
+    .gwd-div-1n7m {
+      top: 42px;
+    }
+    .gwd-div-2q7d {
+      top: 75px;
+    }
+    .gwd-div-1p0y {
+      top: 108px;
+    }
+    .gwd-div-pfzu {
+      top: 141px;
+    }
+    .gwd-div-1fhz {
+      top: 175px;
+    }
+    .gwd-div-14ue {
+      top: 209px;
+    }
+    .gwd-p-b9nr {
+      height: 16px;
+      position: absolute;
+      width: 110px;
+      transform-origin: 55.2px 8px 0px;
+      top: 7px;
+      left: 9px;
+      font-size: 14px;
+      color: white;
+    }
+    .gwd-span-cfv8 {
+      font-size: 14px;
+    }
+    .gwd-p-1xjb {
+      position: absolute;
+      width: 237px;
+      height: 26px;
+      font-size: 14px;
+      color: rgb(255, 255, 255);
+      left: 144px;
+      top: 2px;
+    }
+    .UserConArea {
+      position: absolute;
+      background-image: none;
+      background-color: rgb(80, 80, 80);
+      border-radius: 30px;
+      top: 41px;
+      height: 171px;
+      width: 587px;
+      transform-origin: 293.5px 85.5px 0px;
+      left: 6px;
+      visibility: hidden;
+    }
+    .LeftColumn {
+      width: 302px;
+      height: 724px;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+    }
+    .RightColumn {
+      height: 724px;
+      position: fixed;
+      width: 298px;
+      left: 904px;
+      top: 0px;
+    }
+    .ItemRow {
+      height: 33px;
+      left: 127px;
+      position: absolute;
+      top: 46px;
+      width: 156px;
+      border-width: 0px 0px 1px;
+      border-style: solid;
+    }
+    .MyAccount {
+      position: absolute;
+      text-align: center;
+      left: 0px;
+      width: 156px;
+      height: 22px;
+      transform-origin: 78px 11px 0px;
+      top: 6px;
+    }
+    .MyAccountText {
+      color: rgb(255, 255, 255);
+      font-family: Tahoma;
+      text-align: center;
+    }
+    .gwd-br-kkz3 {
+      text-align: center;
+    }
+    .gwd-br-10eb {
+      text-align: center;
+    }
+    .ContentArea {
+      height: 721px;
+      overflow: hidden;
+      position: relative;
+      width: 602px;
+      transform-origin: 301px 360.5px 0px;
+      left: 302px;
+      top: 3px;
+    }
+    .InnerContentArea {
+      position: absolute;
+      left: 1px;
+      bottom: 0px;
+      right: -20px;
+      overflow-y: scroll;
+      width: 623px;
+      top: 92px;
+      height: 648px;
+      transform-origin: 311.663px 323.846px 0px;
+    }
+    .Bubble {
+      height: 207px;
+      position: relative;
+      width: 570px;
+      left: 1px;
+      top: 15px;
+      background-color: rgb(90, 90, 90);
+      border-radius: 30px;
+      margin: 25px 10px;
+    }
+    .UserContent {
+      height: 164px;
+      position: absolute;
+      width: 600px;
+      left: -1px;
+      top: 44px;
+    }
+    .UserInfo {
+      height: 44px;
+      left: -1px;
+      position: absolute;
+      top: 4px;
+      width: 600px;
+    }
+    .ProfilePicture {
+      height: 40px;
+      position: absolute;
+      top: 2px;
+      width: 40px;
+      left: 36px;
+    }
+    .ProfileOutline {
+      width: 40px;
+      height: 40px;
+      display: block;
+      fill: none;
+      stroke: rgb(0, 0, 0);
+      left: 36px;
+      position: absolute;
+      top: 2px;
+    }
+    .UserNameStyle {
+      position: absolute;
+      top: 15px;
+      height: 40px;
+      left: 94px;
+      width: 226px;
+      transform-origin: 121.136px 20px 0px;
+      color: white;
+    }
+    .ContentText {
+      height: 131px;
+      position: absolute;
+      width: 572px;
+      transform-origin: 286px 65.5px 0px;
+      top: 17px;
+      left: 14px;
+      color: white;
+    }
+    .TextField {
+      position: absolute;
+      left: 25px;
+      width: 552px;
+      top: 13px;
+      height: 47px;
+      transform-origin: 278px 26.5px 0px;
+    }
+    .NewComment {
+      position: absolute;
+      width: 599px;
+      height: 79px;
+      left: 1px;
+      top: 13px;
+    }
+    .CreateButton {
+      position: absolute;
+      left: 498px;
+      top: 13px;
+      width: 83px;
+      height: 53px;
+      transform-origin: 41.5px 26.5px 0px;
+      background-image: none;
+      background-color: rgb(183, 181, 176);
+    }
+</style>
