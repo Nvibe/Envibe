@@ -3,10 +3,12 @@ package com.envibe.envibe.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.envibe.envibe.service.UserAuthService;
@@ -58,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Must have valid session cookie to access site.
                 .authorizeRequests()
                 // The following endpoints do not require authorization.
-                .antMatchers("/", "/login", "/register")
+                .antMatchers("/", "/login", "/register", "/assets/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
