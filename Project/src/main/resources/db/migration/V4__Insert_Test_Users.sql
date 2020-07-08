@@ -1,3 +1,0 @@
-INSERT INTO user_account (user_name, user_password, user_email, user_role) VALUES ('admin', '$2a$10$/PjDpYv9Cx69LVlnnM2asuf9SX26adeHKCgV5CnGjYpj/00A7lc2a', 'admin@example.com', 'ROLE_ADMIN');
-INSERT INTO user_account (user_name, user_password, user_email, user_role) VALUES ('listener', '$2a$10$/PjDpYv9Cx69LVlnnM2asuf9SX26adeHKCgV5CnGjYpj/00A7lc2a', 'listener@example.com', 'ROLE_USER');
-INSERT INTO user_account (user_name, user_password, user_email, user_role) VALUES ('artist', '$2a$10$/PjDpYv9Cx69LVlnnM2asuf9SX26adeHKCgV5CnGjYpj/00A7lc2a', 'artist@example.com', 'ROLE_USER');
