@@ -45,12 +45,9 @@ public class FriendDao {
 	/*Unused but could be eventually.*/
 	public void update(Relationship relation) {
         Objects.requireNonNull(relation, "Method argument user cannot be null");
-        try {
         jdbcTemplate.update(queryUpdate, relation.getUserName(), relation.getUserFriend());
-        } catch (Exception e) {
-        	return;
-        }
     }
+	
 	/*Used to delete record from database, call a relationship object and than delete it in query.*/
 	public void delete(Relationship relation) {
         Objects.requireNonNull(relation, "Method argument relation cannot be null");
