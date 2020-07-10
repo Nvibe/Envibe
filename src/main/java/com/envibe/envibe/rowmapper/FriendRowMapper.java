@@ -8,6 +8,8 @@ import com.envibe.envibe.model.Relationship;
 
 public class FriendRowMapper implements RowMapper<Relationship>{
 	
+	
+	/*Maps users and friends for SQL on Relationship model*/
 	public Relationship mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Relationship(
                 rs.getString("user_name"),
