@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta charset="utf-8">
   <title>undefined</title>
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
   <link rel="stylesheet" type="text/css" href="/assets/StyleSheet.css">
-  <style type="text/css" id="gwd-text-style" >
+  <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
     }
@@ -20,67 +21,96 @@
     h3 {
       margin: 0px;
     }
+    a {
+      text-decoration: none;
+    }
   </style>
 </head>
 
 <body class="htmlNoPages">
   <div class="ContentArea" id="ContentArea">
+    <form name="registerForm" th:object="${user}" th:action="@{/register}" method="POST">
+    <div class="SavebuttonDiv">
+      <button id="SaveButton" class="gwd-button-1aim" type="submit">Save changes</button>
+    </div>
     <div class="gwd-div-14ue FormLines" id="Password">
-      <p class="gwd-p-1xjb" id="Passvalue"><br>
+      <p editable="" class="valuep" id="Passvalue" th:field="*{password}">TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Password: </p>
     </div>
     <div class="gwd-div-1fhz FormLines" id="Email">
-      <p class="gwd-p-1xjb" id="Emailvalue"><br>
+      <p editable="" class="valuep" id="Emailvalue" th:field="*{email}">TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Email: </p>
     </div>
     <div class="gwd-div-pfzu FormLines" id="Country">
-      <p class="gwd-p-1xjb" id="Countryvalue"><br>
+      <p editable="" class="valuep" id="Countryvalue" th:field="*{country}">TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Country: </p>
     </div>
     <div class="gwd-div-1p0y FormLines" id="DOB">
-      <p class="gwd-p-1xjb" id="Birthvalue"><br>
+      <p editable="" class="valuep" id="Birthvalue" th:field="*{birthday}">TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Date of Birth: </p>
     </div>
     <div class="gwd-div-2q7d FormLines" id="UName">
-      <p class="gwd-p-1xjb" id="UNvalue"><br>
+      <p editable="" class="valuep" id="UNvalue" th:field="*{username}">TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Username: </p>
     </div>
     <div class="gwd-div-1n7m FormLines" id="Last">
-      <p class="gwd-p-1xjb" id="LNvalue"><br>
+      <p editable="" class="valuep gwd-p-n6wb" id="LNvalue" th:field="*{last_name}" >TEST<br>
         
       </p>
       <p class="gwd-p-b9nr">Last Name: </p>
     </div>
     <div class="FormLines" id="First">
-      <p class="gwd-p-b9nr"><span class="gwd-span-cfv8">First Name</span>: </p>
-      <p class="gwd-p-1xjb" id="FNvalue"><br>
+      <p editable="" class="valuep" id="FNvalue" th:field="*{first_name}">TEST<br>
         
       </p>
+      <p class="gwd-p-b9nr">First Name:</p>
     </div>
+    </form>
   </div>
+
   <div class="gwd-div-ox36" id="LeftColumn">
     <div class="gwd-div-1bvk">
-      <p class="Feedlink" id="MyFeed">My Feed</p>
+      <a href="/feed" class="Feedlink" id="MyFeed">My Feed</a>
     </div>
   </div>
   <div class="gwd-div-ncvi" id="RightColumn">
-	 <div class="Logout" id="Row1_1">
+    <div class="Logout" id="Row1_1">
       <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
       <br>
       
-      <p class=""></p>
     </div>
   </div>
+  <script>
+    $('body').on('click', '[editable]', function() {
+      var $a = $(this);
+      var fieldType = $a.attr("th:field");
+      alert(fieldType);
+      var $in = $('<input/ class ="valuep" placeholder="' + $a.text() +'">')
+      $in.css("color", "black");
+      $a.replaceWith($in);
+      var save = function() {
+        if($in.val() == ''){
+          var $p = $a;
+        }
+        else{
+          var $p = $('<p/ editable class = "valuep" th:field="' + fieldType +'">').text($in.val());
+        }
+        $in.replaceWith($p);
+      };
+      $in.one('blur', save).focus();
+
+    });
+  </script>
 </body>
 
 </html>
