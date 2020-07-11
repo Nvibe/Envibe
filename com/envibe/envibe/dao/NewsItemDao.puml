@@ -1,0 +1,13 @@
+@startuml
+
+    class NewsItemDao [[NewsItemDao.html]] {
+        +create(NewsItem): void
+        +read(int): NewsItem
+        +read(String): List<NewsItem>
+        +update(NewsItem): void
+        +delete(NewsItem): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

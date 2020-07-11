@@ -1,0 +1,18 @@
+@startuml
+
+    class CachedItemDao [[CachedItemDao.html]] {
+        {static} +PURPOSE_GENERAL_CACHE: String
+        {static} +PURPOSE_NEWS_FEED_CACHE: String
+        {static} +PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH: String
+        +create(CachedItem): void
+        +read(String): CachedItem
+        +readAndDelete(String): CachedItem
+        +update(CachedItem): void
+        +delete(CachedItem): void
+        +delete(String): void
+        +generateTag(String, String): String
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

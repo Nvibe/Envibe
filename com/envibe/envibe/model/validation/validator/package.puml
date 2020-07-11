@@ -1,0 +1,33 @@
+@startuml
+
+    namespace com.envibe.envibe.model.validation.validator {
+
+        class PasswordValidator [[PasswordValidator.html]] {
+            +initialize(ValidPassword): void
+            +isValid(String, ConstraintValidatorContext): boolean
+        }
+
+        class UsernameValidator [[UsernameValidator.html]] {
+            +initialize(ValidUsername): void
+            +isValid(String, ConstraintValidatorContext): boolean
+        }
+
+        class RoleValidator [[RoleValidator.html]] {
+            +initialize(ValidRole): void
+            +isValid(String, ConstraintValidatorContext): boolean
+        }
+
+        interface javax.validation.ConstraintValidator<A, T> {
+            {abstract} +isValid(T, ConstraintValidatorContext): boolean
+        }
+        javax.validation.ConstraintValidator <|.. PasswordValidator
+
+        javax.validation.ConstraintValidator <|.. UsernameValidator
+
+        javax.validation.ConstraintValidator <|.. RoleValidator
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

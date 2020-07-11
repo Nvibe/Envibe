@@ -1,0 +1,44 @@
+@startuml
+
+    namespace com.envibe.envibe.dao {
+
+        class NewsItemDao [[NewsItemDao.html]] {
+            +create(NewsItem): void
+            +read(int): NewsItem
+            +read(String): List<NewsItem>
+            +update(NewsItem): void
+            +delete(NewsItem): void
+        }
+
+        class FriendDao [[FriendDao.html]] {
+            +create(Relationship): void
+            +read(String): List<Relationship>
+            +update(Relationship): void
+            +delete(Relationship): void
+        }
+
+        class UserDao [[UserDao.html]] {
+            +create(User): void
+            +read(String): User
+            +update(User): void
+            +delete(User): void
+        }
+
+        class CachedItemDao [[CachedItemDao.html]] {
+            {static} +PURPOSE_GENERAL_CACHE: String
+            {static} +PURPOSE_NEWS_FEED_CACHE: String
+            {static} +PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH: String
+            +create(CachedItem): void
+            +read(String): CachedItem
+            +readAndDelete(String): CachedItem
+            +update(CachedItem): void
+            +delete(CachedItem): void
+            +delete(String): void
+            +generateTag(String, String): String
+        }
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

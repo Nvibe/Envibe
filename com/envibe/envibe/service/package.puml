@@ -1,0 +1,31 @@
+@startuml
+
+    namespace com.envibe.envibe.service {
+
+        class UserRegistrationService [[UserRegistrationService.html]] {
+            +registerNewUserAccount(User): void
+        }
+
+        class UserAuthService [[UserAuthService.html]] {
+            +loadUserByUsername(String): UserDetails
+        }
+
+        class NewsFeedUpdateService [[NewsFeedUpdateService.html]] {
+            +triggerWorker(int): void
+            +dismantle(): void
+        }
+
+        class RelationshipDisplayService [[RelationshipDisplayService.html]] {
+            +FriendsList(String): List<String>
+        }
+
+        interface org.springframework.security.core.userdetails.UserDetailsService {
+            {abstract} +loadUserByUsername(String): UserDetails
+        }
+        org.springframework.security.core.userdetails.UserDetailsService <|.. UserAuthService
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

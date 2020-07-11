@@ -1,0 +1,21 @@
+@startuml
+
+    namespace com.envibe.envibe.controller {
+
+        class HomeController [[HomeController.html]] {
+            +index(Model): String
+        }
+
+        class AuthenticationController [[AuthenticationController.html]] {
+            +initBinder(WebDataBinder): void
+            +login(Model, String, String): String
+            +logout(Model, HttpServletRequest): String
+            +registration(Model): String
+            +registerUser(User, HttpServletRequest, Errors): String
+        }
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

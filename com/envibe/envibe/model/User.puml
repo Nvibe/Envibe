@@ -1,0 +1,25 @@
+@startuml
+
+    class User [[User.html]] {
+        +User()
+        +getRole(): String
+        +setRole(String): void
+        +getUsername(): String
+        +setUsername(String): void
+        +getPassword(): String
+        +setPassword(String): void
+        +getEmail(): String
+        +setEmail(String): void
+        +getCountry(): String
+        +setCountry(String): void
+        +getBirthday(): Date
+        +setBirthday(Date): void
+        +getLast_name(): String
+        +setLast_name(String): void
+        +getFirst_name(): String
+        +setFirst_name(String): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

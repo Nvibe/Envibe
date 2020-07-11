@@ -1,0 +1,19 @@
+@startuml
+
+    class NewsItem [[NewsItem.html]] {
+        +NewsItem()
+        +NewsItem(String, Date, String)
+        +NewsItem(int, String, Date, String)
+        +getPost_id(): int
+        +setPost_id(int): void
+        +getUsername(): String
+        +setUsername(String): void
+        +getPost_date(): Date
+        +setPost_date(Date): void
+        +getContent(): String
+        +setContent(String): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

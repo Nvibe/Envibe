@@ -1,0 +1,30 @@
+@startuml
+
+    namespace com.envibe.envibe.rowmapper {
+
+        class NewsItemRowMapper [[NewsItemRowMapper.html]] {
+            +mapRow(ResultSet, int): NewsItem
+        }
+
+        class FriendRowMapper [[FriendRowMapper.html]] {
+            +mapRow(ResultSet, int): Relationship
+        }
+
+        class UserRowMapper [[UserRowMapper.html]] {
+            +mapRow(ResultSet, int): User
+        }
+
+        interface org.springframework.jdbc.core.RowMapper<T> {
+            {abstract} +mapRow(ResultSet, int): T
+        }
+        org.springframework.jdbc.core.RowMapper <|.. NewsItemRowMapper
+
+        org.springframework.jdbc.core.RowMapper <|.. FriendRowMapper
+
+        org.springframework.jdbc.core.RowMapper <|.. UserRowMapper
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

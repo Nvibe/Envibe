@@ -1,0 +1,68 @@
+@startuml
+
+    namespace com.envibe.envibe.model {
+
+        class User [[User.html]] {
+            +User()
+            +getRole(): String
+            +setRole(String): void
+            +getUsername(): String
+            +setUsername(String): void
+            +getPassword(): String
+            +setPassword(String): void
+            +getEmail(): String
+            +setEmail(String): void
+            +getCountry(): String
+            +setCountry(String): void
+            +getBirthday(): Date
+            +setBirthday(Date): void
+            +getLast_name(): String
+            +setLast_name(String): void
+            +getFirst_name(): String
+            +setFirst_name(String): void
+        }
+
+        class CachedItem [[CachedItem.html]] {
+            +CachedItem()
+            +CachedItem(String, String, String)
+            +getPurpose(): String
+            +getUserTag(): String
+            +getPayload(): String
+            +setPayload(String): void
+        }
+
+        class NewsItem [[NewsItem.html]] {
+            +NewsItem()
+            +NewsItem(String, Date, String)
+            +NewsItem(int, String, Date, String)
+            +getPost_id(): int
+            +setPost_id(int): void
+            +getUsername(): String
+            +setUsername(String): void
+            +getPost_date(): Date
+            +setPost_date(Date): void
+            +getContent(): String
+            +setContent(String): void
+        }
+
+        class Relationship [[Relationship.html]] {
+            +Relationship()
+            +Relationship(String, String)
+            +getUserName(): String
+            +setUserName(String): void
+            +getUserFriend(): String
+            +setUserFriend(String): void
+        }
+
+        interface java.io.Serializable
+        java.io.Serializable <|.. User
+
+        java.io.Serializable <|.. CachedItem
+
+        java.io.Serializable <|.. NewsItem
+
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

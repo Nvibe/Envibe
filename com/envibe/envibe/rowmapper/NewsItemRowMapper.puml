@@ -1,0 +1,9 @@
+@startuml
+
+    class NewsItemRowMapper [[NewsItemRowMapper.html]] {
+        +mapRow(ResultSet, int): NewsItem
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+    class Relationship [[Relationship.html]] {
+        +Relationship()
+        +Relationship(String, String)
+        +getUserName(): String
+        +setUserName(String): void
+        +getUserFriend(): String
+        +setUserFriend(String): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

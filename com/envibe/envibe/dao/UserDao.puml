@@ -1,0 +1,12 @@
+@startuml
+
+    class UserDao [[UserDao.html]] {
+        +create(User): void
+        +read(String): User
+        +update(User): void
+        +delete(User): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml

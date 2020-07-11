@@ -1,0 +1,12 @@
+@startuml
+
+    class FriendDao [[FriendDao.html]] {
+        +create(Relationship): void
+        +read(String): List<Relationship>
+        +update(Relationship): void
+        +delete(Relationship): void
+    }
+
+
+    center footer UMLDoclet 1.1.4, PlantUML 1.2019.05
+@enduml
