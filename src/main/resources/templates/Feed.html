@@ -21,6 +21,9 @@
     h3 {
       margin: 0px;
     }
+    a{
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -87,11 +90,6 @@
       target.append(element);
     }
 
-    user1 = new User("John Smith", "Generic content");
-    user2 = new User("Kyle Hill", "What would it feel like to get pulled into a black hole?");
-    user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
-    user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
-    user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
 
     $.ajax({
       url: '/api/v1/feed/user?count=10&after=0',
