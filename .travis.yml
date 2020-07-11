@@ -9,6 +9,12 @@ dist: bionic
 services:
   - postgresql
   - redis
+# Install Graphviz as it is required by the UML class generator.
+addons:
+  apt:
+    packages:
+      - graphviz
+    update: true
 # Specify environment variables for database integration.
 env:
   global:

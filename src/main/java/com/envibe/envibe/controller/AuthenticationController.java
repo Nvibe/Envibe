@@ -32,7 +32,7 @@ public class AuthenticationController {
      */
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.addCustomFormatter(new DateFormatter("YYYY-MM-DD"));
+        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd"),"user.birthday");
     }
 
     /**
@@ -101,7 +101,7 @@ public class AuthenticationController {
         } catch (UserAlreadyExistsException e) {
             // Validation error occured.
             // TODO: Pass a message to the front-end.
-            return "redirect:/register";
+            return "register";
         }
         // Redirect user to login page on save success.
         return "redirect:/login";

@@ -3,6 +3,7 @@ package com.envibe.envibe.model;
 import com.envibe.envibe.model.validation.constraints.ValidPassword;
 import com.envibe.envibe.model.validation.constraints.ValidRole;
 import com.envibe.envibe.model.validation.constraints.ValidUsername;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -61,6 +62,7 @@ public class User implements Serializable {
      * User's date of birth. Follows the SQL 'YYYY-MM-DD' format.
      */
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     /**
