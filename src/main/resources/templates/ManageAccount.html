@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
   <meta charset="utf-8">
@@ -25,48 +25,50 @@
 
 <body class="htmlNoPages">
   <div class="ContentArea" id="ContentArea">
-    <div class="gwd-div-14ue FormLines" id="Password">
-      <p class="gwd-p-1xjb" id="Passvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Password: </p>
-    </div>
-    <div class="gwd-div-1fhz FormLines" id="Email">
-      <p class="gwd-p-1xjb" id="Emailvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Email: </p>
-    </div>
-    <div class="gwd-div-pfzu FormLines" id="Country">
-      <p class="gwd-p-1xjb" id="Countryvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Country: </p>
-    </div>
-    <div class="gwd-div-1p0y FormLines" id="DOB">
-      <p class="gwd-p-1xjb" id="Birthvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Date of Birth: </p>
-    </div>
-    <div class="gwd-div-2q7d FormLines" id="UName">
-      <p class="gwd-p-1xjb" id="UNvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Username: </p>
-    </div>
-    <div class="gwd-div-1n7m FormLines" id="Last">
-      <p class="gwd-p-1xjb" id="LNvalue"><br>
-        
-      </p>
-      <p class="gwd-p-b9nr">Last Name: </p>
-    </div>
-    <div class="FormLines" id="First">
-      <p class="gwd-p-b9nr"><span class="gwd-span-cfv8">First Name</span>: </p>
-      <p class="gwd-p-1xjb" id="FNvalue"><br>
-        
-      </p>
-    </div>
+    <form name="accteditform" th:object="${user}" th:action="@{/manageaccount}" method="POST">
+      <div class="gwd-div-14ue FormLines" id="Password">
+        <p class="gwd-p-1xjb" id="Passvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Password: </p>
+      </div>
+      <div class="gwd-div-1fhz FormLines" id="Email">
+        <p class="gwd-p-1xjb" id="Emailvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Email: </p>
+      </div>
+      <div class="gwd-div-pfzu FormLines" id="Country">
+        <p class="gwd-p-1xjb" id="Countryvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Country: </p>
+      </div>
+      <div class="gwd-div-1p0y FormLines" id="DOB">
+        <p class="gwd-p-1xjb" id="Birthvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Date of Birth: </p>
+      </div>
+      <div class="gwd-div-2q7d FormLines" id="UName">
+        <p class="gwd-p-1xjb" id="UNvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Username: </p>
+      </div>
+      <div class="gwd-div-1n7m FormLines" id="Last">
+        <p class="gwd-p-1xjb" id="LNvalue"><br>
+
+        </p>
+        <p class="gwd-p-b9nr">Last Name: </p>
+      </div>
+      <div class="FormLines" id="First">
+        <p class="gwd-p-b9nr"><span class="gwd-span-cfv8">First Name</span>: </p>
+        <p class="gwd-p-1xjb" id="FNvalue"><br>
+
+        </p>
+      </div>
+    </form>
   </div>
   <div class="gwd-div-ox36" id="LeftColumn">
     <div class="gwd-div-1bvk">
