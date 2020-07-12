@@ -33,18 +33,18 @@ before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
   - mvn flyway:migrate -e -B -Dmaven.test.skip=true -T1
 script:
-  - mvn compiler:compile -B -Dmaven.test.skip=true -T2C -q --fail-at-end
-  - mvn compiler:testCompile -B -Dmaven.test.skip=true -T2C -q
-  - mvn test -B -T1
+  - mvn compiler:compile -B -Dmaven.test.skip=true -T2 -q --fail-at-end
+  - mvn compiler:testCompile -B -Dmaven.test.skip=true -T2 -q
+  - mvn test -B -T1 -Dspring-boot.run.arguments=--logging.level.org.springframework=ERROR,--logging.level.com.envibe=ERROR
 after_success:
   - echo "Raw slug size of application $(du -sh ./)/500MB (without compression)"
 before_deploy:
   # Delete the /target folder.
-  - mvn clean -B -Dmaven.test.skip=true -T2C -q
+  - mvn clean -B -Dmaven.test.skip=true -T2 -q
   # Package as JAR file for deployment onto Heroku.
-  - mvn package -B -Dmaven.test.skip=true -T2C -q
+  - mvn package -B -Dmaven.test.skip=true -T2 -q
   # Generate internal code documentation site for GitHub Pages.
-  - mvn javadoc:javadoc -B -Dmaven.test.skip=true -T2C -q
+  - mvn javadoc:javadoc -B -Dmaven.test.skip=true -T2 -q
 deploy:
   - provider: heroku
     # Use API method to avoid git collision issues.
@@ -56,7 +56,6 @@ deploy:
     # Use deploy API v2 as v1 is deprecated
     edge: true
   - provider: pages
-    skip_cleanup: true
     github_token: $GITHUB_TOKEN
     keep_history: false
     local_dir: ./target/site/apidocs
