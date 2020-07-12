@@ -32,6 +32,9 @@ before_script:
   - mvn flyway:migrate -e -B
 script:
   - mvn test -B
+after_success:
+  - echo "Raw slug size of application: $(du -h ./)/500MB (without compression)"
+  - tree --du -h ./
 before_deploy:
   # Build project to JAR file for deployment onto Heroku.
   - mvn clean package -B
