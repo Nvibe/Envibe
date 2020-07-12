@@ -14,7 +14,10 @@ addons:
   apt:
     packages:
       - graphviz
+      - tree
+      - du
     update: true
+  chrome: stable
 # Specify environment variables for database integration.
 env:
   global:
