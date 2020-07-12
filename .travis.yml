@@ -33,7 +33,6 @@ before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
   - mvn flyway:migrate -e -B -Dmaven.test.skip=true -T1
 script:
-  - mvn compiler:compile -B -Dmaven.test.skip=true -T2 -q --fail-at-end
   - mvn compiler:testCompile -B -Dmaven.test.skip=true -T2 -q
   - mvn test -B -T1 -Dspring-boot.run.arguments=--logging.level.org.springframework=ERROR,--logging.level.com.envibe=ERROR
 after_success:
