@@ -7,6 +7,7 @@ import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.model.User;
 import com.envibe.envibe.service.NewsFeedUpdateService;
+import com.envibe.envibe.service.RelationshipDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +46,12 @@ public class NewsFeedUpdateWorker implements Runnable {
     CachedItemDao cachedItemDao;
 
     /**
+     * Injected service for retrieving a list of followers of a specified user.
+     */
+    @Autowired
+    RelationshipDisplayService relationshipDisplayService;
+
+    /**
      * Constructor that retrieves the newest post ID from memcache.
      */
     public NewsFeedUpdateWorker() {
@@ -64,10 +71,9 @@ public class NewsFeedUpdateWorker implements Runnable {
         // Pull the entire profile of the user who created the post.
         User originalPoster = userDao.read(originalPost.getUsername());
         // Get a list of all the friends of the original user. Use Strings since we don't need any friend User attributes.
-        ArrayList<String> friends = new ArrayList<String>();
-        // TODO: Generate a list of friends of the OP.
+        ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(originalPoster.getUsername()));
         // Get the news feed caches for each friend.
-        ArrayList<CachedItem> caches = new ArrayList<CachedItem>();
+        ArrayList<CachedItem> caches = new ArrayList<>();
         // Use an index to keep both friends and caches in the same order.
         for (int i = 0; i < friends.size(); i++) {
             // Generate a tag from our service name and the friend's username.
