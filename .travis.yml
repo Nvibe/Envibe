@@ -26,22 +26,25 @@ env:
     - MAVEN_OPTS=-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 before_install:
   # For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
-  - mvn -N io.takari:maven:wrapper -B
+  - mvn -N io.takari:maven:wrapper -B -Dmaven.test.skip=true -T2 -q
   - chmod +x ./mvnw
 # Initialize the database and perform all necessary migrations.
 before_script:
   - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
-  - mvn flyway:migrate -e -B
+  - mvn flyway:migrate -e -B -Dmaven.test.skip=true -T1
 script:
-  - mvn test -B
+  - mvn compiler:compile -B -Dmaven.test.skip=true -T2C -q --fail-at-end
+  - mvn compiler:testCompile -B -Dmaven.test.skip=true -T2C -q
+  - mvn test -B -T1
 after_success:
-  - echo "Raw slug size of application $(du -h ./)/500MB (without compression)"
-  - tree --du -h ./
+  - echo "Raw slug size of application $(du -sh ./)/500MB (without compression)"
 before_deploy:
-  # Build project to JAR file for deployment onto Heroku.
-  - mvn clean package -B
+  # Delete the /target folder.
+  - mvn clean -B -Dmaven.test.skip=true -T2C -q
+  # Package as JAR file for deployment onto Heroku.
+  - mvn package -B -Dmaven.test.skip=true -T2C -q
   # Generate internal code documentation site for GitHub Pages.
-  - mvn javadoc:javadoc -B
+  - mvn javadoc:javadoc -B -Dmaven.test.skip=true -T2C -q
 deploy:
   - provider: heroku
     # Use API method to avoid git collision issues.
