@@ -30,6 +30,7 @@ public class UserRowMapper implements RowMapper<User> {
                 rs.getString("country"),
                 rs.getDate("birthday"),
                 rs.getString("last_name"),
-                rs.getString("first_name"));
+                rs.getString("first_name"),
+                rs.getString("image_link"));
     }
 }
