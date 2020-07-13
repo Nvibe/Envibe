@@ -28,8 +28,8 @@ public class UserDao {
     /**
      * Prepared query to insert user records into database.
      */
-    private final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role, country, birthday, last_name, first_name) " +
-                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role, country, birthday, last_name, first_name, image_link) " +
+                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * Prepared query to search for user records in database.
@@ -50,6 +50,7 @@ public class UserDao {
                 "birthday = ?, " +
                 "last_name = ?, " +
                 "first_name = ? " +
+                "image_link = ? " +
             "WHERE user_name = ?";
 
     /**
@@ -64,7 +65,7 @@ public class UserDao {
      */
     public void create(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
-        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name());
+        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getImage_link());
     }
 
     /**
@@ -88,7 +89,7 @@ public class UserDao {
     public void update(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
         // TODO: Catch EmptyResultDataAccessExceptions.
-        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getUsername());
+        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getImage_link(), user.getUsername());
     }
 
     /**

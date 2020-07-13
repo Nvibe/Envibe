@@ -2,6 +2,8 @@ package com.envibe.envibe.service;
 
 import com.envibe.envibe.dao.CachedItemDao;
 import com.envibe.envibe.dao.NewsItemDao;
+import com.envibe.envibe.dao.UserDao;
+import com.envibe.envibe.dto.NewsFeedItemDto;
 import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.model.NewsItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,12 @@ public class NewsFeedRetrievalService {
     NewsItemDao newsItemDao;
 
     /**
+     * Injected data access object for user records in the persistent datastore.
+     */
+    @Autowired
+    UserDao userDao;
+
+    /**
      * Sets the default number of posts to return if count is not specified.
      */
     private static final int DEFAULT_POST_COUNT = 10;
@@ -45,7 +53,7 @@ public class NewsFeedRetrievalService {
      * @param username Username to perform the lookup under.
      * @return List of posts from user's newsfeed.
      */
-    public List<NewsItem> getNewsFeed(String username) {
+    public List<NewsFeedItemDto> getNewsFeed(String username) {
         return getNewsFeed(username, DEFAULT_POST_COUNT, FROM_BEGINNING);
     }
 
@@ -55,7 +63,7 @@ public class NewsFeedRetrievalService {
      * @param count Number of posts to return.
      * @return List of posts from user's newsfeed.
      */
-    public List<NewsItem> getNewsFeed(String username, int count) {
+    public List<NewsFeedItemDto> getNewsFeed(String username, int count) {
         return getNewsFeed(username, count, FROM_BEGINNING);
     }
 
@@ -66,17 +74,17 @@ public class NewsFeedRetrievalService {
      * @param after Defines the last post_id that was received.
      * @return List of posts from user's newsfeed.
      */
-    public List<NewsItem> getNewsFeed(String username, int count, int after) {
+    public List<NewsFeedItemDto> getNewsFeed(String username, int count, int after) {
         // Get the post_ids of the cached feed of the specified user.
         int[] idReferenceArray = getAllPostIndexes(username);
         // Return an empty list if no cache was found or the specified user does not exist.
         // TODO: Throw an exception if we go the API route so we can customize the error message on the frontend.
-        if (idReferenceArray.length == 0) return new ArrayList<NewsItem>();
+        if (idReferenceArray.length == 0) return new ArrayList<NewsFeedItemDto>();
         // Calculate the index of idReferenceArray to start at.
         int startIndex = getStartIndex(idReferenceArray, after);
         // Check if the +1 put the startIndex past the bounds of the array. If so, we have reached the end of the
         // feed and can return an empty ArrayList.
-        if (startIndex >= idReferenceArray.length) return new ArrayList<NewsItem>();
+        if (startIndex >= idReferenceArray.length) return new ArrayList<NewsFeedItemDto>();
         // Calculate the index of idReferenceArray to end at (or the end of the array, whichever is shorter.
         int endIndex = Math.min(startIndex + count, idReferenceArray.length - 1);
         // Return the loaded NewsItems for the portion of post_ids in idReferenceArray that we need.
@@ -141,9 +149,15 @@ public class NewsFeedRetrievalService {
      * @param endIndex Index to end sublist at.
      * @return Sublist of idReferenceArray with loaded NewsItems.
      */
-    private List<NewsItem> getNewsItemsBetweenIndexes(int[] idReferenceArray, int startIndex, int endIndex) {
+    private List<NewsFeedItemDto> getNewsItemsBetweenIndexes(int[] idReferenceArray, int startIndex, int endIndex) {
         // Create list to hold all of the loaded posts.
-        ArrayList<NewsItem> returnPostings = new ArrayList<NewsItem>();
+        ArrayList<NewsFeedItemDto> returnPostings = new ArrayList<>();
+        // Loop to insert the posts we want (assuming the indicies are valid).
+        for (int i = startIndex; i <= endIndex; i++) {
+            NewsItem n = newsItemDao.read(idReferenceArray[i]);
+            String imageLink = userDao.read(n.getUsername()).getImage_link(); // TODO: Pull in user image.
+            returnPostings.add(new NewsFeedItemDto(n.getPost_id(), n.getUsername(), n.getPost_date(), n.getContent(), imageLink));
+        }
         // Return the result.
         return returnPostings;
     }

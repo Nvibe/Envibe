@@ -1,6 +1,7 @@
 package com.envibe.envibe.controller;
 
 import com.envibe.envibe.dao.NewsItemDao;
+import com.envibe.envibe.dto.NewsFeedItemDto;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.service.NewsFeedRetrievalService;
 import com.google.gson.Gson;
@@ -56,7 +57,7 @@ public class FeedController {
     @GetMapping(value = "/api/v1/feed/user", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String apiUserFeed(Model model, HttpServletRequest request, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
-        List<NewsItem> newsFeed;
+        List<NewsFeedItemDto> newsFeed;
         if (count == 0) {
             newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser());
         } else if (after == 0) {
