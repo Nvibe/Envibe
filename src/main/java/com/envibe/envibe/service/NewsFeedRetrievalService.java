@@ -155,7 +155,7 @@ public class NewsFeedRetrievalService {
         // Loop to insert the posts we want (assuming the indicies are valid).
         for (int i = startIndex; i <= endIndex; i++) {
             NewsItem n = newsItemDao.read(idReferenceArray[i]);
-            String imageLink = userDao.read(n.getUsername()).getImage_link(); // TODO: Pull in user image.
+            String imageLink = userDao.read(n.getUsername()).getImage_link();
             returnPostings.add(new NewsFeedItemDto(n.getPost_id(), n.getUsername(), n.getPost_date(), n.getContent(), imageLink));
         }
         // Return the result.
