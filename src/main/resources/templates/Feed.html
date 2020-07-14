@@ -724,10 +724,6 @@
     </div>
     <div class="friendZone" id="FriendZone">
       <div class="FriendContainer" id="Friendcontainer">
-        <div th:each="Relationship, stats: ${FriendRef}">
-           <div th:text="${Relationship.userFriend}">John Doe</div>
-           <div stats.index + 1 </div>
-        </div>
         <div class="FriendName" id="FriendName"></div>
         <div class="FriendPictureContainer" id="Friendpic"></div>
         <button id="addfriend" class="gwd-button-1ra4">Button</button>
