@@ -38,7 +38,7 @@ public class ManageAcctController {
      * @param request Proxy object to manipulate cookies and other session data.
      * @return Reference to the ManageAccount.html template with user data injected in.
      */
-    @GetMapping("/manageaccount")
+    @GetMapping("/ManageAccount")
     public String showAccountChanges(Model model, HttpServletRequest request) {
         // Get all the information about the currently logged-in user.
         User currentUser = userDao.read(request.getRemoteUser());
