@@ -701,7 +701,7 @@
       element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name; /*user name div*/
       element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content; /*user content div*/
       if(profilePic == ""){
-        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture"/>'; /*user profile picture div*/
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
       }
       else{
       element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '"/>'; 
@@ -725,7 +725,7 @@
       success: function(data, txtStatus, xhr) {
         var i;
         for (i = 0; i < data.length - 1; i++) {
-          newElement(data[i].username, data[i].content, data[i].image_link);
+          newElement(data[i].username, data[i].content, '');
         }
         //alert( "status: " + txtStatus);
         //alert(data.length);
