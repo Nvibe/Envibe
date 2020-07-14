@@ -755,8 +755,8 @@
       target.append(element);
     }
 
-    newElement("TESTNAME", "TESTCONTENT", "https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1534530600391-CTOG7HCYJJIHHLNLZLNI/ke17ZwdGBToddI8pDm48kGPVK--wGoWXJsqwlxbZlQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5enfxu_O4VeONvneR-F6W8oeFhFqSrYyNrfPB9Y70_gvQ/IYORBank_CoralReefs_AlexMustard_01.jpg?format=300w");
-    newElement("TESTNAME", "TESTCONTENT", "");
+    /*newElement("TESTNAME", "TESTCONTENT", "https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1534530600391-CTOG7HCYJJIHHLNLZLNI/ke17ZwdGBToddI8pDm48kGPVK--wGoWXJsqwlxbZlQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5enfxu_O4VeONvneR-F6W8oeFhFqSrYyNrfPB9Y70_gvQ/IYORBank_CoralReefs_AlexMustard_01.jpg?format=300w");
+    newElement("TESTNAME", "TESTCONTENT", "");*/
 
 
 
@@ -770,8 +770,9 @@
       success: function(data, txtStatus, xhr) {
         var i;
         for (i = 0; i < data.length - 1; i++) {
-          newElement(data[i].username, data[i].content, data[i].image_link);
+          newElement(data[i].username, data[i].content, data[i].user_image);
         }
+        newElement("","No more vibes","assets/Envibe-icon-remake.png")
         //alert( "status: " + txtStatus);
         //alert(data.length);
         //alert(JSON.stringify(data));
