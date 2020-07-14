@@ -749,7 +749,7 @@
       if (profilePic == "") {
         element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
       } else {
-        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '"/>';
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;"/>';
       }
       let target = document.getElementById('InnerContentArea');
       target.append(element);
@@ -770,7 +770,7 @@
       success: function(data, txtStatus, xhr) {
         var i;
         for (i = 0; i < data.length - 1; i++) {
-          newElement(data[i].username, data[i].content, '');
+          newElement(data[i].username, data[i].content, data[i].image_link);
         }
         //alert( "status: " + txtStatus);
         //alert(data.length);
