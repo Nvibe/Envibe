@@ -2,6 +2,7 @@ package com.envibe.envibe.controller;
 
 import com.envibe.envibe.dao.UserDao;
 import com.envibe.envibe.model.User;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,7 @@ public class ManageAcctController {
      */
     @PostMapping("/manageaccount")
     public String processAccountChanges(@ModelAttribute User userDto, Model model, HttpServletRequest request) {
+        System.out.println("DEBUG N6 " + new Gson().toJson(userDto));
         // Retrieve the original account details for comparison.
         User oldDetails = userDao.read(request.getRemoteUser());
         // Check if the user's password has been updated.
@@ -68,7 +70,7 @@ public class ManageAcctController {
             // No new password, import the hash from the original account data.
             userDto.setPassword(oldDetails.getPassword());
         }
-        // Ensure that constraint/unique fields can't be tampered with.
+        // Ensure that constraint/unique/index fields can't be tampered with.
         userDto.setUsername(oldDetails.getUsername());
         userDto.setRole(oldDetails.getRole());
         // Check if a field is new. If it is, update it.

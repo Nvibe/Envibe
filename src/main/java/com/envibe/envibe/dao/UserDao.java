@@ -49,7 +49,7 @@ public class UserDao {
                 "country = ?, " +
                 "birthday = ?, " +
                 "last_name = ?, " +
-                "first_name = ? " +
+                "first_name = ?, " +
                 "image_link = ? " +
             "WHERE user_name = ?";
 
