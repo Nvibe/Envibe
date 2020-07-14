@@ -90,7 +90,7 @@
       width: 237px;
       height: 26px;
       font-size: 14px;
-      color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
       left: 144px;
       top: 2px;
     }
@@ -633,56 +633,56 @@
 
 <body class="htmlNoPages">
   <div class="ContentArea" id="ContentArea">
-    <form name="registerForm" th:object="${user}" th:action="@{/manageaccount}" method="POST">
+    <form id="SaveForm" name="registerForm" th:object="${user}" th:action="@{/manageaccount}" method="POST">
       <div class="SavebuttonDiv">
         <button id="SaveButton" class="gwd-button-1aim" type="submit">Save changes</button>
       </div>
       <div class="gwd-div-14ue FormLines" id="Password">
-        <p editable="" class="valuep" id="Passvalue" th:field="*{password}">[[${user.password}]]<br>
+        <input editable="" class="valuep" id="Passvalue" th:field="*{password}" placeholder= [[${user.password}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Password: </p>
       </div>
       <div class="gwd-div-1fhz FormLines" id="Email">
-        <p editable="" class="valuep" id="Emailvalue" th:field="*{email}">[[${user.email}]]<br>
+        <input editable="" class="valuep" id="Emailvalue" th:field="*{email}" placeholder=[[${user.email}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Email: </p>
       </div>
       <div class="gwd-div-pfzu FormLines" id="Country">
-        <p editable="" class="valuep" id="Countryvalue" th:field="*{country}">[[${user.country}]]<br>
+        <input editable="" class="valuep" id="Countryvalue"  placeholder=[[${user.country}]] th:field="*{country}"><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Country: </p>
       </div>
       <div class="gwd-div-14ue FormLines gwd-div-ohoq" id="LinkField">
-        <p editable="" class="valuep gwd-p-c72t" id="UserImg" th:field="*{image_link}">[[${user.image_link}]]<br>
+        <input editable="" class="valuep gwd-p-c72t" id="UserImg" th:field="*{image_link}" placeholder=[[${user.image_link}]]><br>
           
-        </p>
-        <p editable="" class="gwd-p-b9nr gwd-p-19s5" id="ImageLink">Image Link: </p>
+        </input>
+        <input editable="" class="gwd-p-b9nr gwd-p-19s5" id="ImageLink">Image Link: </input>
       </div>
       <div class="gwd-div-1p0y FormLines" id="DOB">
-        <p editable="" class="valuep" id="Birthvalue" th:field="*{birthday}">[[${user.birthday}]]<br>
+        <input editable="" class="valuep" id="Birthvalue" th:field="*{birthday}" placeholder=[[${user.birthday}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Date of Birth: </p>
       </div>
       <div class="gwd-div-2q7d FormLines" id="UName">
-        <p editable="" class="valuep" id="UNvalue" th:field="*{username}">[[${user.username}]]<br>
+        <input editable="" class="valuep" id="UNvalue" th:field="*{username}" placeholder=[[${user.username}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Username: </p>
       </div>
       <div class="gwd-div-1n7m FormLines" id="Last">
-        <p editable="" class="valuep gwd-p-n6wb" id="LNvalue" th:field="*{last_name}">[[${user.last_name}]]<br>
+        <input editable="" class="valuep gwd-p-n6wb" id="LNvalue" th:field="*{last_name}" placeholder=[[${user.last_name}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">Last Name: </p>
       </div>
       <div class="FormLines" id="First">
-        <p editable="" class="valuep" id="FNvalue" th:field="*{first_name}">[[${user.first_name}]]<br>
+        <input editable="" class="valuep" id="FNvalue" th:field="*{first_name}" placeholder=[[${user.first_name}]]><br>
           
-        </p>
+        </input>
         <p class="gwd-p-b9nr">First Name:</p>
       </div>
     </form>
@@ -704,44 +704,16 @@
   </div>
   <script>
     $(document).ready(function() {
-      var imgSource = '';
+      var imgSource = $("#UserImg").val();
+      alert(imgSource);
       if (imgSource == '') {
         $('div.Profilepic img').attr('src', 'assets/Default-Picture.png');
       }
       else{
-      $('div.Profilepic img').attr('src', imageSource);
+      $('div.Profilepic img').attr('src', imgSource );
       }
-      $('form').submit(function(event) {
-        $("div.valuep").each(function(index) {
-          var $a = $(this);
-          var fieldType = $a.attr("th:field");
-          var $in = $('<input/ class ="valuep" placeholder="' + $a.text() + '" th:field="' + fieldType + '">');
-          $in.css("color", "black");
-          $a.replaceWith($in);
-        })
-      })
     });
 
-
-
-
-    $('body').on('click', '[editable]', function() {
-      var $a = $(this);
-      var fieldType = $a.attr("th:field");
-      var $in = $('<input/ class ="valuep" placeholder="' + $a.text() + '" th:field="' + fieldType + '">');
-      $in.css("color", "black");
-      $a.replaceWith($in);
-      var save = function() {
-        if ($in.val() == '') {
-          var $p = $a;
-        } else {
-          var $p = $('<p/ editable class = "valuep" th:field="' + fieldType + '">').text($in.val());
-        }
-        $in.replaceWith($p);
-      };
-      $in.one('blur', save).focus();
-
-    });
   </script>
 </body>
 

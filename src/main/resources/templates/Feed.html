@@ -638,6 +638,46 @@
       transform-origin: 149px 259px 0px;
       overflow: hidden;
     }
+    .FriendContainer {
+      height: 70px;
+      position: absolute;
+      top: 23px;
+      left: 14px;
+      width: 275px;
+      transform-origin: 137.5px 35px 0px;
+    }
+    .FriendPictureContainer {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 70px;
+      transform-origin: 38px 35px 0px;
+      width: 70px;
+    }
+    .FriendName {
+      position: absolute;
+      left: 70px;
+      height: 35px;
+      width: 204px;
+      transform-origin: 102px 17.5px 0px;
+      top: 3px;
+    }
+    .gwd-button-1ra4 {
+      position: absolute;
+      height: 24px;
+      top: 43px;
+      left: 70px;
+      width: 204px;
+      transform-origin: 102px 12px 0px;
+      background-image: none;
+      color: white;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: transparent;
+      background-color: rgb(15, 6, 146);
+    }
   </style>
 </head>
 
@@ -682,7 +722,13 @@
       
       <p class=""></p>
     </div>
-    <div class="friendZone"></div>
+    <div class="friendZone" id="FriendZone">
+      <div class="FriendContainer" id="Friendcontainer">
+        <div class="FriendName" id="FriendName"></div>
+        <div class="FriendPictureContainer" id="Friendpic"></div>
+        <button id="addfriend" class="gwd-button-1ra4">Button</button>
+      </div>
+    </div>
   </div>
   <script>
     class User {
@@ -700,11 +746,10 @@
       element.append(UserContentTemplate.content.cloneNode(true));
       element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name; /*user name div*/
       element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content; /*user content div*/
-      if(profilePic == ""){
+      if (profilePic == "") {
         element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
-      }
-      else{
-      element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '"/>'; 
+      } else {
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '"/>';
       }
       let target = document.getElementById('InnerContentArea');
       target.append(element);
@@ -725,7 +770,7 @@
       success: function(data, txtStatus, xhr) {
         var i;
         for (i = 0; i < data.length - 1; i++) {
-          newElement(data[i].username, data[i].content, data[i].image_link);
+          newElement(data[i].username, data[i].content, '');
         }
         //alert( "status: " + txtStatus);
         //alert(data.length);

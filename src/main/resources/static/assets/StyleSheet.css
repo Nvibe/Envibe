@@ -18,6 +18,17 @@ html, body {
       left: 302px;
       top: 0px;
     }
+	.passposmod {
+      top: 253px;
+    }
+	.TextFieldREG {
+      display: block;
+      height: 19.9968px;
+      left: 180.86px;
+      position: absolute;
+      top: 119.241px;
+      width: 100px;
+    }
     .gwd-div-ojh2 {
       position: absolute;
       width: 571px;
@@ -84,7 +95,7 @@ html, body {
       top: 14px;
     }
     .gwd-input-1wzc {
-      top: 220px;
+      top: 250px;
       height: 20px;
       width: 200px;
       left: 196px;
