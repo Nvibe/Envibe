@@ -61,7 +61,7 @@ public class ManageAcctController {
         // Retrieve the original account details for comparison.
         User oldDetails = userDao.read(request.getRemoteUser());
         // Check if the user's password has been updated.
-        if(userDto.getPassword() != "") {
+        if(userDto.getPassword() != "" || userDto.getPassword() != null) {
             // A new password was entered, hash it.
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         } else {
@@ -71,6 +71,13 @@ public class ManageAcctController {
         // Ensure that constraint/unique fields can't be tampered with.
         userDto.setUsername(oldDetails.getUsername());
         userDto.setRole(oldDetails.getRole());
+        // Check if a field is new. If it is, update it.
+        if(userDto.getEmail() == null) userDto.setEmail(oldDetails.getEmail());
+        if(userDto.getCountry() == null) userDto.setCountry(oldDetails.getCountry());
+        if(userDto.getBirthday() == null) userDto.setBirthday(oldDetails.getBirthday());
+        if(userDto.getLast_name() == null) userDto.setLast_name(oldDetails.getLast_name());
+        if(userDto.getFirst_name() == null) userDto.setFirst_name(oldDetails.getFirst_name());
+        if(userDto.getImage_link() == null) userDto.setImage_link(oldDetails.getImage_link());
         // Save it, passing on relevant messages to the frontend.
         try {
             userDao.update(userDto);
