@@ -4,6 +4,7 @@ import com.envibe.envibe.dao.NewsItemDao;
 import com.envibe.envibe.dto.NewsFeedItemDto;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.service.NewsFeedRetrievalService;
+import com.envibe.envibe.service.RelationshipDisplayService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +30,10 @@ public class FeedController {
      */
     @Autowired
     NewsFeedRetrievalService newsFeedRetrievalService;
+    
+    /* Injected service that handles retrieving friends list */
+    @Autowired
+    RelationshipDisplayService RelationshipDisplayService;
 
     /**
      * Injected data access object for accessing user posts in the permanent datastore.
@@ -45,18 +50,20 @@ public class FeedController {
     public String userFeed(Model model) {
         return "Feed";
     }
-
+    
     /**
      * Handles API requests for a user's cached newsfeed. URI follows the format /api/v1/feed?username=user1&count=10&after=4012.
      * @param model Container we can use to inject data into the view.
      * @param request Access class that allows us to read session data from the user's browser.
      * @param count Number of posts to return.
      * @param after Last post_id received by the client.
+     * @param FriendsList initialized and pushed into model object @author Elijah Deputy
      * @return List of news items with specified parameters.
      */
     @GetMapping(value = "/api/v1/feed/user", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String apiUserFeed(Model model, HttpServletRequest request, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
+    	model.addAttribute("FriendRef", RelationshipDisplayService.FriendsList(request.getRemoteUser()));
         List<NewsFeedItemDto> newsFeed;
         if (count == 0) {
             newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser());
