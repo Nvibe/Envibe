@@ -39,7 +39,7 @@ after_success:
   - echo "Raw slug size of application $(du -sh ./)/500MB (without compression)"
 before_deploy:
   # Delete the /target folder.
-  - mvn clean -B -Dmaven.test.skip=true -T2 -q
+  #- mvn clean -B -Dmaven.test.skip=true -T2 -q # This removes the /apidocs folder
   # Package as JAR file for deployment onto Heroku.
   - mvn package -B -Dmaven.test.skip=true -T2 -q
   # Generate internal code documentation site for GitHub Pages.
