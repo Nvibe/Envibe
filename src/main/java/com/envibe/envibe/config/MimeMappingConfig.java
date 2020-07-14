@@ -15,6 +15,7 @@ public class MimeMappingConfig implements WebServerFactoryCustomizer<Configurabl
         mappings.add("js", "application/javascript;charset=utf-8");
         mappings.remove("css");
         mappings.add("css", "text/css;charset=utf-8");
+        mappings.add("png", "image/png");
         factory.setMimeMappings(mappings);
     }
 }
