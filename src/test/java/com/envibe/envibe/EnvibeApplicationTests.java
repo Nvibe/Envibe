@@ -38,7 +38,8 @@ class EnvibeApplicationTests {
 
 	/**
 	 * Smoke test that confirms that the application starts up with no runtime exceptions thrown.
-	 * Note that Spring uses lazy dependency loading, so this will almost never fail unless you mess with core configuration or if there is a missing service dependency in the environment.
+	 * Note that Spring uses lazy dependency loading, so this will almost never fail unless you mess
+	 * with core configuration or if there is a missing service dependency in the environment.
 	 */
 	@Test
 	void contextLoads() {

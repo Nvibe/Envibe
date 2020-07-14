@@ -14,4 +14,11 @@ public class UserAlreadyExistsException extends Exception {
     public UserAlreadyExistsException(String msg) {
         super(msg);
     }
+
+    /**
+     * Default constructor that takes no arguments.
+     */
+    public UserAlreadyExistsException() {
+        super();
+    }
 }
