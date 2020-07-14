@@ -15,7 +15,7 @@ public class CachedItemModelUnitTest extends UnitTest {
     private static final String TEST_STRING2 = "test2";
 
     @BeforeEach
-    public static void setupTestCachedItemInstance() {
+    public void setupTestCachedItemInstance() {
         testCachedItem = new CachedItem();
     }
 

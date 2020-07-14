@@ -42,7 +42,7 @@ public class UserModelUnitTest {
 
 
     @BeforeEach
-    public static void setupTestUserInstance() {
+    public void setupTestUserInstance() {
         testUser = new User(TEST_USERNAME, TEST_PASSWORD, TEST_ROLE, TEST_EMAIL, TEST_COUNTRY, TEST_BIRTHDAY, TEST_LASTNAME, TEST_FIRSTNAME);
     }
 

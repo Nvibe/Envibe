@@ -17,7 +17,7 @@ public class NewsItemUnitTest {
     private static final int TEST_INTEGER = 5;
 
     @BeforeEach
-    public static void setupTestNewsItemInstance() {
+    public void setupTestNewsItemInstance() {
         testNewsItem = new NewsItem();
     }
 

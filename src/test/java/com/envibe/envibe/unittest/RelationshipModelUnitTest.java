@@ -13,7 +13,7 @@ public class RelationshipModelUnitTest {
     private static final String TEST_STRING = "test";
 
     @BeforeEach
-    public static void setupTestRelationshipInstance() {
+    public void setupTestRelationshipInstance() {
         testRelationship = new Relationship();
     }
 
