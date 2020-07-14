@@ -1,22 +1,27 @@
 package com.envibe.envibe.unittest;
 
 import com.envibe.envibe.model.NewsItem;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class NewsItemUnitTest {
 
     private static NewsItem testNewsItem;
 
     private static final String TEST_STRING1 = "test1";
-    private static final Date TEST_DATE = new Date("2010-02-25");
+    private static final Date TEST_DATE = new Date();
     private static final int TEST_INTEGER = 5;
 
-    @BeforeEach
+    @Before
     public void setupTestNewsItemInstance() {
         testNewsItem = new NewsItem();
     }

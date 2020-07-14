@@ -4,9 +4,14 @@ import com.envibe.envibe.UnitTest;
 import com.envibe.envibe.model.CachedItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class CachedItemModelUnitTest extends UnitTest {
 
     private static CachedItem testCachedItem;

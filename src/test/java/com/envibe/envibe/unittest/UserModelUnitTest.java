@@ -4,8 +4,11 @@ import com.envibe.envibe.model.User;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintViolation;
@@ -25,6 +28,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author ARMmaster17
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class UserModelUnitTest {
 
     private static User testUser;
@@ -34,14 +39,14 @@ public class UserModelUnitTest {
     private static final String TEST_ROLE = "ROLE_USER";
     private static final String TEST_EMAIL = "user1@example.com";
     private static final String TEST_COUNTRY = "United States";
-    private static final Date TEST_BIRTHDAY = new Date("1999-01-28");
+    private static final Date TEST_BIRTHDAY = new Date();
     private static final String TEST_LASTNAME = "userlastname";
     private static final String TEST_FIRSTNAME = "userfirstname";
     private static final String TEST_STRING = "test";
-    private static final Date TEST_DATE = new Date("2005-01-01");
+    private static final Date TEST_DATE = new Date();
 
 
-    @BeforeEach
+    @Before
     public void setupTestUserInstance() {
         testUser = new User(TEST_USERNAME, TEST_PASSWORD, TEST_ROLE, TEST_EMAIL, TEST_COUNTRY, TEST_BIRTHDAY, TEST_LASTNAME, TEST_FIRSTNAME);
     }

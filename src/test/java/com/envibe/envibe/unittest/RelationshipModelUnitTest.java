@@ -1,18 +1,23 @@
 package com.envibe.envibe.unittest;
 
 import com.envibe.envibe.model.Relationship;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class RelationshipModelUnitTest {
 
     private static Relationship testRelationship;
 
     private static final String TEST_STRING = "test";
 
-    @BeforeEach
+    @Before
     public void setupTestRelationshipInstance() {
         testRelationship = new Relationship();
     }
