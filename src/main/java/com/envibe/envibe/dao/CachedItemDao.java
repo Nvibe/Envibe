@@ -135,7 +135,7 @@ public class CachedItemDao {
      * @param cachedItem Object to pull parameters from to generate search tag.
      * @return Generated search tag that can be used for CRUD operations. Schema follows the PURPOSE|USER format.
      */
-    private String generateTag(@NotNull CachedItem cachedItem) {
+    public String generateTag(@NotNull CachedItem cachedItem) {
         // Argument validation.
         Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
         return generateTag(cachedItem.getPurpose(), cachedItem.getUserTag());

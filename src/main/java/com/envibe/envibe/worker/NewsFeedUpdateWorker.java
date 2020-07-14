@@ -126,7 +126,8 @@ public class NewsFeedUpdateWorker implements Runnable {
         // Check if the cache exists.
         if(result == null) {
             // Cache does not exist. Create a new one.
-            result = new CachedItem(tag, "");
+            //result = new CachedItem(tag, "");
+            result = new CachedItem(cachedItemDao.PURPOSE_NEWS_FEED_CACHE, friend_name, "");
         }
         return result;
     }

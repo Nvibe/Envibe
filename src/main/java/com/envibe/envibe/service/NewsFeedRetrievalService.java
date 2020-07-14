@@ -152,7 +152,7 @@ public class NewsFeedRetrievalService {
     private List<NewsFeedItemDto> getNewsItemsBetweenIndexes(int[] idReferenceArray, int startIndex, int endIndex) {
         // Create list to hold all of the loaded posts.
         ArrayList<NewsFeedItemDto> returnPostings = new ArrayList<>();
-        // Loop to insert the posts we want (assuming the indicies are valid).
+        // Loop to insert the posts we want (assuming the indices are valid).
         for (int i = startIndex; i <= endIndex; i++) {
             NewsItem n = newsItemDao.read(idReferenceArray[i]);
             String imageLink = userDao.read(n.getUsername()).getImage_link();
