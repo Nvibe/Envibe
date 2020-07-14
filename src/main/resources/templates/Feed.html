@@ -749,7 +749,7 @@
       if (profilePic == "") {
         element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
       } else {
-        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;"/>';
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;object-fit: cover;"/>';
       }
       let target = document.getElementById('InnerContentArea');
       target.append(element);
