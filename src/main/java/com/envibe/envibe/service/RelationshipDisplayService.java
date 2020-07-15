@@ -17,6 +17,7 @@ public class RelationshipDisplayService {
 	public List<String> FriendsList (String user_name) {
 		List<Relationship> currentFriends = friendDao.read(user_name);
 		if (currentFriends == null) return new ArrayList<String>();
+		ArrayList<String> friendGroup = new ArrayList<>();
 		for (Relationship j : currentFriends)
 		{
 			friendGroup.add(j.getUserFriend());

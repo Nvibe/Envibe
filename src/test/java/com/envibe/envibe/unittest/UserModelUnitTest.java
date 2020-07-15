@@ -42,13 +42,14 @@ public class UserModelUnitTest {
     private static final Date TEST_BIRTHDAY = new Date();
     private static final String TEST_LASTNAME = "userlastname";
     private static final String TEST_FIRSTNAME = "userfirstname";
+    private static final String TEST_IMAGELINK = "http://example.com/test.png";
     private static final String TEST_STRING = "test";
     private static final Date TEST_DATE = new Date();
 
 
     @Before
     public void setupTestUserInstance() {
-        testUser = new User(TEST_USERNAME, TEST_PASSWORD, TEST_ROLE, TEST_EMAIL, TEST_COUNTRY, TEST_BIRTHDAY, TEST_LASTNAME, TEST_FIRSTNAME);
+        testUser = new User(TEST_USERNAME, TEST_PASSWORD, TEST_ROLE, TEST_EMAIL, TEST_COUNTRY, TEST_BIRTHDAY, TEST_LASTNAME, TEST_FIRSTNAME, TEST_IMAGELINK);
     }
 
     @Test

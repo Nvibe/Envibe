@@ -3,12 +3,15 @@ package com.envibe.envibe.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import com.envibe.envibe.model.User;
 import com.envibe.envibe.rowmapper.UserRowMapper;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -37,6 +40,8 @@ public class UserDao {
     private final String queryRead = "SELECT * FROM user_account " +
                                         "WHERE user_name = ? " +
                                         "LIMIT 1";
+
+    private final String queryReadAll = "SELECT * FROM user_account";
 
     /**
      * Prepared query to update user records in database.
@@ -99,5 +104,13 @@ public class UserDao {
     public void delete(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
         jdbcTemplate.update(queryDelete, user.getUsername());
+    }
+
+    public List<User> readAll() {
+        try {
+            return jdbcTemplate.query(queryReadAll, new UserRowMapper());
+        } catch (Exception e) {
+            return new ArrayList<User>();
+        }
     }
 }
