@@ -1,5 +1,7 @@
 package com.envibe.envibe.controller;
 
+import com.envibe.envibe.dao.FriendDao;
+import com.envibe.envibe.model.Relationship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class FollowController {
-    //@Autowired
-    //RelationshipDao relatinshipDao;
+    @Autowired
+    FriendDao relationshipDao;
 
     @PostMapping("/api/v1/follow")
     public void apiFollowUser(Model model, HttpServletRequest request, @RequestParam(required = true) String username) {
-        //relationshipDao.create(request.getRemoteUser(), username);
+        relationshipDao.create(new Relationship(request.getRemoteUser(), username));
     }
 }

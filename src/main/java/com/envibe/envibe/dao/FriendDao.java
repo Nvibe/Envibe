@@ -13,7 +13,6 @@ import com.envibe.envibe.rowmapper.FriendRowMapper;
 @Repository
 public class FriendDao {
 	 @Autowired
-	
 	 /* injects JdbcTemplate into class*/
 	private JdbcTemplate jdbcTemplate;
 	
@@ -37,7 +36,7 @@ public class FriendDao {
         Objects.requireNonNull(userName, "Method argument userName cannot be null");
         try {
         	return jdbcTemplate.query(queryRead, new FriendRowMapper(), userName);
-        } catch (EmptyResultDataAccessException e) {
+        } catch (Exception e) {
             return null;
         }
     }

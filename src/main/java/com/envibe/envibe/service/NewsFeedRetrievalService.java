@@ -6,6 +6,7 @@ import com.envibe.envibe.dao.UserDao;
 import com.envibe.envibe.dto.NewsFeedItemDto;
 import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.model.NewsItem;
+import com.envibe.envibe.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -156,7 +157,9 @@ public class NewsFeedRetrievalService {
         for (int i = startIndex; i <= endIndex; i++) {
             NewsItem n = newsItemDao.read(idReferenceArray[i]);
             String imageLink = userDao.read(n.getUsername()).getImage_link();
-            returnPostings.add(new NewsFeedItemDto(n.getPost_id(), n.getUsername(), n.getPost_date(), n.getContent(), imageLink));
+            User user = userDao.read(n.getUsername());
+            String visibleName = user.getFirst_name() + " " + user.getLast_name();
+            returnPostings.add(new NewsFeedItemDto(n.getPost_id(), visibleName, n.getPost_date(), n.getContent(), imageLink));
         }
         // Return the result.
         return returnPostings;
