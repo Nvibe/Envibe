@@ -80,6 +80,11 @@ public class User implements Serializable {
     private String first_name;
 
     /**
+     * URL to user's profile picture.
+     */
+    private String image_link;
+
+    /**
      * Empty constructor for user model. Consumed by several Thymeleaf templates controlled by {@link com.envibe.envibe.controller.AuthenticationController}.
      */
     public User() {
@@ -99,7 +104,7 @@ public class User implements Serializable {
      * @param first_name The user's first name.
      * @deprecated This isn't 2008 anymore. Will be replaced with Builder pattern to be compliant with 2020 coding standards.
      */
-    public User(@ValidUsername String username, @ValidPassword String password, @ValidRole String role, @Email String email, @NotEmpty String country, @NotNull Date birthday, @ValidUsername String last_name, @ValidUsername String first_name) {
+    public User(@ValidUsername String username, @ValidPassword String password, @ValidRole String role, @Email String email, @NotEmpty String country, @NotNull Date birthday, @ValidUsername String last_name, @ValidUsername String first_name, String image_link) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -108,6 +113,7 @@ public class User implements Serializable {
         this.birthday = birthday;
         this.last_name = last_name;
         this.first_name = first_name;
+        this.image_link = image_link;
     }
 
     /**
@@ -242,5 +248,21 @@ public class User implements Serializable {
      */
     public void setFirst_name(@NotEmpty String first_name) {
         this.first_name = first_name;
+    }
+
+    /**
+     * Returns a link to a users profile picture.
+     * @return Fully-Qualified URL to a user's profile picture.
+     */
+    public String getImage_link() {
+        return image_link;
+    }
+
+    /**
+     * Sets a link to a users profile picture.
+     * @param image_link Fully-Qualified URL to a user's profile picture.
+     */
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
     }
 }

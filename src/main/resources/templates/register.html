@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <title>undefined</title>
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
+  <link rel="stylesheet" type="text/css" href="/assets/StyleSheet.css">
   <style type="text/css" id="gwd-text-style">
+
+
     p {
       margin: 0px;
     }
@@ -18,164 +21,8 @@
     h3 {
       margin: 0px;
     }
-  </style>
-  <style type="text/css">
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0px;
-    }
-    body {
-      background-color: rgb(50, 50, 50);
-      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-      transform-style: preserve-3d;
-    }
-    .ContentArea {
-      position: absolute;
-      width: 600px;
-      height: 724px;
-      transform-origin: 300px 362px 0px;
-      background: rgb(90, 90, 90);
-      left: 302px;
-      top: 0px;
-    }
-    .gwd-div-ojh2 {
-      position: absolute;
-      width: 571px;
-      height: 322px;
-      transform-origin: 285.488px 160.849px 0px;
-      left: 10px;
-      top: 85px;
-    }
-    .TextField {
-      display: block;
-      height: 19.9968px;
-      left: 180.86px;
-      position: absolute;
-      top: 119.241px;
-      width: 100px;
-    }
-    .LastName {
-      height: 20px;
-      width: 200px;
-      left: 197px;
-      top: 54px;
-    }
-    .FirstNameLabel {
-      position: absolute;
-      width: 100px;
-      height: 20px;
-      left: 96px;
-      top: 63px;
-    }
-    .Birthday {
-      width: 200px;
-      height: 20px;
-      left: 197px;
-      top: 134px;
-    }
-    .CountryField {
-      height: 20px;
-      width: 200px;
-      left: 197px;
-      top: 174px;
-    }
-    email {
-      height: 20px;
-      left: 179px;
-      top: 106px;
-      transform-style: preserve-3d;
-      width: 194.537px;
-      transform-origin: 99.2508px 12.9735px 0px;
-      transform: translate3d(-1px, 23px, 0px) rotateZ(-0.602012deg);
-    }
-    .FirstName {
-      height: 20px;
-      width: 200px;
-      left: 197px;
-      top: 14px;
-    }
-    .gwd-input-1wzc {
-      top: 220px;
-      height: 20px;
-      width: 200px;
-      left: 196px;
-    }
-    .Label {
-      left: 90px;
-      top: 17px;
-    }
-    .gwd-label-1hof {
-      left: 90px;
-      top: 57px;
-    }
-    .gwd-label-b57a {
-      left: 90px;
-      top: 138px;
-    }
-    .gwd-label-evt3 {
-      left: 90px;
-      top: 177px;
-    }
-    .gwd-label-p0ca {
-      top: 223px;
-      left: 90px;
-    }
-    .FieldsBorder {
-      border-style: solid;
-      box-sizing: border-box;
-      display: block;
-      position: absolute;
-      height: 324px;
-      width: 573px;
-      transform-origin: 286.634px 161.859px 0px;
-      background-image: none;
-      background-color: transparent;
-      border-image-source: none;
-      border-image-width: 1;
-      border-image-outset: 0;
-      border-image-repeat: stretch;
-      border-color: rgb(206, 110, 12);
-      border-width: 2px;
-      border-radius: 30px;
-      left: 0px;
-      top: 0px;
-    }
-    .gwd-input-18zp {
-      top: 253px;
-    }
-    .gwd-label-pv1t {
-      top: 256px;
-    }
-    .gwd-div-1hhx {
-      position: absolute;
-      width: 333.333px;
-      height: 60.6061px;
-      left: 119px;
-      top: 327px;
-      overflow: visible;
-    }
-    .gwd-button-16n5 {
-      display: block;
-      height: 29.9874px;
-      position: absolute;
-      width: 332.986px;
-      transform-origin: 166.556px 15.263px 0px;
-      border-style: none;
-      left: 0px;
-      top: 15px;
-    }
-    .gwd-label-1o24 {
-      top: 217px;
-    }
-    .gwd-input-1e3f {
-      top: 214px;
-    }
-    .UsernameField {
-      top: 93px;
-    }
-    .UsernameLabel {
-      top: 96px;
+    a {
+      text-decoration: none;
     }
   </style>
 </head>
@@ -184,20 +31,19 @@
   <div class="ContentArea" id="ContentArea">
     <div class="gwd-div-ojh2" id="Fields">
       <form name="registerForm" th:object="${user}" th:action="@{/register}" method="POST">
-        <svg data-gwd-shape="rectangle" class="FieldsBorder"></svg>
-        <input type="password" id="Password" class="TextField gwd-input-1wzc gwd-input-18zp" data-gwd-name="Pass" th:field="*{password}">
+        <input type="password" id="Password" class="gwd-input-1wzc TextFieldREG passposmod" data-gwd-name="Pass" th:field="*{password}">
         <label id="PasswordLabel" class="FirstNameLabel gwd-label-p0ca gwd-label-pv1t" style="color: white;" for="Password" data-gwd-name="Password">Password:</label>
-        <input type="text" id="Email" class="TextField gwd-input-1wzc gwd-input-1e3f" data-gwd-name="Email" placeholder="Someone@somewhere.com" th:field="*{email}">
+        <input type="text" id="Email" class="gwd-input-1wzc gwd-input-1e3f TextFieldREG" data-gwd-name="Email" placeholder="Someone@somewhere.com" th:field="*{email}">
         <label id="EmailLabel" class="FirstNameLabel gwd-label-p0ca gwd-label-1o24" style="color: white;" for="Email" data-gwd-name="Email">Email:</label>
-        <input type="text" id="Country" class="TextField CountryField" placeholder="Change this to a drop down" data-gwd-name="Country" th:field="*{country}">
+        <input type="text" id="Country" class="CountryField TextFieldREG" placeholder="Change this to a drop down" data-gwd-name="Country" th:field="*{country}">
         <label id="CountryLabel" class="FirstNameLabel gwd-label-evt3" style="color: white;" for="Country" data-gwd-name="CountryLabel">Country:</label>
-        <input type="date" id="Birthday" class="TextField Birthday" placeholder="MM/DD/YY" data-gwd-name="DOB" th:field="*{birthday}">
+        <input type="date" id="Birthday" class="Birthday TextFieldREG" placeholder="MM/DD/YY" data-gwd-name="DOB" th:field="*{birthday}">
         <label id="DOBLabel" class="FirstNameLabel gwd-label-b57a" style="color: white;" for="Birthday" data-gwd-name="DOBlabel">Date of Birth:</label>
-        <input type="text" id="LastName" class="TextField LastName" data-gwd-name="Last Name" th:field="*{last_name}">
+        <input type="text" id="LastName" class="LastName TextFieldREG" data-gwd-name="Last Name" th:field="*{last_name}">
         <label id="LNLabel" class="FirstNameLabel gwd-label-1hof" style="color: white;" for="LastName">Last Name:</label>
-        <input type="text" id="Username" class="TextField LastName UsernameField" data-gwd-name="Username" th:field="*{username}">
+        <input type="text" id="Username" class="LastName UsernameField TextFieldREG" data-gwd-name="Username" th:field="*{username}">
         <label id="UsernameLabel" class="FirstNameLabel gwd-label-1hof UsernameLabel" style="color: white;" for="Username">Username:</label>
-        <input type="text" id="FirstName" class="TextField FirstName" data-gwd-name="FirstName" th:field="*{first_name}">
+        <input type="text" id="FirstName" class="FirstName gwd-input-rdhj TextFieldREG" data-gwd-name="FirstName" th:field="*{first_name}">
         <label id="FNLabel" class="FirstNameLabel Label" style="color: white;" for="FirstName">First Name:</label>
         <div class="gwd-div-1hhx" id="Buttondiv">
           <button id="CreateAccount" class="gwd-button-16n5" type="submit">Create Account</button>

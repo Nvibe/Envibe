@@ -27,6 +27,8 @@ By default, the following users are created for testing purposes.
 | listener | listener@example.com | envibe   | ROLE_USER     |
 | artist   | artist@example.com   | envibe   | ROLE_USER     |
 
+As of right now, the friends functionality is missing from the codebase. Anytime you create a post, only the `listener` account will be able to see it. (Essentially, `listener` is a permanent follower of the other two accounts).
+
 ## Basic Commands
 - `mvnw spring-boot:run` Runs server locally.
 - `mvnw clean package` Builds JAR file, rarely needed.
@@ -39,7 +41,20 @@ Instead of messing around with PostgreSQL, you can run an in-memory database for
 1. Within your IDE, set the environment variable `JDBC_DATABASE_URL` to `jdbc:h2:mem:test_db`.
 2. Every time you start the webapp, it will create a temporary database in memory that your application will use. The database will be deleted every time you close the webapp.
 
-## How To Update Database
+## How to set up Redis
+This application requires Redis for cross-thread communication. You can install it in one of three ways.
+- Install the Windows Subsystem for Linux (WSL) (Windows 10 version 2004 only).
+- Install a non-supported build of Redis for Windows.
+- In a Linux VM.
+
+If you chose option 1 or 3, you will need to run `sudo apt install redis-server -y` before you continue.
+1. Turn protected mode off by running `sudo nano /etc/redis/redis.conf`
+2. Start the Redis service with `sudo service redis-server start`
+3. In your IDE, set the environment variable `REDIS_URL` to `redis://127.0.0.1:6379`
+
+When you are done, and don't want Redis running in the background, stop it with `sudo service redis-server stop`
+
+## How To Update The Database
 This project uses Flyway to manage database schemas. To change how the database is set up, create a migration.
 1. Go to `/src/main/resources/db/migration`
 2. Create a SQL file with the format `VX__Useful_Name_Here.sql`. Note that the filename MUST start with a capital `V`, followed by a number higher than any of the other files in the `/migration` folder(e.g. V1, V2, V3...). After `VX`, there should be TWO underscores(`__`).

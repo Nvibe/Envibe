@@ -4,6 +4,7 @@ import com.envibe.envibe.dao.CachedItemDao;
 import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.worker.NewsFeedUpdateWorker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,9 @@ public class NewsFeedUpdateService {
     @Autowired
     CachedItemDao cachedItemDao;
 
+    @Autowired
+    ApplicationContext applicationContext;
+
     /**
      * Local pool of workers so that we can invoke their control functions if needed.
      */
@@ -49,8 +53,14 @@ public class NewsFeedUpdateService {
         CachedItem newPostMessage = new CachedItem(CachedItemDao.PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH, "INTERNAL", Integer.toString(post_id));
         // Save the payload so that it can be accessed by the worker thread.
         cachedItemDao.create(newPostMessage);
-        // Fire off a worker and assign it to the worker pool so we can monitor it.
-        workers.add(new Thread(new NewsFeedUpdateWorker()));
+        // Create a worker and assign it to the worker pool so we can monitor it.
+        NewsFeedUpdateWorker newsFeedUpdateWorker = new NewsFeedUpdateWorker();
+        // Allow Spring to inject DAO and config dependencies.
+        applicationContext.getAutowireCapableBeanFactory().autowireBean(newsFeedUpdateWorker);
+        // Initialize the worker as a Thread() and add it to the pool.
+        workers.add(new Thread(newsFeedUpdateWorker));
+        // Fire off the worker.
+        workers.get(workers.size() - 1).start();
     }
 
     /**

@@ -1,7 +1,9 @@
 package com.envibe.envibe.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.JedisPoolConfig;
@@ -26,7 +28,7 @@ public class RedisConfig {
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() throws URISyntaxException {
         // Retrieve REDIS_URL, or supply a default connection string if it does not exist.
-        String rawURI = System.getenv("REDIS_URL") == null ? "redis://localhost:6379" : System.getenv("REDIS_URL");
+        String rawURI = System.getenv("REDIS_URL") == null ? "redis://127.0.0.1:6379" : System.getenv("REDIS_URL");
         URI redisURI = new URI(rawURI);
         // Create an empty connection pool to configure.
         JedisPoolConfig poolConfig = new JedisPoolConfig();
