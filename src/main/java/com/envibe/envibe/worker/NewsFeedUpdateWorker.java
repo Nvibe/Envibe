@@ -95,7 +95,7 @@ public class NewsFeedUpdateWorker implements Runnable {
     private ArrayList<String> getAffectedFriends(int post_id) {
         User poster = getUserOfNextPost(post_id);
         // Get a list of all the friends of the original user. Use Strings since we don't need any friend User attributes.
-        ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(originalPoster.getUsername()));
+        ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(poster.getUsername()));
         return friends;
     }
 
