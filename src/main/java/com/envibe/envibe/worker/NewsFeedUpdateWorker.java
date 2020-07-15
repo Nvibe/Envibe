@@ -7,6 +7,7 @@ import com.envibe.envibe.model.CachedItem;
 import com.envibe.envibe.model.NewsItem;
 import com.envibe.envibe.model.User;
 import com.envibe.envibe.service.NewsFeedUpdateService;
+import com.envibe.envibe.service.RelationshipDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,12 @@ public class NewsFeedUpdateWorker implements Runnable {
     CachedItemDao cachedItemDao;
 
     private static final String INTERNAL_USER_TAG = "INTERNAL";
+
+    /**
+     * Injected service for retrieving a list of followers of a specified user.
+     */
+    @Autowired
+    RelationshipDisplayService relationshipDisplayService;
 
     /**
      * Constructor that retrieves the newest post ID from memcache.
@@ -88,10 +95,7 @@ public class NewsFeedUpdateWorker implements Runnable {
     private ArrayList<String> getAffectedFriends(int post_id) {
         User poster = getUserOfNextPost(post_id);
         // Get a list of all the friends of the original user. Use Strings since we don't need any friend User attributes.
-        ArrayList<String> friends = new ArrayList<String>();
-        // TODO: Generate a list of friends of the OP.
-        // Since friends code isn't implemented, just make listener a permanent follower of everyone.
-        friends.add("listener");
+        ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(originalPoster.getUsername()));
         return friends;
     }
 
