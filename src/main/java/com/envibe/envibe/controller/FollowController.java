@@ -17,7 +17,8 @@ public class FollowController {
     FriendDao relationshipDao;
 
     @GetMapping("/api/v1/follow")
-    public void apiFollowUser(Model model, HttpServletRequest request, @RequestParam(required = true) String username) {
+    public String apiFollowUser(Model model, HttpServletRequest request, @RequestParam(required = true) String username) {
         relationshipDao.create(new Relationship(request.getRemoteUser(), username));
+        return "redirect:/feed";
     }
 }
