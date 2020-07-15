@@ -28,7 +28,7 @@ before_install:
   # For some reason, we need to re-install Maven Wrapper and set the execute bit on the .sh file.
   - mvn -N io.takari:maven:wrapper -B -Dmaven.test.skip=true -T2 -q
   - chmod +x ./mvnw
-  - wget -N http://chromedriver.storage.googleapis.com/84.0.4147/chromedriver_linux64.zip -P ~/
+  - wget -N https://chromedriver.storage.googleapis.com/84.0.4147.30/chromedriver_linux64.zip -P ~/
   - unzip ~/chromedriver_linux64.zip -d ~/
   - rm ~/chromedriver_linux64.zip
   - sudo mv -f ~/chromedriver /usr/local/share/
