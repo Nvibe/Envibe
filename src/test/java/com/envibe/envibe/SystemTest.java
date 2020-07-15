@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.concurrent.TimeUnit;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SystemTest {
 
@@ -16,9 +18,14 @@ public class SystemTest {
 
     protected WebDriver driver;
 
+    protected String DEFAULT_USERNAME = "listener";
+    protected String DEFAULT_PASSWORD = "envibe";
+
     @Before
     public void setup() {
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
     /**

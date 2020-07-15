@@ -17,6 +17,8 @@ public class LoginSystemTets extends SystemTest {
     @Test
     public void testLoginFlow() throws Exception {
         driver.get("/login");
-        //driver.findElement(By.ById)
+        driver.findElement(By.name("username")).sendKeys(DEFAULT_USERNAME);
+        driver.findElement(By.name("password")).sendKeys(DEFAULT_PASSWORD);
+        driver.findElement(By.id("LogInButton")).click();
     }
 }
