@@ -28,24 +28,36 @@ public class UserDao {
     /**
      * Prepared query to insert user records into database.
      */
-    final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role, country, birthday, last_name, first_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String queryCreate = "INSERT INTO user_account (user_name, user_password, user_email, user_role, country, birthday, last_name, first_name, image_link) " +
+                                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * Prepared query to search for user records in database.
      */
-    final String queryRead = "SELECT user_name, user_password, user_email, user_role, country, birthday, last_name, first_name FROM user_account WHERE user_name = ?";
+    private final String queryRead = "SELECT * FROM user_account " +
+                                        "WHERE user_name = ? " +
+                                        "LIMIT 1";
 
     /**
      * Prepared query to update user records in database.
      */
-    final String queryUpdate = "UPDATE user_account SET user_password = ?, user_email = ?, user_role = ?, country = ?, birthday = ?, last_name = ?, first_name = ? WHERE user_name = ?";
+    private final String queryUpdate = "UPDATE user_account " +
+            "SET " +
+                "user_password = ?, " +
+                "user_email = ?, " +
+                "user_role = ?, " +
+                "country = ?, " +
+                "birthday = ?, " +
+                "last_name = ?, " +
+                "first_name = ?, " +
+                "image_link = ? " +
+            "WHERE user_name = ?";
 
     /**
      * Prepared query to delete user records in database.
      */
-    final String queryDelete = "DELETE FROM user_account WHERE user_name = ?";
-
-    // TODO: Switch from Strings to PreparedSQLQuery objects.
+    private final String queryDelete = "DELETE FROM user_account " +
+                                        "WHERE user_name = ?";
 
     /**
      * Creates a pre-validated user in the permanent datastore.
@@ -53,7 +65,7 @@ public class UserDao {
      */
     public void create(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
-        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name());
+        jdbcTemplate.update(queryCreate, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getImage_link());
     }
 
     /**
@@ -77,7 +89,7 @@ public class UserDao {
     public void update(@Valid User user) {
         Objects.requireNonNull(user, "Method argument user cannot be null");
         // TODO: Catch EmptyResultDataAccessExceptions.
-        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getUsername());
+        jdbcTemplate.update(queryUpdate, user.getPassword(), user.getEmail(), user.getRole(), user.getCountry(), user.getBirthday(), user.getLast_name(), user.getFirst_name(), user.getImage_link(), user.getUsername());
     }
 
     /**

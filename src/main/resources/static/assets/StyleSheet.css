@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
 
-<head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <meta charset="utf-8">
-  <title>undefined</title>
-  <meta name="generator" content="Google Web Designer 8.0.3.0603">
-  <meta data-template-name="gwd-EnvibeBackground">
-  <style type="text/css" id="gwd-text-style">
-    p {
-      margin: 0px;
-    }
-    h1 {
-      margin: 0px;
-    }
-    h2 {
-      margin: 0px;
-    }
-    h3 {
-      margin: 0px;
-    }
-    a {
-      text-decoration: none;
-    }
-  </style>
-  <style>
-    html, body {
+html, body {
       width: 100%;
       height: 100%;
       margin: 0px;
@@ -43,6 +17,17 @@
       background: rgb(90, 90, 90);
       left: 302px;
       top: 0px;
+    }
+	.passposmod {
+      top: 253px;
+    }
+	.TextFieldREG {
+      display: block;
+      height: 19.9968px;
+      left: 180.86px;
+      position: absolute;
+      top: 119.241px;
+      width: 100px;
     }
     .gwd-div-ojh2 {
       position: absolute;
@@ -85,12 +70,12 @@
       left: 197px;
       top: 174px;
     }
-    .valuep {
+  .valuep {
       position: absolute;
       width: 237px;
       height: 26px;
       font-size: 14px;
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       left: 144px;
       top: 2px;
     }
@@ -110,7 +95,7 @@
       top: 14px;
     }
     .gwd-input-1wzc {
-      top: 220px;
+      top: 250px;
       height: 20px;
       width: 200px;
       left: 196px;
@@ -191,6 +176,7 @@
     .UsernameLabel {
       top: 96px;
     }
+    
     .gwd-div-q8c2 {
       position: absolute;
       width: 240.5px;
@@ -357,8 +343,8 @@
       height: 24px;
       left: 27px;
       position: absolute;
+      top: 15px;
       width: 267px;
-      top: 286px;
     }
     .Feedlink {
       position: absolute;
@@ -415,6 +401,7 @@
     .gwd-span-cfv8 {
       font-size: 14px;
     }
+   
     .UserConArea {
       position: absolute;
       background-image: none;
@@ -575,134 +562,25 @@
       background-color: rgb(183, 181, 176);
     }
     .SavebuttonDiv {
-      height: 36px;
-      position: absolute;
-      width: 222px;
-      top: 273px;
-      left: 190px;
-    }
-    .gwd-p-n6wb {
-      height: 26px;
-    }
-    .gwd-button-1aim {
-      background-color: rgb(30, 29, 29);
-      border-color: rgba(0, 0, 0, 0);
-      border-image-outset: 0;
-      display: block;
-      height: 36px;
-      position: absolute;
-      width: 222px;
-      transform-origin: 111px 18px 0px;
-      top: 0px;
-      left: 0px;
-      color: white;
-    }
-    .Profilepic {
-      position: absolute;
-      top: 0px;
-      background: white;
-      height: 180px;
-      width: 180px;
-      border-radius: 90px;
-      left: 50%;
-      transform: translate3d(-90px, 0px, 0px);
-      transform-style: preserve-3d;
-    }
-    .ProfileImage {
-      left: 50%;
-      top: 50%;
-    }
-    .gwd-div-ohoq {
-      width: 248px;
-      transform-origin: 124.413px 15px 0px;
-      top: 246px;
-      left: 1px;
-    }
-    .gwd-p-c72t {
-      width: 164px;
-      transform-origin: 82px 13px 0px;
-      left: 135px;
-    }
-    .gwd-p-19s5 {
-      left: 9px;
-    }
-  </style>
-</head>
-
-<body class="htmlNoPages">
-  <div class="ContentArea" id="ContentArea">
-    <form id="SaveForm" name="registerForm" th:object="${user}" th:action="@{/manageaccount}" method="POST">
-      <div class="SavebuttonDiv">
-        <button id="SaveButton" class="gwd-button-1aim" type="submit">Save changes</button>
-      </div>
-      <div class="gwd-div-14ue FormLines" id="Password">
-        <input editable="" class="valuep" id="Passvalue" th:field="*{password}" placeholder="*" *******=""><br>
-        
-        <p class="gwd-p-b9nr">Password: </p>
-      </div>
-      <div class="gwd-div-1fhz FormLines" id="Email">
-        <input editable="" class="valuep" id="Emailvalue" th:field="*{email}" placeholder="[[${user.email}]]"><br>
-        
-        <p class="gwd-p-b9nr">Email: </p>
-      </div>
-      <div class="gwd-div-pfzu FormLines" id="Country">
-        <input editable="" class="valuep" id="Countryvalue" placeholder="[[${user.country}]]" th:field="*{country}"><br>
-        
-        <p class="gwd-p-b9nr">Country: </p>
-      </div>
-      <div class="gwd-div-14ue FormLines gwd-div-ohoq" id="LinkField">
-        <input editable="" class="valuep gwd-p-c72t" id="UserImg" th:field="*{image_link}" placeholder="[[${user.image_link}]]"><br>
-        
-        <p editable="" class="gwd-p-b9nr gwd-p-19s5" id="ImageLink">Image Link: </p>
-      </div>
-      <div class="gwd-div-1p0y FormLines" id="DOB">
-        <input editable="" class="valuep" id="Birthvalue" th:field="*{birthday}" placeholder="[[${user.birthday}]]"><br>
-        
-        <p class="gwd-p-b9nr">Date of Birth: </p>
-      </div>
-      <div class="gwd-div-2q7d FormLines" id="UName">
-        <input editable="" class="valuep" id="UNvalue" th:field="*{username}" placeholder="[[${user.username}]]"><br>
-        
-        <p class="gwd-p-b9nr">Username: </p>
-      </div>
-      <div class="gwd-div-1n7m FormLines" id="Last">
-        <input editable="" class="valuep gwd-p-n6wb" id="LNvalue" th:field="*{last_name}" placeholder="[[${user.last_name}]]"><br>
-        
-        <p class="gwd-p-b9nr">Last Name: </p>
-      </div>
-      <div class="FormLines" id="First">
-        <input editable="" class="valuep" id="FNvalue" th:field="*{first_name}" placeholder="[[${user.first_name}]]"><br>
-        
-        <p class="gwd-p-b9nr">First Name:</p>
-      </div>
-    </form>
-  </div>
-  <div class="gwd-div-ox36" id="LeftColumn">
-    <div class="Profilepic" id="ProfilePic">
-      <img src="" class="ProfileImage" style="width: 180px; height: 180px; overflow: hidden; border-radius: 90px; object-fit: cover;">
-    </div>
-    <div class="gwd-div-1bvk">
-      <a href="/feed" class="Feedlink" id="MyFeed">My Feed</a>
-    </div>
-  </div>
-  <div class="gwd-div-ncvi" id="RightColumn">
-    <div class="Logout" id="Row1_1">
-      <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
-      <br>
-      
-    </div>
-  </div>
-  <script>
-    $(document).ready(function() {
-      var imgSource = $("#UserImg").val();
-      // alert(imgSource);
-      if (imgSource == '') {
-        $('div.Profilepic img').attr('src', 'assets/Default-Picture.png');
-      } else {
-        $('div.Profilepic img').attr('src', imgSource);
-      }
-    });
-  </script>
-</body>
-
-</html>
+          height: 36px;
+          position: absolute;
+          width: 222px;
+          top: 273px;
+          left: 190px;
+        }
+        .gwd-p-n6wb {
+          height: 26px;
+        }
+        .gwd-button-1aim {
+          background-color: rgb(30, 29, 29);
+          border-color: rgba(0, 0, 0, 0);
+          border-image-outset: 0;
+          display: block;
+          height: 36px;
+          position: absolute;
+          width: 222px;
+          transform-origin: 111px 18px 0px;
+          top: 0px;
+          left: 0px;
+          color: white;
+        }

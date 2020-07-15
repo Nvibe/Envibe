@@ -1,6 +1,6 @@
 package com.envibe.envibe.service;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ public class RelationshipDisplayService {
 	 /*Creates a list of String that pulls .getUserFriend from Relationship objects*/
 	public List<String> FriendsList (String user_name) {
 		List<Relationship> currentFriends = friendDao.read(user_name);
+		if (currentFriends == null) return new ArrayList<String>();
 		for (Relationship j : currentFriends)
 		{
 			friendGroup.add(j.getUserFriend());

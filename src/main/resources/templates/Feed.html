@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <title>undefined</title>
+  <meta charset="UTF-8">
+  <title>Envibe</title>
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
@@ -19,8 +20,11 @@
     h3 {
       margin: 0px;
     }
+    a {
+      text-decoration: none;
+    }
   </style>
-  <style type="text/css">
+  <style>
     html, body {
       width: 100%;
       height: 100%;
@@ -30,6 +34,386 @@
       background-color: rgb(50, 50, 50);
       transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
       transform-style: preserve-3d;
+    }
+    .ContentArea {
+      position: absolute;
+      width: 600px;
+      height: 724px;
+      transform-origin: 300px 362px 0px;
+      background: rgb(90, 90, 90);
+      left: 302px;
+      top: 0px;
+    }
+    .gwd-div-ojh2 {
+      position: absolute;
+      width: 571px;
+      height: 322px;
+      transform-origin: 285.488px 160.849px 0px;
+      left: 10px;
+      top: 85px;
+    }
+    .TextField {
+      display: block;
+      height: 19.9968px;
+      left: 180.86px;
+      position: absolute;
+      top: 119.241px;
+      width: 100px;
+    }
+    .LastName {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 54px;
+    }
+    .FirstNameLabel {
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      left: 96px;
+      top: 63px;
+    }
+    .Birthday {
+      width: 200px;
+      height: 20px;
+      left: 197px;
+      top: 134px;
+    }
+    .CountryField {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 174px;
+    }
+    .valuep {
+      position: absolute;
+      width: 237px;
+      height: 26px;
+      font-size: 14px;
+      color: rgb(255, 255, 255);
+      left: 144px;
+      top: 2px;
+    }
+    email {
+      height: 20px;
+      left: 179px;
+      top: 106px;
+      transform-style: preserve-3d;
+      width: 194.537px;
+      transform-origin: 99.2508px 12.9735px 0px;
+      transform: translate3d(-1px, 23px, 0px) rotateZ(-0.602012deg);
+    }
+    .FirstName {
+      height: 20px;
+      width: 200px;
+      left: 197px;
+      top: 14px;
+    }
+    .gwd-input-1wzc {
+      top: 220px;
+      height: 20px;
+      width: 200px;
+      left: 196px;
+    }
+    .Label {
+      left: 90px;
+      top: 17px;
+    }
+    .gwd-label-1hof {
+      left: 90px;
+      top: 57px;
+    }
+    .gwd-label-b57a {
+      left: 90px;
+      top: 138px;
+    }
+    .gwd-label-evt3 {
+      left: 90px;
+      top: 177px;
+    }
+    .gwd-label-p0ca {
+      top: 223px;
+      left: 90px;
+    }
+    .FieldsBorder {
+      border-style: solid;
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      height: 324px;
+      width: 573px;
+      transform-origin: 286.634px 161.859px 0px;
+      background-image: none;
+      background-color: transparent;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(206, 110, 12);
+      border-width: 2px;
+      border-radius: 30px;
+      left: 0px;
+      top: 0px;
+    }
+    .gwd-input-18zp {
+      top: 253px;
+    }
+    .gwd-label-pv1t {
+      top: 256px;
+    }
+    .gwd-div-1hhx {
+      position: absolute;
+      width: 333.333px;
+      height: 60.6061px;
+      left: 119px;
+      top: 327px;
+      overflow: visible;
+    }
+    .gwd-button-16n5 {
+      display: block;
+      height: 29.9874px;
+      position: absolute;
+      width: 332.986px;
+      transform-origin: 166.556px 15.263px 0px;
+      border-style: none;
+      left: 0px;
+      top: 15px;
+    }
+    .gwd-label-1o24 {
+      top: 217px;
+    }
+    .gwd-input-1e3f {
+      top: 214px;
+    }
+    .UsernameField {
+      top: 93px;
+    }
+    .UsernameLabel {
+      top: 96px;
+    }
+    .gwd-div-q8c2 {
+      position: absolute;
+      width: 240.5px;
+      height: 104px;
+      top: 310px;
+      left: 481px;
+    }
+    .gwd-input-s0m9 {
+      display: block;
+      height: 20px;
+      position: absolute;
+      width: 100px;
+      left: 8px;
+      top: 5px;
+    }
+    .gwd-label-1akj {
+      display: block;
+      height: 20px;
+      position: absolute;
+      width: 100px;
+      top: -20px;
+      left: 9px;
+    }
+    .gwd-input-1nw7 {
+      left: 8px;
+      top: 5px;
+      width: 228px;
+      transform-origin: 116px 13px 0px;
+    }
+    .gwd-label-18p6 {
+      left: 9px;
+      top: -20px;
+      font-family: Tahoma;
+    }
+    .gwd-input-19ax {
+      width: 227px;
+      transform-origin: 115.5px 13px 0px;
+      left: 9px;
+      top: 67px;
+    }
+    .gwd-label-9ml0 {
+      top: 42px;
+      font-family: Tahoma;
+    }
+    .gwd-div-166q {
+      position: absolute;
+      width: 512px;
+      height: 128px;
+      transform-origin: 256.004px 64.1667px 0px;
+      top: 108px;
+      left: 350px;
+    }
+    .gwd-rect-wd79 {
+      background-color: rgb(255, 255, 255);
+      border-color: rgba(255, 108, 2, 0.66);
+      border-radius: 20px;
+      border-image-outset: 0;
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 450px;
+      left: -103px;
+      top: -310px;
+      height: 724px;
+      transform-origin: 225px 362px 0px;
+    }
+    .gwd-button-a3gx {
+      display: block;
+      height: 27px;
+      position: absolute;
+      width: 241px;
+      transform-origin: 125px 14px 0px;
+      left: 1px;
+      top: 120px;
+    }
+    .gwd-p-1qxg {
+      font-family: Tahoma;
+      font-size: 24px;
+      height: 33px;
+      position: absolute;
+      width: 66px;
+      transform-origin: 937.251px 111.487px 0px;
+      top: 150px;
+      left: 92px;
+    }
+    .gwd-span-1uia {
+      font-family: Tahoma;
+      font-size: 12px;
+      left: -2px;
+      top: 19px;
+    }
+    .gwd-br-vcoj {
+      font-family: Tahoma;
+      font-size: 24px;
+    }
+    .gwd-img-1t33 {
+      display: block;
+      position: absolute;
+      height: 88px;
+      background-image: none;
+      width: 349px;
+      transform-origin: 174.5px 43.625px 0px;
+      background-color: transparent;
+      left: 142px;
+      top: 27px;
+    }
+    .gwd-img-8xbc {
+      position: absolute;
+      width: 107px;
+      height: 107px;
+      transform-origin: 53.6667px 53.6667px 0px;
+      left: 36px;
+      top: 13px;
+    }
+    .ContentArea {
+      position: absolute;
+      width: 600px;
+      transform-origin: 300px 362px 0px;
+      left: 302px;
+      top: 0px;
+      background: transparent;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(239, 102, 3);
+      border-style: solid;
+      border-width: 0px 1px;
+      height: 100vh;
+    }
+    .UserConArea {
+      position: absolute;
+      background-image: none;
+      background-color: rgb(80, 80, 80);
+      border-radius: 30px;
+      top: 41px;
+      height: 171px;
+      width: 587px;
+      transform-origin: 293.5px 85.5px 0px;
+      left: 6px;
+      visibility: hidden;
+    }
+    .gwd-div-ox36 {
+      position: absolute;
+      width: 302px;
+      height: 724px;
+      left: 0px;
+      top: 0px;
+    }
+    .gwd-div-ncvi {
+      position: absolute;
+      width: 298px;
+      height: 724px;
+      left: 904px;
+      top: 0px;
+    }
+    .gwd-br-kkz3 {
+      text-align: center;
+    }
+    .gwd-br-10eb {
+      text-align: center;
+    }
+    .gwd-div-1bvk {
+      height: 24px;
+      left: 27px;
+      position: absolute;
+      top: 15px;
+      width: 267px;
+    }
+    .Feedlink {
+      position: absolute;
+      width: 114px;
+      transform-origin: 28px 0px 0px;
+      top: 1px;
+      left: 77px;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(255, 255, 255);
+      border-style: none;
+      color: white;
+      text-align: center;
+      height: 23px;
+    }
+    .FormLines {
+      height: 30px;
+      position: absolute;
+      transform-origin: 301px 15px 0px;
+      top: 8px;
+      left: 0px;
+      width: 600px;
+    }
+    .gwd-div-1n7m {
+      top: 42px;
+    }
+    .gwd-div-2q7d {
+      top: 75px;
+    }
+    .gwd-div-1p0y {
+      top: 108px;
+    }
+    .gwd-div-pfzu {
+      top: 141px;
+    }
+    .gwd-div-1fhz {
+      top: 175px;
+    }
+    .gwd-div-14ue {
+      top: 209px;
+    }
+    .gwd-p-b9nr {
+      height: 16px;
+      position: absolute;
+      width: 110px;
+      transform-origin: 55.2px 8px 0px;
+      top: 7px;
+      left: 9px;
+      font-size: 14px;
+      color: white;
+    }
+    .gwd-span-cfv8 {
+      font-size: 14px;
     }
     .UserConArea {
       position: absolute;
@@ -87,24 +471,24 @@
       text-align: center;
     }
     .ContentArea {
-      height: 721px;
       overflow: hidden;
       position: relative;
-      width: 602px;
       transform-origin: 301px 360.5px 0px;
       left: 302px;
       top: 3px;
+      width: 602px;
+      height: 100vh;
     }
     .InnerContentArea {
       position: absolute;
       left: 1px;
-      top: 0px;
       bottom: 0px;
       right: -20px;
       overflow-y: scroll;
+      top: 92px;
+      transform-origin: 311.663px 323.846px 0px;
       width: 623px;
-      height: 740px;
-      transform-origin: 311.663px 369.634px 0px;
+      height: 100vh;
     }
     .Bubble {
       height: 207px;
@@ -115,6 +499,7 @@
       background-color: rgb(90, 90, 90);
       border-radius: 30px;
       margin: 25px 10px;
+      overflow-wrap: normal;
     }
     .UserContent {
       height: 164px;
@@ -136,6 +521,9 @@
       top: 2px;
       width: 40px;
       left: 36px;
+      background: white;
+      overflow: hidden;
+      border-radius: 20px;
     }
     .ProfileOutline {
       width: 40px;
@@ -143,9 +531,10 @@
       display: block;
       fill: none;
       stroke: rgb(0, 0, 0);
-      left: 36px;
       position: absolute;
-      top: 2px;
+      overflow: hidden;
+      left: 0px;
+      top: 0px;
     }
     .UserNameStyle {
       position: absolute;
@@ -165,16 +554,140 @@
       left: 14px;
       color: white;
     }
+    .TextField {
+      position: absolute;
+      left: 25px;
+      top: 13px;
+      height: 47px;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: rgb(47, 64, 148);
+      border-style: solid;
+      border-width: 2px;
+      width: 471px;
+      transform-origin: 237.5px 26.5px 0px;
+    }
+    .NewComment {
+      position: absolute;
+      width: 599px;
+      height: 79px;
+      left: 1px;
+      top: 13px;
+    }
+    .CreateButton {
+      position: absolute;
+      top: 13px;
+      width: 83px;
+      height: 53px;
+      transform-origin: 41.5px 26.5px 0px;
+      background-image: none;
+      color: white;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: transparent;
+      border-width: 8px;
+      border-style: none;
+      left: 500px;
+      background-color: rgb(47, 64, 148);
+    }
+    .SavebuttonDiv {
+      height: 36px;
+      position: absolute;
+      width: 222px;
+      top: 273px;
+      left: 190px;
+    }
+    .gwd-p-n6wb {
+      height: 26px;
+    }
+    .gwd-button-1aim {
+      background-color: rgb(30, 29, 29);
+      border-color: rgba(0, 0, 0, 0);
+      border-image-outset: 0;
+      display: block;
+      height: 36px;
+      position: absolute;
+      width: 222px;
+      transform-origin: 111px 18px 0px;
+      top: 0px;
+      left: 0px;
+      color: white;
+    }
+    .gwd-div-1yuc {
+      left: 48px;
+    }
+    .gwd-div-1g9o {
+      top: 165px;
+    }
+    .gwd-div-19b5 {
+      left: 0px;
+    }
+    .gwd-div-j10l {
+      top: 0px;
+    }
+    .friendZone {
+      position: absolute;
+      left: 0px;
+      width: 298px;
+      top: 147px;
+      height: 518px;
+      transform-origin: 149px 259px 0px;
+      overflow: hidden;
+    }
+    .FriendContainer {
+      height: 70px;
+      position: absolute;
+      top: 23px;
+      left: 14px;
+      width: 275px;
+      transform-origin: 137.5px 35px 0px;
+    }
+    .FriendPictureContainer {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 70px;
+      transform-origin: 38px 35px 0px;
+      width: 70px;
+    }
+    .FriendName {
+      position: absolute;
+      left: 70px;
+      height: 35px;
+      width: 204px;
+      transform-origin: 102px 17.5px 0px;
+      top: 3px;
+    }
+    .gwd-button-1ra4 {
+      position: absolute;
+      height: 24px;
+      top: 43px;
+      left: 70px;
+      width: 204px;
+      transform-origin: 102px 12px 0px;
+      background-image: none;
+      color: white;
+      border-image-source: none;
+      border-image-width: 1;
+      border-image-outset: 0;
+      border-image-repeat: stretch;
+      border-color: transparent;
+      background-color: rgb(15, 6, 146);
+    }
   </style>
 </head>
 
 <body class="htmlNoPages">
   <div class="LeftColumn" id="LeftColumn">
     <div class="ItemRow" id="Row1">
-      <p class="MyAccount"><span class="MyAccountText">My Account</span><br>
-        <br>
-        
-      </p>
+      <a href="/ManageAccount" class="MyAccount"><span class="MyAccountText">My Account</span></a><br>
+      <br>
+      
+      <p></p>
     </div>
   </div>
   <div class="ContentArea" id="ContentArea">
@@ -191,43 +704,84 @@
               
             </p>
             <div class="ProfilePicture" id="ProfilePicture"></div>
-            <svg data-gwd-shape="oval" preserveAspectRatio="none" viewBox="0 0 40 40" class="ProfileOutline">
-              <ellipse cx="50%" cy="50%" rx="19.5" ry="19.5"></ellipse>
-            </svg>
           </div>
         </div>
       </template>
     </div>
+    <div class="NewComment" id="NewComment">
+      <form action="#" th:action="@{/api/v1/feed/create}" method="post">
+        <input type="text" id="CommentField" class="TextField" name="content" placeholder="What are you vibing to?" value="">
+        <button id="CreateButton" class="CreateButton" type="submit">Post</button>
+      </form>
+    </div>
   </div>
-  <div class="RightColumn" id="RightColumn"></div>
+  <div class="RightColumn" id="RightColumn">
+    <div class="Logout gwd-div-1yuc gwd-div-1g9o gwd-div-19b5 gwd-div-j10l" id="Row1_1">
+      <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
+      <br>
+      
+      <p class=""></p>
+    </div>
+    <div class="friendZone" id="FriendZone">
+      <div class="FriendContainer" id="Friendcontainer">
+        <div th:each="Relationship, stats: ${FriendRef}">
+           <div th:text="${Relationship.userFriend}">John Doe</div>
+           <div stats.index + 1 </div>
+        </div>
+        <div class="FriendName" id="FriendName"></div>
+        <div class="FriendPictureContainer" id="Friendpic"></div>
+        <button id="addfriend" class="gwd-button-1ra4">Button</button>
+      </div>
+    </div>
+  </div>
   <script>
     class User {
       constructor(name, content) {
         this.name = name;
         this.content = content;
       }
+
     }
 
-    function newElement(name, content) {
+    function newElement(name, content, profilePic) {
+
+      /*child node chain will be used until a better method can be implemented*/
       let element = document.createElement('div');
       element.append(UserContentTemplate.content.cloneNode(true));
-      element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name;
-      element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content;
+      element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name; /*user name div*/
+      element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content; /*user content div*/
+      if (profilePic == "") {
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
+      } else {
+        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;object-fit: cover;"/>';
+      }
       let target = document.getElementById('InnerContentArea');
       target.append(element);
     }
 
-    user1 = new User("John Smith", "Generic content");
-    user2 = new User("Kyle Hill", "What would it feel like to get pulled into a black hole?");
-    user3 = new User("Snowman John", "The only thing I know is that I know nothing.");
-    user4 = new User("Your Mother", "charlie when are you going to be home? dinner is ready.");
-    user5 = new User("Existential Dread", "Nothing really matters. Anyone can see. Nothing really matters to me.");
-    var testinfo = [user1, user2, user3, user4, user5];
-    newElement(user1.name, user1.content);
-    newElement(user2.name, user2.content);
-    newElement(user3.name, user3.content);
-    newElement(user4.name, user4.content);
-    newElement(user5.name, user5.content);
+    /*newElement("TESTNAME", "TESTCONTENT", "https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1534530600391-CTOG7HCYJJIHHLNLZLNI/ke17ZwdGBToddI8pDm48kGPVK--wGoWXJsqwlxbZlQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5enfxu_O4VeONvneR-F6W8oeFhFqSrYyNrfPB9Y70_gvQ/IYORBank_CoralReefs_AlexMustard_01.jpg?format=300w");
+    newElement("TESTNAME", "TESTCONTENT", "");*/
+
+
+
+    $.ajax({
+      url: '/api/v1/feed/user?count=10&after=0',
+      type: 'GET',
+      dataType: 'json',
+      error: function(xhr, statTxt, thrownTXT) {
+        alert(xhr.status + statTxt)
+      },
+      success: function(data, txtStatus, xhr) {
+        var i;
+        for (i = 0; i < data.length - 1; i++) {
+          newElement(data[i].username, data[i].content, data[i].user_image);
+        }
+        newElement("","No more vibes","assets/Envibe-icon-remake.png")
+        //alert( "status: " + txtStatus);
+        //alert(data.length);
+        //alert(JSON.stringify(data));
+      }
+    });
   </script>
 </body>
 

@@ -36,14 +36,14 @@ script:
   - mvn compiler:testCompile -B -Dmaven.test.skip=true -T2 -q
   - mvn test -B -T1 -Dspring-boot.run.arguments=--logging.level.org.springframework=ERROR,--logging.level.com.envibe=ERROR
 after_success:
+  # Generate internal code documentation site for GitHub Pages.
+  - mvn javadoc:javadoc -B -Dmaven.test.skip=true -T2 -q
   - echo "Raw slug size of application $(du -sh ./)/500MB (without compression)"
 before_deploy:
   # Delete the /target folder.
-  - mvn clean -B -Dmaven.test.skip=true -T2 -q
+  #- mvn clean -B -Dmaven.test.skip=true -T2 -q # This removes the /apidocs folder
   # Package as JAR file for deployment onto Heroku.
   - mvn package -B -Dmaven.test.skip=true -T2 -q
-  # Generate internal code documentation site for GitHub Pages.
-  - mvn javadoc:javadoc -B -Dmaven.test.skip=true -T2 -q
 deploy:
   - provider: heroku
     # Use API method to avoid git collision issues.

@@ -1,5 +1,7 @@
 package com.envibe.envibe.model;
 
+import com.envibe.envibe.dao.CachedItemDao;
+
 import java.io.Serializable;
 
 /**
@@ -32,6 +34,19 @@ public class CachedItem implements Serializable {
      */
     public CachedItem() {
 
+    }
+
+    /**
+     * Overloaded constructor. Allows setting pre-generated parameters.
+     * @param pregeneratedTag Generated tag for use in keystore.
+     * @param payload Raw String payload to hold for external processing.
+     * @deprecated Java, in it's inifinite wisdom, splits a string by cutting off random parts of it and sticking the given delimeter wherever it feels like it.
+     */
+    public CachedItem(String pregeneratedTag, String payload) {
+        String[] options = pregeneratedTag.split(CachedItemDao.TAG_SPLITTER);
+        this.purpose = options[0];
+        this.user_tag = options[1];
+        this.payload = payload;
     }
 
     /**

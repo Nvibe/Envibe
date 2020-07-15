@@ -32,6 +32,13 @@ public class CachedItemDao {
     public static final String PURPOSE_NEWS_FEED_WORKER_PASSTHROUGH = "NEWSFEEDWORKERPASSTHROUGH";
 
     /**
+     * Global delimiter for payloads that store multiple values.
+     */
+    public static final String PAYLOAD_LIST_DELIMITER = ",";
+
+    public static final String TAG_SPLITTER = "|";
+
+    /**
      * Injected Redis connection object to run queries against. See {@link RedisTemplate}.
      */
     @Autowired
@@ -120,7 +127,7 @@ public class CachedItemDao {
         // Argument validation.
         Objects.requireNonNull(purpose, "Method argument purpose cannot be null");
         Objects.requireNonNull(user_tag, "Method argument user_tag cannot be null");
-        return purpose + "|" + user_tag;
+        return purpose + TAG_SPLITTER + user_tag;
     }
 
     /**
@@ -128,7 +135,7 @@ public class CachedItemDao {
      * @param cachedItem Object to pull parameters from to generate search tag.
      * @return Generated search tag that can be used for CRUD operations. Schema follows the PURPOSE|USER format.
      */
-    private String generateTag(@NotNull CachedItem cachedItem) {
+    public String generateTag(@NotNull CachedItem cachedItem) {
         // Argument validation.
         Objects.requireNonNull(cachedItem, "Method argument cachedItem cannot be null");
         return generateTag(cachedItem.getPurpose(), cachedItem.getUserTag());
