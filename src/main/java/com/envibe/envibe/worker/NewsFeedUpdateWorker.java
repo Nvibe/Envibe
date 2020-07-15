@@ -96,6 +96,9 @@ public class NewsFeedUpdateWorker implements Runnable {
         User poster = getUserOfNextPost(post_id);
         // Get a list of all the friends of the original user. Use Strings since we don't need any friend User attributes.
         ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(poster.getUsername()));
+        // Allow users to see their own posts on their feed.
+        if (friends == null) friends = new ArrayList<>();
+        friends.add(poster.getUsername());
         return friends;
     }
 

@@ -52,12 +52,11 @@ public class FeedController {
     }
     
     /**
-     * Handles API requests for a user's cached newsfeed. URI follows the format /api/v1/feed?username=user1&count=10&after=4012.
+     * Handles API requests for a user's cached newsfeed. URI follows the format [REMOVED - URI caused Javadoc build errors].
      * @param model Container we can use to inject data into the view.
      * @param request Access class that allows us to read session data from the user's browser.
      * @param count Number of posts to return.
      * @param after Last post_id received by the client.
-     * @param FriendsList initialized and pushed into model object @author Elijah Deputy
      * @return List of news items with specified parameters.
      */
     @GetMapping(value = "/api/v1/feed/user", produces = MediaType.APPLICATION_JSON_VALUE)
