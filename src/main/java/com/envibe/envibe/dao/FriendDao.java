@@ -18,7 +18,7 @@ public class FriendDao {
 	
 	final String queryCreate = "INSERT INTO user_relationship (user_name, user_friend) VALUES (?, ?)";
 	
-	final String queryRead = "SELECT user_friend FROM user_relationship WHERE user_name = ?";
+	final String queryRead = "SELECT * FROM user_relationship WHERE user_name = ?";
 	
 	final String queryUpdate = "UPDATE user_relationship SET user_name = ?, user_friend = ? WHERE user_name = ?";
 	

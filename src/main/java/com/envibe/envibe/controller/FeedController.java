@@ -1,8 +1,10 @@
 package com.envibe.envibe.controller;
 
 import com.envibe.envibe.dao.NewsItemDao;
+import com.envibe.envibe.dao.UserDao;
 import com.envibe.envibe.dto.NewsFeedItemDto;
 import com.envibe.envibe.model.NewsItem;
+import com.envibe.envibe.model.User;
 import com.envibe.envibe.service.NewsFeedRetrievalService;
 import com.envibe.envibe.service.RelationshipDisplayService;
 import com.google.gson.Gson;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Null;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +37,7 @@ public class FeedController {
     
     /* Injected service that handles retrieving friends list */
     @Autowired
-    RelationshipDisplayService RelationshipDisplayService;
+    RelationshipDisplayService relationshipDisplayService;
 
     /**
      * Injected data access object for accessing user posts in the permanent datastore.
@@ -41,13 +45,31 @@ public class FeedController {
     @Autowired
     NewsItemDao newsItemDao;
 
+    @Autowired
+    UserDao userDao;
+
     /**
      * Returns a view that can display news feed posts.
      * @param model Container we can use to inject data into the view.
      * @return View template to render.
      */
     @GetMapping("/feed")
-    public String userFeed(Model model) {
+    public String userFeed(Model model, HttpServletRequest request) {
+        ArrayList<String> friends = new ArrayList<>(relationshipDisplayService.FriendsList(request.getRemoteUser()));
+        model.addAttribute("FriendRef", friends);
+        ArrayList<String> notFriends = new ArrayList<>();
+        List<User> rawUsers = userDao.readAll();
+        for (User u : rawUsers) {
+            boolean notFriend = true;
+            for (String username : friends){
+                if(u.getUsername() == username) {
+                    notFriend = false;
+                    break;
+                }
+            }
+            if (notFriend) notFriends.add(u.getUsername());
+        }
+        model.addAttribute("NotFriends", notFriends);
         return "Feed";
     }
     
@@ -62,7 +84,6 @@ public class FeedController {
     @GetMapping(value = "/api/v1/feed/user", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String apiUserFeed(Model model, HttpServletRequest request, @RequestParam(required = false) int count, @RequestParam(required = false) int after) {
-    	model.addAttribute("FriendRef", RelationshipDisplayService.FriendsList(request.getRemoteUser()));
         List<NewsFeedItemDto> newsFeed;
         if (count == 0) {
             newsFeed = newsFeedRetrievalService.getNewsFeed(request.getRemoteUser());

@@ -717,7 +717,7 @@
   </div>
   <div class="RightColumn" id="RightColumn">
     <div class="Logout gwd-div-1yuc gwd-div-1g9o gwd-div-19b5 gwd-div-j10l" id="Row1_1">
-      <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
+      <a href="/logout" id="logOutLink" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
       <br>
       
       <p class=""></p>
@@ -725,7 +725,7 @@
     <div class="friendZone" id="FriendZone">
       <div class="FriendContainer" id="Friendcontainer">
         <div th:each="Relationship, stats: ${FriendRef}">
-           <div th:text="${Relationship.userFriend}">John Doe</div>
+           <div th:text="${Relationship}">John Doe</div>
            <div stats.index + 1 </div>
         </div>
         <div class="FriendName" id="FriendName"></div>
@@ -733,6 +733,18 @@
         <button id="addfriend" class="gwd-button-1ra4">Button</button>
       </div>
     </div>
+  <div class="notFriendZone" id="NotFriendZone">
+    <div class="NotFriendContainer" id="NotFriendcontainer">
+      <div th:each="user, stats: ${NotFriends}">
+        <div th:text="${user}">John Doe</div>
+        <a th:href="@{'/api/v1/follow?username=' + ${user}}">Follow</a>
+        <div stats.index + 1 </div>
+    </div>
+    <div class="FriendName" id="FriendName"></div>
+    <div class="FriendPictureContainer" id="Friendpic"></div>
+    <button id="addfriend" class="gwd-button-1ra4">Button</button>
+  </div>
+  </div>
   </div>
   <script>
     class User {
