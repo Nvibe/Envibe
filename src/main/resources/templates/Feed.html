@@ -7,6 +7,7 @@
   <meta name="generator" content="Google Web Designer 8.0.3.0603">
   <meta data-template-name="gwd-EnvibeBackground">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <style type="text/css" id="gwd-text-style">
     p {
       margin: 0px;
@@ -22,6 +23,8 @@
     }
     a {
       text-decoration: none;
+      z-index:10;
+      position:relative;
     }
   </style>
   <style>
@@ -720,81 +723,78 @@
       <a href="/logout" class="MyAccount"><span class="MyAccountText">Logout</span></a><br>
       <br>
       
-      <p class=""></p>
     </div>
     <div class="friendZone" id="FriendZone">
-      <div class="FriendContainer" id="Friendcontainer">
-        <div th:each="Relationship, stats: ${FriendRef}">
-           <div th:text="${Relationship}">John Doe</div>
-           <div stats.index + 1 </div>
+      <div id="FriendContainerTemplate">
+        <div class="FriendContainer" id="Friendcontainer">
+          <div th:each="Relationship, stats: ${NotFriends}">
+            <a class= "fLink" name="fLink" id="fLink" th:href="@{'/api/v1/follow?username=' + ${user}}" style="color:white" th:text="${Relationship}">Follow</a>
+            </div>
+            <div class="FriendName" id="FriendName"></div>
+            <div class="FriendPictureContainer" id="Friendpic"></div>
+          </div>
         </div>
-        <div class="FriendName" id="FriendName"></div>
-        <div class="FriendPictureContainer" id="Friendpic"></div>
-        <button id="addfriend" class="gwd-button-1ra4">Button</button>
       </div>
     </div>
-  <div class="notFriendZone" id="NotFriendZone">
-    <div class="NotFriendContainer" id="NotFriendcontainer">
-      <div th:each="user, stats: ${NotFriends}">
-        <div th:text="${user}">John Doe</div>
-        <a th:href="@{'/api/v1/follow?username=' + ${user}}">Follow</a>
-        <div stats.index + 1 </div>
-    </div>
-    <div class="FriendName" id="FriendName"></div>
-    <div class="FriendPictureContainer" id="Friendpic"></div>
-    <button id="addfriend" class="gwd-button-1ra4">Button</button>
-  </div>
-  </div>
-  </div>
-  <script>
-    class User {
-      constructor(name, content) {
-        this.name = name;
-        this.content = content;
-      }
-
-    }
-
-    function newElement(name, content, profilePic) {
-
-      /*child node chain will be used until a better method can be implemented*/
-      let element = document.createElement('div');
-      element.append(UserContentTemplate.content.cloneNode(true));
-      element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name; /*user name div*/
-      element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content; /*user content div*/
-      if (profilePic == "") {
-        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
-      } else {
-        element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;object-fit: cover;"/>';
-      }
-      let target = document.getElementById('InnerContentArea');
-      target.append(element);
-    }
-
-    /*newElement("TESTNAME", "TESTCONTENT", "https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1534530600391-CTOG7HCYJJIHHLNLZLNI/ke17ZwdGBToddI8pDm48kGPVK--wGoWXJsqwlxbZlQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5enfxu_O4VeONvneR-F6W8oeFhFqSrYyNrfPB9Y70_gvQ/IYORBank_CoralReefs_AlexMustard_01.jpg?format=300w");
-    newElement("TESTNAME", "TESTCONTENT", "");*/
-
-
-
-    $.ajax({
-      url: '/api/v1/feed/user?count=10&after=0',
-      type: 'GET',
-      dataType: 'json',
-      error: function(xhr, statTxt, thrownTXT) {
-        alert(xhr.status + statTxt)
-      },
-      success: function(data, txtStatus, xhr) {
-        var i;
-        for (i = 0; i < data.length - 1; i++) {
-          newElement(data[i].username, data[i].content, data[i].user_image);
+    <script>
+      class User {
+        constructor(name, content) {
+          this.name = name;
+          this.content = content;
         }
-        newElement("","No more vibes","assets/Envibe-icon-remake.png")
-        //alert( "status: " + txtStatus);
-        //alert(data.length);
-        //alert(JSON.stringify(data));
+
       }
-    });
-  </script>
+
+      $(function(){
+      $('a.fLink').each(function() {
+      var $target = $(this);
+      var value = $target.val();
+      $target.attr("href",'/api/v1/follow?username= '+ value);
+       });
+       });
+
+
+      function newElement(name, content, profilePic) {
+
+        /*child node chain will be used until a better method can be implemented*/
+        let element = document.createElement('div');
+        element.append(UserContentTemplate.content.cloneNode(true));
+        element.childNodes[1].childNodes[3].childNodes[1].innerHTML = name; /*user name div*/
+        element.childNodes[1].childNodes[1].childNodes[1].innerHTML = content; /*user content div*/
+        if (profilePic == "") {
+          element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="assets/Default-Picture.png"/>'; /*user profile picture div*/
+        } else {
+          element.childNodes[1].childNodes[3].childNodes[3].innerHTML += '<img src ="' + profilePic + '" style ="width:40px;height:40px;overflow:hidden;border-radius:20px;object-fit: cover;"/>';
+        }
+        let target = document.getElementById('InnerContentArea');
+        target.append(element);
+      }
+
+      /*newElement("TESTNAME", "TESTCONTENT", "https://images.squarespace-cdn.com/content/v1/5a5906400abd0406785519dd/1534530600391-CTOG7HCYJJIHHLNLZLNI/ke17ZwdGBToddI8pDm48kGPVK--wGoWXJsqwlxbZlQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mwONMR1ELp49Lyc52iWr5enfxu_O4VeONvneR-F6W8oeFhFqSrYyNrfPB9Y70_gvQ/IYORBank_CoralReefs_AlexMustard_01.jpg?format=300w");
+      newElement("TESTNAME", "TESTCONTENT", "");*/
+
+
+
+      $.ajax({
+        url: '/api/v1/feed/user?count=10&after=0',
+        type: 'GET',
+        dataType: 'json',
+        error: function(xhr, statTxt, thrownTXT) {
+          alert(xhr.status + statTxt)
+        },
+        success: function(data, txtStatus, xhr) {
+          var i;
+          for (i = 0; i < data.length - 1; i++) {
+            newElement(data[i].username, data[i].content, data[i].user_image);
+          }
+          newElement("", "No more vibes", "assets/Envibe-icon-remake.png")
+            //alert( "status: " + txtStatus);
+            //alert(data.length);
+            //alert(JSON.stringify(data));
+        }
+      });
+    </script>
+  </div>
 </body>
 
 </html>
